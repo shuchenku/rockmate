@@ -1,0 +1,37 @@
+{
+  "indexes": [
+    {
+      "collectionGroup": "trips",
+      "queryScope": "COLLECTION",
+      "fields": [
+        {
+          "fieldPath": "location.areaId",
+          "order": "ASCENDING"
+        },
+        {
+          "fieldPath": "gradeRange.min",
+          "order": "ASCENDING"
+        }
+      ]
+    },
+    {
+      "collectionGroup": "trips",
+      "queryScope": "COLLECTION",
+      "fields": [
+        {
+          "fieldPath": "userIsPublic",
+          "order": "ASCENDING"
+        },
+        {
+          "fieldPath": "location.areaId",
+          "order": "ASCENDING"
+        },
+        {
+          "fieldPath": "gradeRange.min",
+          "order": "ASCENDING"
+        }
+      ]
+    }
+  ],
+  "fieldOverrides": []
+}

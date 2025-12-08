@@ -67,7 +67,7 @@ Future<void> deleteAccount() async {
 5. **Verify Visibility**:
    - Try to view profile from another account → Should fail
    - Search for user's trips → Should not appear in results
-6. **Verify Auth**: User is signed out and cannot sign back in with same credentials
+6. **Verify Auth**: User is signed out. If they sign back in, they will still be able to authenticate (Firebase Auth is not disabled), but the client should detect `isDeleted: true` and show an "Account Deleted" screen or error. The user will be unable to access their data or others' data.
 
 ### Security Rules Test
 ```javascript

@@ -17,8 +17,8 @@ service cloud.firestore {
     
     // Users collection
     match /users/{uid} {
-      // Public read if user is not deleted
-      allow read: if resource.data.isDeleted != true;
+      // Public read if user is not deleted (must be authenticated)
+      allow read: if isAuthenticated() && resource.data.isDeleted != true;
       
       // Owner can write their own profile
       allow write: if isOwner(uid);

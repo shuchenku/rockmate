@@ -51,6 +51,10 @@ dependencies:
   # Networking
   graphql_flutter: ^5.2.0-beta.7
   
+  # Internal packages
+  openbeta_client:
+    path: packages/openbeta_client
+  
 dev_dependencies:
   flutter_test:
     sdk: flutter

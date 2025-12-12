@@ -2,6 +2,7 @@ import 'package:freezed_annotation/freezed_annotation.dart';
 import 'route_entity.dart';
 
 part 'route_detail_entity.freezed.dart';
+part 'route_detail_entity.g.dart';
 
 @freezed
 class RouteDetailEntity with _$RouteDetailEntity implements RouteEntity {
@@ -20,4 +21,6 @@ class RouteDetailEntity with _$RouteDetailEntity implements RouteEntity {
     required String protection,
     required String firstAscent,
   }) = _RouteDetailEntity;
+
+  factory RouteDetailEntity.fromJson(Map<String, dynamic> json) => _$RouteDetailEntityFromJson(json);
 }

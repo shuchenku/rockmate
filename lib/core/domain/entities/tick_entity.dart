@@ -2,6 +2,7 @@ import 'package:freezed_annotation/freezed_annotation.dart';
 import 'tick_status.dart';
 
 part 'tick_entity.freezed.dart';
+part 'tick_entity.g.dart';
 
 @freezed
 class TickEntity with _$TickEntity {
@@ -15,4 +16,6 @@ class TickEntity with _$TickEntity {
     required String location,
     required String routeGrade,
   }) = _TickEntity;
+
+  factory TickEntity.fromJson(Map<String, dynamic> json) => _$TickEntityFromJson(json);
 }

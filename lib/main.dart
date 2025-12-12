@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:hive_flutter/hive_flutter.dart';
+import 'package:beamer/beamer.dart';
 import 'injection.dart';
+import 'features/navigation/presentation/main_location.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -11,25 +13,32 @@ void main() async {
   // Configure Dependency Injection
   configureDependencies();
   
-  runApp(const MyApp());
+  runApp(MyApp());
 }
 
 class MyApp extends StatelessWidget {
-  const MyApp({super.key});
+  MyApp({super.key});
+
+  final routerDelegate = BeamerDelegate(
+    locationBuilder: BeamerLocationBuilder(
+      beamLocations: [
+        MainLocation(RouteInformation()),
+      ],
+    ),
+  );
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
+    return MaterialApp.router(
+      debugShowCheckedModeBanner: false,
       title: 'RockMate',
       theme: ThemeData(
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.teal),
         useMaterial3: true,
       ),
-      home: const Scaffold(
-        body: Center(
-          child: Text('App Initialized. Routing setup in PR #26.'),
-        ),
-      ),
+      routeInformationParser: BeamerParser(),
+      routerDelegate: routerDelegate,
     );
   }
 }
+

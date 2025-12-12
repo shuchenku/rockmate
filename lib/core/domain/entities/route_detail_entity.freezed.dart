@@ -15,6 +15,10 @@ final _privateConstructorUsedError = UnsupportedError(
   'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models',
 );
 
+RouteDetailEntity _$RouteDetailEntityFromJson(Map<String, dynamic> json) {
+  return _RouteDetailEntity.fromJson(json);
+}
+
 /// @nodoc
 mixin _$RouteDetailEntity {
   String get id => throw _privateConstructorUsedError;
@@ -30,6 +34,9 @@ mixin _$RouteDetailEntity {
   String get description => throw _privateConstructorUsedError;
   String get protection => throw _privateConstructorUsedError;
   String get firstAscent => throw _privateConstructorUsedError;
+
+  /// Serializes this RouteDetailEntity to a JSON map.
+  Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
 
   /// Create a copy of RouteDetailEntity
   /// with the given fields replaced by the non-null parameter values.
@@ -253,7 +260,7 @@ class __$$RouteDetailEntityImplCopyWithImpl<$Res>
 }
 
 /// @nodoc
-
+@JsonSerializable()
 class _$RouteDetailEntityImpl implements _RouteDetailEntity {
   const _$RouteDetailEntityImpl({
     required this.id,
@@ -269,6 +276,9 @@ class _$RouteDetailEntityImpl implements _RouteDetailEntity {
     required this.protection,
     required this.firstAscent,
   });
+
+  factory _$RouteDetailEntityImpl.fromJson(Map<String, dynamic> json) =>
+      _$$RouteDetailEntityImplFromJson(json);
 
   @override
   final String id;
@@ -325,6 +335,7 @@ class _$RouteDetailEntityImpl implements _RouteDetailEntity {
                 other.firstAscent == firstAscent));
   }
 
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   int get hashCode => Object.hash(
     runtimeType,
@@ -352,6 +363,11 @@ class _$RouteDetailEntityImpl implements _RouteDetailEntity {
         this,
         _$identity,
       );
+
+  @override
+  Map<String, dynamic> toJson() {
+    return _$$RouteDetailEntityImplToJson(this);
+  }
 }
 
 abstract class _RouteDetailEntity implements RouteDetailEntity {
@@ -369,6 +385,9 @@ abstract class _RouteDetailEntity implements RouteDetailEntity {
     required final String protection,
     required final String firstAscent,
   }) = _$RouteDetailEntityImpl;
+
+  factory _RouteDetailEntity.fromJson(Map<String, dynamic> json) =
+      _$RouteDetailEntityImpl.fromJson;
 
   @override
   String get id;

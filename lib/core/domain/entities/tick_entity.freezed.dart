@@ -15,6 +15,10 @@ final _privateConstructorUsedError = UnsupportedError(
   'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models',
 );
 
+TickEntity _$TickEntityFromJson(Map<String, dynamic> json) {
+  return _TickEntity.fromJson(json);
+}
+
 /// @nodoc
 mixin _$TickEntity {
   String get id => throw _privateConstructorUsedError;
@@ -25,6 +29,9 @@ mixin _$TickEntity {
   String get comment => throw _privateConstructorUsedError;
   String get location => throw _privateConstructorUsedError;
   String get routeGrade => throw _privateConstructorUsedError;
+
+  /// Serializes this TickEntity to a JSON map.
+  Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
 
   /// Create a copy of TickEntity
   /// with the given fields replaced by the non-null parameter values.
@@ -200,7 +207,7 @@ class __$$TickEntityImplCopyWithImpl<$Res>
 }
 
 /// @nodoc
-
+@JsonSerializable()
 class _$TickEntityImpl implements _TickEntity {
   const _$TickEntityImpl({
     required this.id,
@@ -212,6 +219,9 @@ class _$TickEntityImpl implements _TickEntity {
     required this.location,
     required this.routeGrade,
   });
+
+  factory _$TickEntityImpl.fromJson(Map<String, dynamic> json) =>
+      _$$TickEntityImplFromJson(json);
 
   @override
   final String id;
@@ -253,6 +263,7 @@ class _$TickEntityImpl implements _TickEntity {
                 other.routeGrade == routeGrade));
   }
 
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   int get hashCode => Object.hash(
     runtimeType,
@@ -273,6 +284,11 @@ class _$TickEntityImpl implements _TickEntity {
   @pragma('vm:prefer-inline')
   _$$TickEntityImplCopyWith<_$TickEntityImpl> get copyWith =>
       __$$TickEntityImplCopyWithImpl<_$TickEntityImpl>(this, _$identity);
+
+  @override
+  Map<String, dynamic> toJson() {
+    return _$$TickEntityImplToJson(this);
+  }
 }
 
 abstract class _TickEntity implements TickEntity {
@@ -286,6 +302,9 @@ abstract class _TickEntity implements TickEntity {
     required final String location,
     required final String routeGrade,
   }) = _$TickEntityImpl;
+
+  factory _TickEntity.fromJson(Map<String, dynamic> json) =
+      _$TickEntityImpl.fromJson;
 
   @override
   String get id;

@@ -15,6 +15,10 @@ final _privateConstructorUsedError = UnsupportedError(
   'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models',
 );
 
+RouteEntity _$RouteEntityFromJson(Map<String, dynamic> json) {
+  return _RouteEntity.fromJson(json);
+}
+
 /// @nodoc
 mixin _$RouteEntity {
   String get id => throw _privateConstructorUsedError;
@@ -24,6 +28,9 @@ mixin _$RouteEntity {
   double get rating => throw _privateConstructorUsedError;
   String get location => throw _privateConstructorUsedError;
   String? get imageUrl => throw _privateConstructorUsedError;
+
+  /// Serializes this RouteEntity to a JSON map.
+  Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
 
   /// Create a copy of RouteEntity
   /// with the given fields replaced by the non-null parameter values.
@@ -187,7 +194,7 @@ class __$$RouteEntityImplCopyWithImpl<$Res>
 }
 
 /// @nodoc
-
+@JsonSerializable()
 class _$RouteEntityImpl implements _RouteEntity {
   const _$RouteEntityImpl({
     required this.id,
@@ -198,6 +205,9 @@ class _$RouteEntityImpl implements _RouteEntity {
     required this.location,
     this.imageUrl,
   });
+
+  factory _$RouteEntityImpl.fromJson(Map<String, dynamic> json) =>
+      _$$RouteEntityImplFromJson(json);
 
   @override
   final String id;
@@ -235,6 +245,7 @@ class _$RouteEntityImpl implements _RouteEntity {
                 other.imageUrl == imageUrl));
   }
 
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   int get hashCode => Object.hash(
     runtimeType,
@@ -254,6 +265,11 @@ class _$RouteEntityImpl implements _RouteEntity {
   @pragma('vm:prefer-inline')
   _$$RouteEntityImplCopyWith<_$RouteEntityImpl> get copyWith =>
       __$$RouteEntityImplCopyWithImpl<_$RouteEntityImpl>(this, _$identity);
+
+  @override
+  Map<String, dynamic> toJson() {
+    return _$$RouteEntityImplToJson(this);
+  }
 }
 
 abstract class _RouteEntity implements RouteEntity {
@@ -266,6 +282,9 @@ abstract class _RouteEntity implements RouteEntity {
     required final String location,
     final String? imageUrl,
   }) = _$RouteEntityImpl;
+
+  factory _RouteEntity.fromJson(Map<String, dynamic> json) =
+      _$RouteEntityImpl.fromJson;
 
   @override
   String get id;

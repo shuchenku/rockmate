@@ -1,0 +1,13 @@
+name: openbeta_client
+description: GraphQL client for Open Beta climbing data API
+version: 0.1.0
+publish_to: none
+
+environment:
+  sdk: ^3.9.2
+
+dependencies:
+  graphql_flutter: ^5.2.0-beta.7
+  
+dev_dependencies:
+  mocktail: ^1.0.4

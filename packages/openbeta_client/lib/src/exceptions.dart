@@ -1,23 +1,23 @@
-class NetworkException implements Exception {
+class OpenBetaNetworkException implements Exception {
   final String message;
-  NetworkException(this.message);
+  OpenBetaNetworkException(this.message);
 
   @override
-  String toString() => 'NetworkException: $message';
+  String toString() => 'OpenBetaNetworkException: $message';
 }
 
-class ParseException implements Exception {
+class OpenBetaParseException implements Exception {
   final String message;
-  ParseException(this.message);
+  OpenBetaParseException(this.message);
 
   @override
-  String toString() => 'ParseException: $message';
+  String toString() => 'OpenBetaParseException: $message';
 }
 
-class NotFoundException implements Exception {
+class OpenBetaNotFoundException implements Exception {
   final String message;
-  NotFoundException(this.message);
+  OpenBetaNotFoundException(this.message);
 
   @override
-  String toString() => 'NotFoundException: $message';
+  String toString() => 'OpenBetaNotFoundException: $message';
 }

@@ -1,5 +1,5 @@
 import 'package:graphql_flutter/graphql_flutter.dart';
-import 'package:rockmate/core/domain/entities/route_entity.dart';
+import 'package:openbeta_client/src/models/openbeta_route_model.dart';
 import 'exceptions.dart';
 
 class OpenBetaClient {
@@ -38,7 +38,7 @@ class OpenBetaClient {
     }
   ''';
 
-  Future<List<RouteEntity>> searchRoutes(String query) async {
+  Future<List<OpenBetaRouteModel>> searchRoutes(String query) async {
     try {
       final QueryOptions options = QueryOptions(
         document: gql(_searchRoutesQuery),
@@ -49,25 +49,25 @@ class OpenBetaClient {
 
       if (result.hasException) {
         if (result.exception!.linkException != null) {
-          throw NetworkException(
+          throw OpenBetaNetworkException(
             'Network error: ${result.exception!.linkException}',
           );
         }
         if (result.exception!.graphqlErrors.isNotEmpty) {
-          throw ParseException(
+          throw OpenBetaParseException(
             'GraphQL error: ${result.exception!.graphqlErrors.first.message}',
           );
         }
-        throw NetworkException('Unknown error occurred');
+        throw OpenBetaNetworkException('Unknown error occurred');
       }
 
       if (result.data == null) {
-        throw NotFoundException('No data returned from API');
+        throw OpenBetaNotFoundException('No data returned from API');
       }
 
       try {
         final List<dynamic> areas = result.data!['areas'] as List<dynamic>;
-        final List<RouteEntity> routes = [];
+        final List<OpenBetaRouteModel> routes = [];
 
         for (final area in areas) {
           final List<dynamic> climbs = area['climbs'] as List<dynamic>;
@@ -80,19 +80,19 @@ class OpenBetaClient {
 
         return routes;
       } catch (e) {
-        throw ParseException('Failed to parse response: $e');
+        throw OpenBetaParseException('Failed to parse response: $e');
       }
     } catch (e) {
-      if (e is NetworkException ||
-          e is ParseException ||
-          e is NotFoundException) {
+      if (e is OpenBetaNetworkException ||
+          e is OpenBetaParseException ||
+          e is OpenBetaNotFoundException) {
         rethrow;
       }
-      throw NetworkException('Unexpected error: $e');
+      throw OpenBetaNetworkException('Unexpected error: $e');
     }
   }
 
-  RouteEntity _parseClimb(Map<String, dynamic> climb, String location) {
+  OpenBetaRouteModel _parseClimb(Map<String, dynamic> climb, String location) {
     final grades = climb['grades'] as Map<String, dynamic>?;
     final type = climb['type'] as Map<String, dynamic>;
 
@@ -109,7 +109,7 @@ class OpenBetaClient {
     // Calculate rating (placeholder - OpenBeta doesn't seem to have star ratings)
     double rating = 0.0;
 
-    return RouteEntity(
+    return OpenBetaRouteModel(
       id: climb['uuid'] as String,
       name: climb['name'] as String,
       grade: grades?['yds'] as String? ?? 'Unknown',

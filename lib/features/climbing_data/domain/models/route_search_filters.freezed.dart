@@ -18,11 +18,10 @@ final _privateConstructorUsedError = UnsupportedError(
 /// @nodoc
 mixin _$RouteSearchFilters {
   String get query => throw _privateConstructorUsedError;
-  String? get area => throw _privateConstructorUsedError;
-  String? get location => throw _privateConstructorUsedError;
+  LocationFilter get locationFilter => throw _privateConstructorUsedError;
   String? get gradeMin => throw _privateConstructorUsedError;
   String? get gradeMax => throw _privateConstructorUsedError;
-  List<String> get types => throw _privateConstructorUsedError;
+  Set<RouteType> get types => throw _privateConstructorUsedError;
 
   /// Create a copy of RouteSearchFilters
   /// with the given fields replaced by the non-null parameter values.
@@ -40,12 +39,13 @@ abstract class $RouteSearchFiltersCopyWith<$Res> {
   @useResult
   $Res call({
     String query,
-    String? area,
-    String? location,
+    LocationFilter locationFilter,
     String? gradeMin,
     String? gradeMax,
-    List<String> types,
+    Set<RouteType> types,
   });
+
+  $LocationFilterCopyWith<$Res> get locationFilter;
 }
 
 /// @nodoc
@@ -64,8 +64,7 @@ class _$RouteSearchFiltersCopyWithImpl<$Res, $Val extends RouteSearchFilters>
   @override
   $Res call({
     Object? query = null,
-    Object? area = freezed,
-    Object? location = freezed,
+    Object? locationFilter = null,
     Object? gradeMin = freezed,
     Object? gradeMax = freezed,
     Object? types = null,
@@ -76,14 +75,10 @@ class _$RouteSearchFiltersCopyWithImpl<$Res, $Val extends RouteSearchFilters>
                 ? _value.query
                 : query // ignore: cast_nullable_to_non_nullable
                       as String,
-            area: freezed == area
-                ? _value.area
-                : area // ignore: cast_nullable_to_non_nullable
-                      as String?,
-            location: freezed == location
-                ? _value.location
-                : location // ignore: cast_nullable_to_non_nullable
-                      as String?,
+            locationFilter: null == locationFilter
+                ? _value.locationFilter
+                : locationFilter // ignore: cast_nullable_to_non_nullable
+                      as LocationFilter,
             gradeMin: freezed == gradeMin
                 ? _value.gradeMin
                 : gradeMin // ignore: cast_nullable_to_non_nullable
@@ -95,10 +90,20 @@ class _$RouteSearchFiltersCopyWithImpl<$Res, $Val extends RouteSearchFilters>
             types: null == types
                 ? _value.types
                 : types // ignore: cast_nullable_to_non_nullable
-                      as List<String>,
+                      as Set<RouteType>,
           )
           as $Val,
     );
+  }
+
+  /// Create a copy of RouteSearchFilters
+  /// with the given fields replaced by the non-null parameter values.
+  @override
+  @pragma('vm:prefer-inline')
+  $LocationFilterCopyWith<$Res> get locationFilter {
+    return $LocationFilterCopyWith<$Res>(_value.locationFilter, (value) {
+      return _then(_value.copyWith(locationFilter: value) as $Val);
+    });
   }
 }
 
@@ -113,12 +118,14 @@ abstract class _$$RouteSearchFiltersImplCopyWith<$Res>
   @useResult
   $Res call({
     String query,
-    String? area,
-    String? location,
+    LocationFilter locationFilter,
     String? gradeMin,
     String? gradeMax,
-    List<String> types,
+    Set<RouteType> types,
   });
+
+  @override
+  $LocationFilterCopyWith<$Res> get locationFilter;
 }
 
 /// @nodoc
@@ -136,8 +143,7 @@ class __$$RouteSearchFiltersImplCopyWithImpl<$Res>
   @override
   $Res call({
     Object? query = null,
-    Object? area = freezed,
-    Object? location = freezed,
+    Object? locationFilter = null,
     Object? gradeMin = freezed,
     Object? gradeMax = freezed,
     Object? types = null,
@@ -148,14 +154,10 @@ class __$$RouteSearchFiltersImplCopyWithImpl<$Res>
             ? _value.query
             : query // ignore: cast_nullable_to_non_nullable
                   as String,
-        area: freezed == area
-            ? _value.area
-            : area // ignore: cast_nullable_to_non_nullable
-                  as String?,
-        location: freezed == location
-            ? _value.location
-            : location // ignore: cast_nullable_to_non_nullable
-                  as String?,
+        locationFilter: null == locationFilter
+            ? _value.locationFilter
+            : locationFilter // ignore: cast_nullable_to_non_nullable
+                  as LocationFilter,
         gradeMin: freezed == gradeMin
             ? _value.gradeMin
             : gradeMin // ignore: cast_nullable_to_non_nullable
@@ -167,7 +169,7 @@ class __$$RouteSearchFiltersImplCopyWithImpl<$Res>
         types: null == types
             ? _value._types
             : types // ignore: cast_nullable_to_non_nullable
-                  as List<String>,
+                  as Set<RouteType>,
       ),
     );
   }
@@ -178,11 +180,10 @@ class __$$RouteSearchFiltersImplCopyWithImpl<$Res>
 class _$RouteSearchFiltersImpl extends _RouteSearchFilters {
   const _$RouteSearchFiltersImpl({
     this.query = '',
-    this.area,
-    this.location,
+    this.locationFilter = const LocationFilter(),
     this.gradeMin,
     this.gradeMax,
-    final List<String> types = const [],
+    final Set<RouteType> types = const {},
   }) : _types = types,
        super._();
 
@@ -190,25 +191,24 @@ class _$RouteSearchFiltersImpl extends _RouteSearchFilters {
   @JsonKey()
   final String query;
   @override
-  final String? area;
-  @override
-  final String? location;
+  @JsonKey()
+  final LocationFilter locationFilter;
   @override
   final String? gradeMin;
   @override
   final String? gradeMax;
-  final List<String> _types;
+  final Set<RouteType> _types;
   @override
   @JsonKey()
-  List<String> get types {
-    if (_types is EqualUnmodifiableListView) return _types;
+  Set<RouteType> get types {
+    if (_types is EqualUnmodifiableSetView) return _types;
     // ignore: implicit_dynamic_type
-    return EqualUnmodifiableListView(_types);
+    return EqualUnmodifiableSetView(_types);
   }
 
   @override
   String toString() {
-    return 'RouteSearchFilters(query: $query, area: $area, location: $location, gradeMin: $gradeMin, gradeMax: $gradeMax, types: $types)';
+    return 'RouteSearchFilters(query: $query, locationFilter: $locationFilter, gradeMin: $gradeMin, gradeMax: $gradeMax, types: $types)';
   }
 
   @override
@@ -217,9 +217,8 @@ class _$RouteSearchFiltersImpl extends _RouteSearchFilters {
         (other.runtimeType == runtimeType &&
             other is _$RouteSearchFiltersImpl &&
             (identical(other.query, query) || other.query == query) &&
-            (identical(other.area, area) || other.area == area) &&
-            (identical(other.location, location) ||
-                other.location == location) &&
+            (identical(other.locationFilter, locationFilter) ||
+                other.locationFilter == locationFilter) &&
             (identical(other.gradeMin, gradeMin) ||
                 other.gradeMin == gradeMin) &&
             (identical(other.gradeMax, gradeMax) ||
@@ -231,8 +230,7 @@ class _$RouteSearchFiltersImpl extends _RouteSearchFilters {
   int get hashCode => Object.hash(
     runtimeType,
     query,
-    area,
-    location,
+    locationFilter,
     gradeMin,
     gradeMax,
     const DeepCollectionEquality().hash(_types),
@@ -253,26 +251,23 @@ class _$RouteSearchFiltersImpl extends _RouteSearchFilters {
 abstract class _RouteSearchFilters extends RouteSearchFilters {
   const factory _RouteSearchFilters({
     final String query,
-    final String? area,
-    final String? location,
+    final LocationFilter locationFilter,
     final String? gradeMin,
     final String? gradeMax,
-    final List<String> types,
+    final Set<RouteType> types,
   }) = _$RouteSearchFiltersImpl;
   const _RouteSearchFilters._() : super._();
 
   @override
   String get query;
   @override
-  String? get area;
-  @override
-  String? get location;
+  LocationFilter get locationFilter;
   @override
   String? get gradeMin;
   @override
   String? get gradeMax;
   @override
-  List<String> get types;
+  Set<RouteType> get types;
 
   /// Create a copy of RouteSearchFilters
   /// with the given fields replaced by the non-null parameter values.

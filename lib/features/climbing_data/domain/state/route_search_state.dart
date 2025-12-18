@@ -6,7 +6,13 @@ part 'route_search_state.freezed.dart';
 @freezed
 class RouteSearchState with _$RouteSearchState {
   const factory RouteSearchState.initial() = RouteSearchStateInitial;
-  const factory RouteSearchState.loading() = RouteSearchStateLoading;
-  const factory RouteSearchState.success(List<RouteEntity> routes) = RouteSearchStateSuccess;
-  const factory RouteSearchState.error(String message) = RouteSearchStateError;
+  const factory RouteSearchState.loading(String query) = RouteSearchStateLoading;
+  const factory RouteSearchState.success({
+    required String query,
+    required List<RouteEntity> routes,
+  }) = RouteSearchStateSuccess;
+  const factory RouteSearchState.error({
+    required String query,
+    required String message,
+  }) = RouteSearchStateError;
 }

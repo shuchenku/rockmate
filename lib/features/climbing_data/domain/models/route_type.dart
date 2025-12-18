@@ -1,11 +1,8 @@
 enum RouteType {
   sport,
   trad,
-  boulder,
-  topRope,
-  alpine,
-  ice,
-  mixed;
+  bouldering,
+  topRope;
 
   String get displayName {
     switch (this) {
@@ -13,16 +10,10 @@ enum RouteType {
         return 'Sport';
       case RouteType.trad:
         return 'Trad';
-      case RouteType.boulder:
-        return 'Boulder';
+      case RouteType.bouldering:
+        return 'Bouldering';
       case RouteType.topRope:
         return 'Top Rope';
-      case RouteType.alpine:
-        return 'Alpine';
-      case RouteType.ice:
-        return 'Ice';
-      case RouteType.mixed:
-        return 'Mixed';
     }
   }
 }

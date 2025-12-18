@@ -17,26 +17,33 @@ final _privateConstructorUsedError = UnsupportedError(
 
 /// @nodoc
 mixin _$RouteSearchState {
+  RouteSearchFilters get filters => throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function() initial,
-    required TResult Function(String query) loading,
-    required TResult Function(String query, List<RouteEntity> routes) success,
-    required TResult Function(String query, String message) error,
+    required TResult Function(RouteSearchFilters filters) initial,
+    required TResult Function(RouteSearchFilters filters) loading,
+    required TResult Function(
+      RouteSearchFilters filters,
+      List<RouteEntity> routes,
+    )
+    success,
+    required TResult Function(RouteSearchFilters filters, String message) error,
   }) => throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function()? initial,
-    TResult? Function(String query)? loading,
-    TResult? Function(String query, List<RouteEntity> routes)? success,
-    TResult? Function(String query, String message)? error,
+    TResult? Function(RouteSearchFilters filters)? initial,
+    TResult? Function(RouteSearchFilters filters)? loading,
+    TResult? Function(RouteSearchFilters filters, List<RouteEntity> routes)?
+    success,
+    TResult? Function(RouteSearchFilters filters, String message)? error,
   }) => throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function()? initial,
-    TResult Function(String query)? loading,
-    TResult Function(String query, List<RouteEntity> routes)? success,
-    TResult Function(String query, String message)? error,
+    TResult Function(RouteSearchFilters filters)? initial,
+    TResult Function(RouteSearchFilters filters)? loading,
+    TResult Function(RouteSearchFilters filters, List<RouteEntity> routes)?
+    success,
+    TResult Function(RouteSearchFilters filters, String message)? error,
     required TResult orElse(),
   }) => throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -61,6 +68,12 @@ mixin _$RouteSearchState {
     TResult Function(RouteSearchStateError value)? error,
     required TResult orElse(),
   }) => throw _privateConstructorUsedError;
+
+  /// Create a copy of RouteSearchState
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  $RouteSearchStateCopyWith<RouteSearchState> get copyWith =>
+      throw _privateConstructorUsedError;
 }
 
 /// @nodoc
@@ -69,6 +82,10 @@ abstract class $RouteSearchStateCopyWith<$Res> {
     RouteSearchState value,
     $Res Function(RouteSearchState) then,
   ) = _$RouteSearchStateCopyWithImpl<$Res, RouteSearchState>;
+  @useResult
+  $Res call({RouteSearchFilters filters});
+
+  $RouteSearchFiltersCopyWith<$Res> get filters;
 }
 
 /// @nodoc
@@ -83,14 +100,44 @@ class _$RouteSearchStateCopyWithImpl<$Res, $Val extends RouteSearchState>
 
   /// Create a copy of RouteSearchState
   /// with the given fields replaced by the non-null parameter values.
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({Object? filters = null}) {
+    return _then(
+      _value.copyWith(
+            filters: null == filters
+                ? _value.filters
+                : filters // ignore: cast_nullable_to_non_nullable
+                      as RouteSearchFilters,
+          )
+          as $Val,
+    );
+  }
+
+  /// Create a copy of RouteSearchState
+  /// with the given fields replaced by the non-null parameter values.
+  @override
+  @pragma('vm:prefer-inline')
+  $RouteSearchFiltersCopyWith<$Res> get filters {
+    return $RouteSearchFiltersCopyWith<$Res>(_value.filters, (value) {
+      return _then(_value.copyWith(filters: value) as $Val);
+    });
+  }
 }
 
 /// @nodoc
-abstract class _$$RouteSearchStateInitialImplCopyWith<$Res> {
+abstract class _$$RouteSearchStateInitialImplCopyWith<$Res>
+    implements $RouteSearchStateCopyWith<$Res> {
   factory _$$RouteSearchStateInitialImplCopyWith(
     _$RouteSearchStateInitialImpl value,
     $Res Function(_$RouteSearchStateInitialImpl) then,
   ) = __$$RouteSearchStateInitialImplCopyWithImpl<$Res>;
+  @override
+  @useResult
+  $Res call({RouteSearchFilters filters});
+
+  @override
+  $RouteSearchFiltersCopyWith<$Res> get filters;
 }
 
 /// @nodoc
@@ -104,61 +151,97 @@ class __$$RouteSearchStateInitialImplCopyWithImpl<$Res>
 
   /// Create a copy of RouteSearchState
   /// with the given fields replaced by the non-null parameter values.
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({Object? filters = null}) {
+    return _then(
+      _$RouteSearchStateInitialImpl(
+        filters: null == filters
+            ? _value.filters
+            : filters // ignore: cast_nullable_to_non_nullable
+                  as RouteSearchFilters,
+      ),
+    );
+  }
 }
 
 /// @nodoc
 
 class _$RouteSearchStateInitialImpl implements RouteSearchStateInitial {
-  const _$RouteSearchStateInitialImpl();
+  const _$RouteSearchStateInitialImpl({
+    this.filters = const RouteSearchFilters(),
+  });
+
+  @override
+  @JsonKey()
+  final RouteSearchFilters filters;
 
   @override
   String toString() {
-    return 'RouteSearchState.initial()';
+    return 'RouteSearchState.initial(filters: $filters)';
   }
 
   @override
   bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$RouteSearchStateInitialImpl);
+            other is _$RouteSearchStateInitialImpl &&
+            (identical(other.filters, filters) || other.filters == filters));
   }
 
   @override
-  int get hashCode => runtimeType.hashCode;
+  int get hashCode => Object.hash(runtimeType, filters);
+
+  /// Create a copy of RouteSearchState
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$RouteSearchStateInitialImplCopyWith<_$RouteSearchStateInitialImpl>
+  get copyWith =>
+      __$$RouteSearchStateInitialImplCopyWithImpl<
+        _$RouteSearchStateInitialImpl
+      >(this, _$identity);
 
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function() initial,
-    required TResult Function(String query) loading,
-    required TResult Function(String query, List<RouteEntity> routes) success,
-    required TResult Function(String query, String message) error,
+    required TResult Function(RouteSearchFilters filters) initial,
+    required TResult Function(RouteSearchFilters filters) loading,
+    required TResult Function(
+      RouteSearchFilters filters,
+      List<RouteEntity> routes,
+    )
+    success,
+    required TResult Function(RouteSearchFilters filters, String message) error,
   }) {
-    return initial();
+    return initial(filters);
   }
 
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function()? initial,
-    TResult? Function(String query)? loading,
-    TResult? Function(String query, List<RouteEntity> routes)? success,
-    TResult? Function(String query, String message)? error,
+    TResult? Function(RouteSearchFilters filters)? initial,
+    TResult? Function(RouteSearchFilters filters)? loading,
+    TResult? Function(RouteSearchFilters filters, List<RouteEntity> routes)?
+    success,
+    TResult? Function(RouteSearchFilters filters, String message)? error,
   }) {
-    return initial?.call();
+    return initial?.call(filters);
   }
 
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function()? initial,
-    TResult Function(String query)? loading,
-    TResult Function(String query, List<RouteEntity> routes)? success,
-    TResult Function(String query, String message)? error,
+    TResult Function(RouteSearchFilters filters)? initial,
+    TResult Function(RouteSearchFilters filters)? loading,
+    TResult Function(RouteSearchFilters filters, List<RouteEntity> routes)?
+    success,
+    TResult Function(RouteSearchFilters filters, String message)? error,
     required TResult orElse(),
   }) {
     if (initial != null) {
-      return initial();
+      return initial(filters);
     }
     return orElse();
   }
@@ -202,17 +285,33 @@ class _$RouteSearchStateInitialImpl implements RouteSearchStateInitial {
 }
 
 abstract class RouteSearchStateInitial implements RouteSearchState {
-  const factory RouteSearchStateInitial() = _$RouteSearchStateInitialImpl;
+  const factory RouteSearchStateInitial({final RouteSearchFilters filters}) =
+      _$RouteSearchStateInitialImpl;
+
+  @override
+  RouteSearchFilters get filters;
+
+  /// Create a copy of RouteSearchState
+  /// with the given fields replaced by the non-null parameter values.
+  @override
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  _$$RouteSearchStateInitialImplCopyWith<_$RouteSearchStateInitialImpl>
+  get copyWith => throw _privateConstructorUsedError;
 }
 
 /// @nodoc
-abstract class _$$RouteSearchStateLoadingImplCopyWith<$Res> {
+abstract class _$$RouteSearchStateLoadingImplCopyWith<$Res>
+    implements $RouteSearchStateCopyWith<$Res> {
   factory _$$RouteSearchStateLoadingImplCopyWith(
     _$RouteSearchStateLoadingImpl value,
     $Res Function(_$RouteSearchStateLoadingImpl) then,
   ) = __$$RouteSearchStateLoadingImplCopyWithImpl<$Res>;
+  @override
   @useResult
-  $Res call({String query});
+  $Res call({RouteSearchFilters filters});
+
+  @override
+  $RouteSearchFiltersCopyWith<$Res> get filters;
 }
 
 /// @nodoc
@@ -228,13 +327,13 @@ class __$$RouteSearchStateLoadingImplCopyWithImpl<$Res>
   /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
-  $Res call({Object? query = null}) {
+  $Res call({Object? filters = null}) {
     return _then(
       _$RouteSearchStateLoadingImpl(
-        null == query
-            ? _value.query
-            : query // ignore: cast_nullable_to_non_nullable
-                  as String,
+        filters: null == filters
+            ? _value.filters
+            : filters // ignore: cast_nullable_to_non_nullable
+                  as RouteSearchFilters,
       ),
     );
   }
@@ -243,14 +342,14 @@ class __$$RouteSearchStateLoadingImplCopyWithImpl<$Res>
 /// @nodoc
 
 class _$RouteSearchStateLoadingImpl implements RouteSearchStateLoading {
-  const _$RouteSearchStateLoadingImpl(this.query);
+  const _$RouteSearchStateLoadingImpl({required this.filters});
 
   @override
-  final String query;
+  final RouteSearchFilters filters;
 
   @override
   String toString() {
-    return 'RouteSearchState.loading(query: $query)';
+    return 'RouteSearchState.loading(filters: $filters)';
   }
 
   @override
@@ -258,11 +357,11 @@ class _$RouteSearchStateLoadingImpl implements RouteSearchStateLoading {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$RouteSearchStateLoadingImpl &&
-            (identical(other.query, query) || other.query == query));
+            (identical(other.filters, filters) || other.filters == filters));
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, query);
+  int get hashCode => Object.hash(runtimeType, filters);
 
   /// Create a copy of RouteSearchState
   /// with the given fields replaced by the non-null parameter values.
@@ -278,36 +377,42 @@ class _$RouteSearchStateLoadingImpl implements RouteSearchStateLoading {
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function() initial,
-    required TResult Function(String query) loading,
-    required TResult Function(String query, List<RouteEntity> routes) success,
-    required TResult Function(String query, String message) error,
+    required TResult Function(RouteSearchFilters filters) initial,
+    required TResult Function(RouteSearchFilters filters) loading,
+    required TResult Function(
+      RouteSearchFilters filters,
+      List<RouteEntity> routes,
+    )
+    success,
+    required TResult Function(RouteSearchFilters filters, String message) error,
   }) {
-    return loading(query);
+    return loading(filters);
   }
 
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function()? initial,
-    TResult? Function(String query)? loading,
-    TResult? Function(String query, List<RouteEntity> routes)? success,
-    TResult? Function(String query, String message)? error,
+    TResult? Function(RouteSearchFilters filters)? initial,
+    TResult? Function(RouteSearchFilters filters)? loading,
+    TResult? Function(RouteSearchFilters filters, List<RouteEntity> routes)?
+    success,
+    TResult? Function(RouteSearchFilters filters, String message)? error,
   }) {
-    return loading?.call(query);
+    return loading?.call(filters);
   }
 
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function()? initial,
-    TResult Function(String query)? loading,
-    TResult Function(String query, List<RouteEntity> routes)? success,
-    TResult Function(String query, String message)? error,
+    TResult Function(RouteSearchFilters filters)? initial,
+    TResult Function(RouteSearchFilters filters)? loading,
+    TResult Function(RouteSearchFilters filters, List<RouteEntity> routes)?
+    success,
+    TResult Function(RouteSearchFilters filters, String message)? error,
     required TResult orElse(),
   }) {
     if (loading != null) {
-      return loading(query);
+      return loading(filters);
     }
     return orElse();
   }
@@ -351,26 +456,34 @@ class _$RouteSearchStateLoadingImpl implements RouteSearchStateLoading {
 }
 
 abstract class RouteSearchStateLoading implements RouteSearchState {
-  const factory RouteSearchStateLoading(final String query) =
-      _$RouteSearchStateLoadingImpl;
+  const factory RouteSearchStateLoading({
+    required final RouteSearchFilters filters,
+  }) = _$RouteSearchStateLoadingImpl;
 
-  String get query;
+  @override
+  RouteSearchFilters get filters;
 
   /// Create a copy of RouteSearchState
   /// with the given fields replaced by the non-null parameter values.
+  @override
   @JsonKey(includeFromJson: false, includeToJson: false)
   _$$RouteSearchStateLoadingImplCopyWith<_$RouteSearchStateLoadingImpl>
   get copyWith => throw _privateConstructorUsedError;
 }
 
 /// @nodoc
-abstract class _$$RouteSearchStateSuccessImplCopyWith<$Res> {
+abstract class _$$RouteSearchStateSuccessImplCopyWith<$Res>
+    implements $RouteSearchStateCopyWith<$Res> {
   factory _$$RouteSearchStateSuccessImplCopyWith(
     _$RouteSearchStateSuccessImpl value,
     $Res Function(_$RouteSearchStateSuccessImpl) then,
   ) = __$$RouteSearchStateSuccessImplCopyWithImpl<$Res>;
+  @override
   @useResult
-  $Res call({String query, List<RouteEntity> routes});
+  $Res call({RouteSearchFilters filters, List<RouteEntity> routes});
+
+  @override
+  $RouteSearchFiltersCopyWith<$Res> get filters;
 }
 
 /// @nodoc
@@ -386,13 +499,13 @@ class __$$RouteSearchStateSuccessImplCopyWithImpl<$Res>
   /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
-  $Res call({Object? query = null, Object? routes = null}) {
+  $Res call({Object? filters = null, Object? routes = null}) {
     return _then(
       _$RouteSearchStateSuccessImpl(
-        query: null == query
-            ? _value.query
-            : query // ignore: cast_nullable_to_non_nullable
-                  as String,
+        filters: null == filters
+            ? _value.filters
+            : filters // ignore: cast_nullable_to_non_nullable
+                  as RouteSearchFilters,
         routes: null == routes
             ? _value._routes
             : routes // ignore: cast_nullable_to_non_nullable
@@ -406,12 +519,12 @@ class __$$RouteSearchStateSuccessImplCopyWithImpl<$Res>
 
 class _$RouteSearchStateSuccessImpl implements RouteSearchStateSuccess {
   const _$RouteSearchStateSuccessImpl({
-    required this.query,
+    required this.filters,
     required final List<RouteEntity> routes,
   }) : _routes = routes;
 
   @override
-  final String query;
+  final RouteSearchFilters filters;
   final List<RouteEntity> _routes;
   @override
   List<RouteEntity> get routes {
@@ -422,7 +535,7 @@ class _$RouteSearchStateSuccessImpl implements RouteSearchStateSuccess {
 
   @override
   String toString() {
-    return 'RouteSearchState.success(query: $query, routes: $routes)';
+    return 'RouteSearchState.success(filters: $filters, routes: $routes)';
   }
 
   @override
@@ -430,14 +543,14 @@ class _$RouteSearchStateSuccessImpl implements RouteSearchStateSuccess {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$RouteSearchStateSuccessImpl &&
-            (identical(other.query, query) || other.query == query) &&
+            (identical(other.filters, filters) || other.filters == filters) &&
             const DeepCollectionEquality().equals(other._routes, _routes));
   }
 
   @override
   int get hashCode => Object.hash(
     runtimeType,
-    query,
+    filters,
     const DeepCollectionEquality().hash(_routes),
   );
 
@@ -455,36 +568,42 @@ class _$RouteSearchStateSuccessImpl implements RouteSearchStateSuccess {
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function() initial,
-    required TResult Function(String query) loading,
-    required TResult Function(String query, List<RouteEntity> routes) success,
-    required TResult Function(String query, String message) error,
+    required TResult Function(RouteSearchFilters filters) initial,
+    required TResult Function(RouteSearchFilters filters) loading,
+    required TResult Function(
+      RouteSearchFilters filters,
+      List<RouteEntity> routes,
+    )
+    success,
+    required TResult Function(RouteSearchFilters filters, String message) error,
   }) {
-    return success(query, routes);
+    return success(filters, routes);
   }
 
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function()? initial,
-    TResult? Function(String query)? loading,
-    TResult? Function(String query, List<RouteEntity> routes)? success,
-    TResult? Function(String query, String message)? error,
+    TResult? Function(RouteSearchFilters filters)? initial,
+    TResult? Function(RouteSearchFilters filters)? loading,
+    TResult? Function(RouteSearchFilters filters, List<RouteEntity> routes)?
+    success,
+    TResult? Function(RouteSearchFilters filters, String message)? error,
   }) {
-    return success?.call(query, routes);
+    return success?.call(filters, routes);
   }
 
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function()? initial,
-    TResult Function(String query)? loading,
-    TResult Function(String query, List<RouteEntity> routes)? success,
-    TResult Function(String query, String message)? error,
+    TResult Function(RouteSearchFilters filters)? initial,
+    TResult Function(RouteSearchFilters filters)? loading,
+    TResult Function(RouteSearchFilters filters, List<RouteEntity> routes)?
+    success,
+    TResult Function(RouteSearchFilters filters, String message)? error,
     required TResult orElse(),
   }) {
     if (success != null) {
-      return success(query, routes);
+      return success(filters, routes);
     }
     return orElse();
   }
@@ -529,28 +648,35 @@ class _$RouteSearchStateSuccessImpl implements RouteSearchStateSuccess {
 
 abstract class RouteSearchStateSuccess implements RouteSearchState {
   const factory RouteSearchStateSuccess({
-    required final String query,
+    required final RouteSearchFilters filters,
     required final List<RouteEntity> routes,
   }) = _$RouteSearchStateSuccessImpl;
 
-  String get query;
+  @override
+  RouteSearchFilters get filters;
   List<RouteEntity> get routes;
 
   /// Create a copy of RouteSearchState
   /// with the given fields replaced by the non-null parameter values.
+  @override
   @JsonKey(includeFromJson: false, includeToJson: false)
   _$$RouteSearchStateSuccessImplCopyWith<_$RouteSearchStateSuccessImpl>
   get copyWith => throw _privateConstructorUsedError;
 }
 
 /// @nodoc
-abstract class _$$RouteSearchStateErrorImplCopyWith<$Res> {
+abstract class _$$RouteSearchStateErrorImplCopyWith<$Res>
+    implements $RouteSearchStateCopyWith<$Res> {
   factory _$$RouteSearchStateErrorImplCopyWith(
     _$RouteSearchStateErrorImpl value,
     $Res Function(_$RouteSearchStateErrorImpl) then,
   ) = __$$RouteSearchStateErrorImplCopyWithImpl<$Res>;
+  @override
   @useResult
-  $Res call({String query, String message});
+  $Res call({RouteSearchFilters filters, String message});
+
+  @override
+  $RouteSearchFiltersCopyWith<$Res> get filters;
 }
 
 /// @nodoc
@@ -566,13 +692,13 @@ class __$$RouteSearchStateErrorImplCopyWithImpl<$Res>
   /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
-  $Res call({Object? query = null, Object? message = null}) {
+  $Res call({Object? filters = null, Object? message = null}) {
     return _then(
       _$RouteSearchStateErrorImpl(
-        query: null == query
-            ? _value.query
-            : query // ignore: cast_nullable_to_non_nullable
-                  as String,
+        filters: null == filters
+            ? _value.filters
+            : filters // ignore: cast_nullable_to_non_nullable
+                  as RouteSearchFilters,
         message: null == message
             ? _value.message
             : message // ignore: cast_nullable_to_non_nullable
@@ -586,18 +712,18 @@ class __$$RouteSearchStateErrorImplCopyWithImpl<$Res>
 
 class _$RouteSearchStateErrorImpl implements RouteSearchStateError {
   const _$RouteSearchStateErrorImpl({
-    required this.query,
+    required this.filters,
     required this.message,
   });
 
   @override
-  final String query;
+  final RouteSearchFilters filters;
   @override
   final String message;
 
   @override
   String toString() {
-    return 'RouteSearchState.error(query: $query, message: $message)';
+    return 'RouteSearchState.error(filters: $filters, message: $message)';
   }
 
   @override
@@ -605,12 +731,12 @@ class _$RouteSearchStateErrorImpl implements RouteSearchStateError {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$RouteSearchStateErrorImpl &&
-            (identical(other.query, query) || other.query == query) &&
+            (identical(other.filters, filters) || other.filters == filters) &&
             (identical(other.message, message) || other.message == message));
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, query, message);
+  int get hashCode => Object.hash(runtimeType, filters, message);
 
   /// Create a copy of RouteSearchState
   /// with the given fields replaced by the non-null parameter values.
@@ -627,36 +753,42 @@ class _$RouteSearchStateErrorImpl implements RouteSearchStateError {
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function() initial,
-    required TResult Function(String query) loading,
-    required TResult Function(String query, List<RouteEntity> routes) success,
-    required TResult Function(String query, String message) error,
+    required TResult Function(RouteSearchFilters filters) initial,
+    required TResult Function(RouteSearchFilters filters) loading,
+    required TResult Function(
+      RouteSearchFilters filters,
+      List<RouteEntity> routes,
+    )
+    success,
+    required TResult Function(RouteSearchFilters filters, String message) error,
   }) {
-    return error(query, message);
+    return error(filters, message);
   }
 
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function()? initial,
-    TResult? Function(String query)? loading,
-    TResult? Function(String query, List<RouteEntity> routes)? success,
-    TResult? Function(String query, String message)? error,
+    TResult? Function(RouteSearchFilters filters)? initial,
+    TResult? Function(RouteSearchFilters filters)? loading,
+    TResult? Function(RouteSearchFilters filters, List<RouteEntity> routes)?
+    success,
+    TResult? Function(RouteSearchFilters filters, String message)? error,
   }) {
-    return error?.call(query, message);
+    return error?.call(filters, message);
   }
 
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function()? initial,
-    TResult Function(String query)? loading,
-    TResult Function(String query, List<RouteEntity> routes)? success,
-    TResult Function(String query, String message)? error,
+    TResult Function(RouteSearchFilters filters)? initial,
+    TResult Function(RouteSearchFilters filters)? loading,
+    TResult Function(RouteSearchFilters filters, List<RouteEntity> routes)?
+    success,
+    TResult Function(RouteSearchFilters filters, String message)? error,
     required TResult orElse(),
   }) {
     if (error != null) {
-      return error(query, message);
+      return error(filters, message);
     }
     return orElse();
   }
@@ -701,15 +833,17 @@ class _$RouteSearchStateErrorImpl implements RouteSearchStateError {
 
 abstract class RouteSearchStateError implements RouteSearchState {
   const factory RouteSearchStateError({
-    required final String query,
+    required final RouteSearchFilters filters,
     required final String message,
   }) = _$RouteSearchStateErrorImpl;
 
-  String get query;
+  @override
+  RouteSearchFilters get filters;
   String get message;
 
   /// Create a copy of RouteSearchState
   /// with the given fields replaced by the non-null parameter values.
+  @override
   @JsonKey(includeFromJson: false, includeToJson: false)
   _$$RouteSearchStateErrorImplCopyWith<_$RouteSearchStateErrorImpl>
   get copyWith => throw _privateConstructorUsedError;

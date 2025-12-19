@@ -14,8 +14,8 @@ class _MainScreenState extends State<MainScreen> {
   late final _routerDelegate = BeamerDelegate(
     locationBuilder: BeamerLocationBuilder(
       beamLocations: [
-        RoutesLocation(RouteInformation()),
-        LogbookLocation(RouteInformation()),
+        RoutesLocation(const RouteInformation(location: '/routes')),
+        LogbookLocation(const RouteInformation(location: '/logbook')),
       ],
     ),
   );

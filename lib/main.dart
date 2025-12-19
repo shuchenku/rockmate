@@ -28,7 +28,7 @@ class MyApp extends StatelessWidget {
   final routerDelegate = BeamerDelegate(
     locationBuilder: BeamerLocationBuilder(
       beamLocations: [
-        MainLocation(RouteInformation()),
+        MainLocation(const RouteInformation(location: '/')),
       ],
     ),
   );

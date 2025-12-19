@@ -2,7 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:rockmate/features/climbing_data/presentation/bloc/route_search_bloc.dart';
 import 'package:rockmate/features/climbing_data/domain/events/route_search_event.dart';
+import 'package:rockmate/features/climbing_data/domain/models/location_filter.dart';
 import 'package:rockmate/features/climbing_data/domain/models/route_type.dart';
+import 'package:rockmate/features/climbing_data/domain/state/route_search_state.dart';
 
 class FilterSection extends StatefulWidget {
   const FilterSection({super.key});
@@ -86,27 +88,47 @@ class _FilterSectionState extends State<FilterSection> {
                     ),
                   ),
                   const SizedBox(height: 8),
-                  Container(
-                    padding: const EdgeInsets.symmetric(horizontal: 12),
-                    decoration: BoxDecoration(
-                      border: Border.all(color: Colors.grey.shade300),
-                      borderRadius: BorderRadius.circular(8),
-                    ),
-                    child: DropdownButton<String>(
-                      value: _selectedArea,
-                      isExpanded: true,
-                      underline: const SizedBox(),
-                      items: const [
-                        DropdownMenuItem(value: 'all', child: Text('All Areas')),
-                        // TODO: Populate with actual areas from routes
-                      ],
-                      onChanged: (value) {
-                        setState(() {
-                          _selectedArea = value ?? 'all';
-                        });
-                        // TODO: Emit filter event
-                      },
-                    ),
+                  BlocBuilder<RouteSearchBloc, RouteSearchState>(
+                    builder: (context, state) {
+                      // Ensure selected area is valid, or reset to 'all'
+                      final areas = state.availableAreas;
+                      if (_selectedArea != 'all' && !areas.contains(_selectedArea)) {
+                        _selectedArea = 'all';
+                      }
+                      
+                      return Container(
+                        padding: const EdgeInsets.symmetric(horizontal: 12),
+                        decoration: BoxDecoration(
+                          border: Border.all(color: Colors.grey.shade300),
+                          borderRadius: BorderRadius.circular(8),
+                        ),
+                        child: DropdownButton<String>(
+                          value: _selectedArea,
+                          isExpanded: true,
+                          underline: const SizedBox(),
+                          items: [
+                            const DropdownMenuItem(value: 'all', child: Text('All Areas')),
+                            ...areas.map((area) => DropdownMenuItem(
+                              value: area,
+                              child: Text(area),
+                            )),
+                          ],
+                          onChanged: (value) {
+                            setState(() {
+                              _selectedArea = value ?? 'all';
+                            });
+                            
+                            final filter = value == 'all' 
+                                ? const LocationFilter()
+                                : LocationFilter(location: value);
+                                
+                            context.read<RouteSearchBloc>().add(
+                                  RouteSearchEventLocationFilterChanged(filter),
+                                );
+                          },
+                        ),
+                      );
+                    },
                   ),
                   const SizedBox(height: 16),
                   

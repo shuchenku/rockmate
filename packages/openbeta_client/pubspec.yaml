@@ -8,6 +8,7 @@ environment:
 
 dependencies:
   graphql_flutter: ^5.2.0-beta.7
+  injectable: ^2.7.1+2
   
 dev_dependencies:
   mocktail: ^1.0.4

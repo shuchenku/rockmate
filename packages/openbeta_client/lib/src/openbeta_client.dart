@@ -1,7 +1,9 @@
 import 'package:graphql_flutter/graphql_flutter.dart';
+import 'package:injectable/injectable.dart';
 import 'package:openbeta_client/src/models/openbeta_route_model.dart';
 import 'exceptions.dart';
 
+@injectable
 class OpenBetaClient {
   final GraphQLClient client;
 

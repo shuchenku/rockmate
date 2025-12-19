@@ -15,63 +15,57 @@ class RouteSearchScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return BlocProvider(
       create: (_) => getIt<RouteSearchBloc>(),
-      child: Scaffold(
-        appBar: AppBar(
-          title: const Text('Search Routes'),
-          elevation: 0,
-        ),
-        body: Column(
-          children: [
-            // Search bar
-            Padding(
-              padding: const EdgeInsets.all(16.0),
-              child: SearchBarWidget(
-                onSearch: (query) {
-                  context.read<RouteSearchBloc>().add(
-                        RouteSearchEventQueryChanged(query),
-                      );
-                },
-                onClear: () {
-                  context.read<RouteSearchBloc>().add(
-                        const RouteSearchEventFiltersCleared(),
-                      );
-                },
-              ),
+      child: Column(
+        children: [
+          // Search bar
+          Padding(
+            padding: const EdgeInsets.all(16.0),
+            child: SearchBarWidget(
+              onSearch: (query) {
+                context.read<RouteSearchBloc>().add(
+                      RouteSearchEventQueryChanged(query),
+                    );
+              },
+              onClear: () {
+                context.read<RouteSearchBloc>().add(
+                      const RouteSearchEventFiltersCleared(),
+                    );
+              },
             ),
-            
-            // Filters section
-            const FilterSection(),
-            
-            const Divider(height: 1),
-            
-            // Results list
-            Expanded(
-              child: BlocBuilder<RouteSearchBloc, RouteSearchState>(
-                builder: (context, state) {
-                  return state.map(
-                    initial: (_) => _buildEmptyState(
-                      icon: Icons.search,
-                      message: 'Search for climbing routes',
-                    ),
-                    loading: (_) => const Center(
-                      child: CircularProgressIndicator(),
-                    ),
-                    success: (state) {
-                      if (state.routes.isEmpty) {
-                        return _buildEmptyState(
-                          icon: Icons.search_off,
-                          message: 'No routes found\nTry adjusting your search',
-                        );
-                      }
-                      return RouteListWidget(routes: state.routes);
-                    },
-                    error: (state) => _buildErrorState(state.message),
-                  );
-                },
-              ),
+          ),
+          
+          // Filters section
+          const FilterSection(),
+          
+          const Divider(height: 1),
+          
+          // Results list
+          Expanded(
+            child: BlocBuilder<RouteSearchBloc, RouteSearchState>(
+              builder: (context, state) {
+                return state.map(
+                  initial: (_) => _buildEmptyState(
+                    icon: Icons.search,
+                    message: 'Search for climbing routes',
+                  ),
+                  loading: (_) => const Center(
+                    child: CircularProgressIndicator(),
+                  ),
+                  success: (state) {
+                    if (state.routes.isEmpty) {
+                      return _buildEmptyState(
+                        icon: Icons.search_off,
+                        message: 'No routes found\nTry adjusting your search',
+                      );
+                    }
+                    return RouteListWidget(routes: state.routes);
+                  },
+                  error: (state) => _buildErrorState(state.message),
+                );
+              },
             ),
-          ],
-        ),
+          ),
+        ],
       ),
     );
   }

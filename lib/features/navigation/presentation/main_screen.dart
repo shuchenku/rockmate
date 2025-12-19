@@ -36,16 +36,37 @@ class _MainScreenState extends State<MainScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(
+        title: Row(
+          children: [
+            Icon(Icons.terrain, size: 24),
+            SizedBox(width: 8),
+            Text('RockMate', style: TextStyle(fontSize: 20)),
+          ],
+        ),
+        flexibleSpace: Container(
+          decoration: BoxDecoration(
+            gradient: LinearGradient(
+              colors: [Colors.blue.shade600, Colors.blue.shade700],
+              begin: Alignment.centerLeft,
+              end: Alignment.centerRight,
+            ),
+          ),
+        ),
+        foregroundColor: Colors.white,
+        elevation: 0,
+      ),
       body: Beamer(
         routerDelegate: _routerDelegate,
       ),
       bottomNavigationBar: BottomNavigationBar(
         currentIndex: _currentIndex,
+        type: BottomNavigationBarType.fixed,
         items: const [
           BottomNavigationBarItem(label: 'Routes', icon: Icon(Icons.terrain)),
           BottomNavigationBarItem(label: 'Logbook', icon: Icon(Icons.book)),
-          BottomNavigationBarItem(label: 'Partners', icon: Icon(Icons.people)), // Placeholder
-          BottomNavigationBarItem(label: 'Profile', icon: Icon(Icons.person)), // Placeholder
+          BottomNavigationBarItem(label: 'Partners', icon: Icon(Icons.people)),
+          BottomNavigationBarItem(label: 'Profile', icon: Icon(Icons.person)),
         ],
         onTap: (index) {
           setState(() {

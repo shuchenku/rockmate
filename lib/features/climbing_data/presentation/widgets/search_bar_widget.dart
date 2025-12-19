@@ -28,11 +28,12 @@ class _SearchBarWidgetState extends State<SearchBarWidget> {
     return TextField(
       controller: _controller,
       decoration: InputDecoration(
-        hintText: 'Search routes, areas, crags...',
-        prefixIcon: const Icon(Icons.search),
+        hintText: 'Search routes or areas...',
+        hintStyle: TextStyle(color: Colors.grey.shade400),
+        prefixIcon: Icon(Icons.search, color: Colors.grey.shade400),
         suffixIcon: _controller.text.isNotEmpty
             ? IconButton(
-                icon: const Icon(Icons.clear),
+                icon: Icon(Icons.clear, color: Colors.grey.shade400),
                 onPressed: () {
                   _controller.clear();
                   widget.onClear();
@@ -40,10 +41,21 @@ class _SearchBarWidgetState extends State<SearchBarWidget> {
                 },
               )
             : null,
+        filled: true,
+        fillColor: Colors.white,
         border: OutlineInputBorder(
           borderRadius: BorderRadius.circular(12),
+          borderSide: BorderSide(color: Colors.grey.shade300),
         ),
-        filled: true,
+        enabledBorder: OutlineInputBorder(
+          borderRadius: BorderRadius.circular(12),
+          borderSide: BorderSide(color: Colors.grey.shade300),
+        ),
+        focusedBorder: OutlineInputBorder(
+          borderRadius: BorderRadius.circular(12),
+          borderSide: BorderSide(color: Colors.blue.shade500, width: 2),
+        ),
+        contentPadding: const EdgeInsets.symmetric(vertical: 12),
       ),
       onChanged: (value) {
         widget.onSearch(value);

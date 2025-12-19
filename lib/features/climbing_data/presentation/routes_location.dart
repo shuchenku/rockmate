@@ -1,5 +1,6 @@
 import 'package:beamer/beamer.dart';
 import 'package:flutter/material.dart';
+import 'package:rockmate/features/climbing_data/presentation/screens/route_search_screen.dart';
 
 class RoutesLocation extends BeamLocation<BeamState> {
   RoutesLocation(super.routeInformation);
@@ -13,7 +14,7 @@ class RoutesLocation extends BeamLocation<BeamState> {
       const BeamPage(
         key: ValueKey('route-search'),
         title: 'Routes',
-        child: Scaffold(body: Center(child: Text('Route Search - To be implemented'))),
+        child: RouteSearchScreen(),
       ),
     ];
 

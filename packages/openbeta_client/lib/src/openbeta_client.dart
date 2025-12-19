@@ -3,6 +3,8 @@ import 'package:injectable/injectable.dart';
 import 'package:openbeta_client/src/models/openbeta_route_model.dart';
 import 'exceptions.dart';
 
+import 'package:flutter/foundation.dart';
+
 @injectable
 class OpenBetaClient {
   final GraphQLClient client;
@@ -10,7 +12,11 @@ class OpenBetaClient {
   OpenBetaClient({GraphQLClient? client})
       : client = client ??
             GraphQLClient(
-              link: HttpLink('https://api.openbeta.io/graphql'),
+              link: HttpLink(
+                kIsWeb 
+                    ? 'https://corsproxy.io/?url=https://api.openbeta.io/graphql'
+                    : 'https://api.openbeta.io/graphql'
+              ),
               cache: GraphQLCache(),
             );
 

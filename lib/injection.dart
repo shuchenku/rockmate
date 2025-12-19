@@ -11,7 +11,7 @@ final getIt = GetIt.instance;
   asExtension: true, // default
 )
 void configureDependencies() {
-  getIt.init();
-  // Manually register OpenBetaClient since it's from external package
+  // Manually register OpenBetaClient BEFORE init() since it's from external package
   getIt.registerFactory<OpenBetaClient>(() => OpenBetaClient());
+  getIt.init();
 }

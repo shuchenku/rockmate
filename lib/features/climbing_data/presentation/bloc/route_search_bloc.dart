@@ -2,22 +2,16 @@ import 'dart:async';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:injectable/injectable.dart';
 import 'package:stream_transform/stream_transform.dart';
-import 'package:rockmate/features/climbing_data/data/datasources/route_local_data_source.dart';
+import 'package:rockmate/features/climbing_data/data/repositories/route_repository.dart';
 import 'package:rockmate/features/climbing_data/domain/events/route_search_event.dart';
 import 'package:rockmate/features/climbing_data/domain/state/route_search_state.dart';
-import 'package:rockmate/core/domain/entities/route_entity.dart';
 import 'package:rockmate/features/climbing_data/domain/models/route_search_filters.dart';
-import 'package:openbeta_client/openbeta_client.dart';
 
 @injectable
 class RouteSearchBloc extends Bloc<RouteSearchEvent, RouteSearchState> {
-  final RouteLocalDataSource _localDataSource;
-  final OpenBetaClient _networkClient;
+  final RouteRepository _repository;
 
-  RouteSearchBloc(
-    this._localDataSource,
-    this._networkClient,
-  ) : super(const RouteSearchState.initial()) {
+  RouteSearchBloc(this._repository) : super(const RouteSearchState.initial()) {
     on<RouteSearchEventQueryChanged>(
       _onQueryChanged,
       transformer: _debounce(const Duration(milliseconds: 500)),
@@ -126,7 +120,7 @@ class RouteSearchBloc extends Bloc<RouteSearchEvent, RouteSearchState> {
     emit(const RouteSearchState.initial());
   }
 
-  /// Performs cache-first search: check local, fallback to network
+  /// Performs search using repository
   Future<void> _performSearch(
     RouteSearchFilters filters,
     Emitter<RouteSearchState> emit,
@@ -137,35 +131,8 @@ class RouteSearchBloc extends Bloc<RouteSearchEvent, RouteSearchState> {
     ));
 
     try {
-      // Cache-first strategy: try local cache first
-      final searchKey = _buildSearchKey(filters);
-      final cachedRoutes = await _localDataSource.getCachedRoutes(searchKey);
-
-      if (cachedRoutes != null && cachedRoutes.isNotEmpty) {
-        emit(RouteSearchState.success(
-          filters: filters,
-          routes: cachedRoutes,
-          availableAreas: state.availableAreas,
-        ));
-        return;
-      }
-
-      // Cache miss or empty: fetch from network
-      final networkResults = await _networkClient.searchRoutes(filters.query);
+      final routes = await _repository.searchRoutes(filters.query);
       
-      // Convert OpenBetaRouteModel to RouteEntity
-      final routes = networkResults.map((model) => RouteEntity(
-        id: model.id,
-        name: model.name,
-        grade: model.grade,
-        type: model.type,
-        rating: model.rating,
-        location: model.location,
-      )).toList();
-
-      // Cache the results
-      await _localDataSource.cacheRoutes(searchKey, routes);
-
       emit(RouteSearchState.success(
         filters: filters,
         routes: routes,
@@ -178,17 +145,5 @@ class RouteSearchBloc extends Bloc<RouteSearchEvent, RouteSearchState> {
         availableAreas: state.availableAreas,
       ));
     }
-  }
-
-  /// Builds cache key from filters
-  String _buildSearchKey(RouteSearchFilters filters) {
-    final parts = <String>[
-      filters.query,
-      filters.locationFilter.mostSpecific ?? '',
-      filters.gradeMin ?? '',
-      filters.gradeMax ?? '',
-      filters.types.map((t) => t.name).join(','),
-    ];
-    return parts.where((p) => p.isNotEmpty).join('_');
   }
 }

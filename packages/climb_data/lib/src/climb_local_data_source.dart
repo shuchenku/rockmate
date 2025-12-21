@@ -7,11 +7,7 @@ class ClimbLocalDataSource {
 
   /// Initialize Hive and open climbs box
   Future<void> init() async {
-    // Register adapter if not already registered
-    if (!Hive.isAdapterRegistered(1)) {
-      Hive.registerAdapter(ClimbEntityAdapter());
-    }
-    
+    // Adapter is registered in main.dart, just open the box
     if (_box == null || !_box!.isOpen) {
       _box = await Hive.openBox<ClimbEntity>(_boxName);
     }

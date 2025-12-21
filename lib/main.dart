@@ -11,12 +11,17 @@ import 'core/presentation/screens/data_download_screen.dart';
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   
-  // Register Hive Adapters
+  // Initialize Hive
+  await Hive.initFlutter();
+  
+  // Register ALL Hive Adapters (must be after initFlutter, before any box operations)
   Hive.registerAdapter(RouteEntityAdapter());
   Hive.registerAdapter(CachedRoutesAdapter());
   
-  // Initialize Hive
-  await Hive.initFlutter();
+  // ClimbEntityAdapter uses typeId 1 - check if already registered
+  if (!Hive.isAdapterRegistered(1)) {
+    Hive.registerAdapter(ClimbEntityAdapter());
+  }
   
   // Configure Dependency Injection
   await configureDependencies();

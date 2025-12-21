@@ -34,11 +34,8 @@ class ClimbDataDownloader {
 
       onProgress(0.4, 'Importing ${response.bodyBytes.length ~/ 1024 ~/ 1024}MB of data...');
 
-      // Import using DataImporter
-      final dataSource = ClimbLocalDataSource();
-      await dataSource.init();
-      
-      final importer = DataImporter(dataSource);
+      // Use the repository's data source (already initialized with adapter registered)
+      final importer = DataImporter(_repository.dataSource);
       
       int lastReportedProgress = 0;
       await importer.importFromFile(

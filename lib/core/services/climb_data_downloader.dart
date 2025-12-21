@@ -5,7 +5,7 @@ import 'package:climb_data/climb_data.dart';
 
 class ClimbDataDownloader {
   static const String _githubReleaseUrl = 
-      'https://github.com/shuchenku/rockmate/releases/latest/download/all_climbs.json';
+      'https://github.com/shuchenku/rockmate/releases/download/v0.1.0-data/all_climbs.json';
   
   final ClimbRepository _repository;
 

@@ -27,14 +27,29 @@ class RouteSearchBloc extends Bloc<RouteSearchEvent, RouteSearchState> {
   void _loadAvailableAreas() {
     try {
       final states = _climbRepository.getUniqueStates();
-      emit(state.map(
-        initial: (s) => s.copyWith(availableAreas: states),
-        loading: (s) => s.copyWith(availableAreas: states),
-        success: (s) => s.copyWith(availableAreas: states),
-        error: (s) => s.copyWith(availableAreas: states),
-      ));
+      final newState = state.when(
+        initial: (filters, _) => RouteSearchState.initial(
+          filters: filters,
+          availableAreas: states,
+        ),
+        loading: (filters, _) => RouteSearchState.loading(
+          filters: filters,
+          availableAreas: states,
+        ),
+        success: (filters, routes, _) => RouteSearchState.success(
+          filters: filters,
+          routes: routes,
+          availableAreas: states,
+        ),
+        error: (filters, message, _) => RouteSearchState.error(
+          filters: filters,
+          message: message,
+          availableAreas: states,
+        ),
+      );
+      emit(newState);
     } catch (e) {
-      // Silently fail -areas will remain empty
+      // Silently fail - areas will remain empty
     }
   }
 
@@ -59,13 +74,15 @@ class RouteSearchBloc extends Bloc<RouteSearchEvent, RouteSearchState> {
     RouteSearchEventLocationFilterChanged event,
     Emitter<RouteSearchState> emit,
   ) async {
-    final updatedFilters = state.filters.copyWith(location: event.location);
-    emit(state.map(
-      initial: (s) => s.copyWith(filters: updatedFilters),
-      loading: (s) => s.copyWith(filters: updatedFilters),
-      success: (s) => s.copyWith(filters: updatedFilters),
-      error: (s) => s.copyWith(filters: updatedFilters),
-    ));
+    final updatedFilters = state.filters.copyWith(locationFilter: event.locationFilter);
+    
+    final newState = state.when(
+      initial: (_, areas) => RouteSearchState.initial(filters: updatedFilters, availableAreas: areas),
+      loading: (_, areas) => RouteSearchState.loading(filters: updatedFilters, availableAreas: areas),
+      success: (_, routes, areas) => RouteSearchState.success(filters: updatedFilters, routes: routes, availableAreas: areas),
+      error: (_, message, areas) => RouteSearchState.error(filters: updatedFilters, message: message, availableAreas: areas),
+    );
+    emit(newState);
 
     if (!updatedFilters.isEmpty) {
       await _performSearch(updatedFilters, emit);
@@ -77,15 +94,17 @@ class RouteSearchBloc extends Bloc<RouteSearchEvent, RouteSearchState> {
     Emitter<RouteSearchState> emit,
   ) async {
     final updatedFilters = state.filters.copyWith(
-      minGrade: event.minGrade,
-      maxGrade: event.maxGrade,
+      gradeMin: event.gradeMin,
+      gradeMax: event.gradeMax,
     );
-    emit(state.map(
-      initial: (s) => s.copyWith(filters: updatedFilters),
-      loading: (s) => s.copyWith(filters: updatedFilters),
-      success: (s) => s.copyWith(filters: updatedFilters),
-      error: (s) => s.copyWith(filters: updatedFilters),
-    ));
+    
+    final newState = state.when(
+      initial: (_, areas) => RouteSearchState.initial(filters: updatedFilters, availableAreas: areas),
+      loading: (_, areas) => RouteSearchState.loading(filters: updatedFilters, availableAreas: areas),
+      success: (_, routes, areas) => RouteSearchState.success(filters: updatedFilters, routes: routes, availableAreas: areas),
+      error: (_, message, areas) => RouteSearchState.error(filters: updatedFilters, message: message, availableAreas: areas),
+    );
+    emit(newState);
 
     if (!updatedFilters.isEmpty) {
       await _performSearch(updatedFilters, emit);
@@ -97,12 +116,14 @@ class RouteSearchBloc extends Bloc<RouteSearchEvent, RouteSearchState> {
     Emitter<RouteSearchState> emit,
   ) async {
     final updatedFilters = state.filters.copyWith(types: event.types);
-    emit(state.map(
-      initial: (s) => s.copyWith(filters: updatedFilters),
-      loading: (s) => s.copyWith(filters: updatedFilters),
-      success: (s) => s.copyWith(filters: updatedFilters),
-      error: (s) => s.copyWith(filters: updatedFilters),
-    ));
+    
+    final newState = state.when(
+      initial: (_, areas) => RouteSearchState.initial(filters: updatedFilters, availableAreas: areas),
+      loading: (_, areas) => RouteSearchState.loading(filters: updatedFilters, availableAreas: areas),
+      success: (_, routes, areas) => RouteSearchState.success(filters: updatedFilters, routes: routes, availableAreas: areas),
+      error: (_, message, areas) => RouteSearchState.error(filters: updatedFilters, message: message, availableAreas: areas),
+    );
+    emit(newState);
 
     if (!updatedFilters.isEmpty) {
       await _performSearch(updatedFilters, emit);
@@ -135,18 +156,20 @@ class RouteSearchBloc extends Bloc<RouteSearchEvent, RouteSearchState> {
     ));
 
     try {
-      // Convert filter state location to simple state string
-      final stateFilter = filters.location?.state;
+      // Extract state from locationFilter (use most specific location set)
+      final stateFilter = filters.locationFilter.mostSpecific;
       
       // Convert RouteType Set to type string list
       final typesList = filters.types.map((t) => t.displayName).toList();
       
+      // For now, ignore grade filtering (would need conversion from string grades to numeric)
       final climbResults = await _climbRepository.searchClimbs(
         query: filters.query,
-        state: stateFilter,
+        state: stateFilter?.isNotEmpty == true ? stateFilter : null,
         types: typesList.isNotEmpty ? typesList : null,
-        minGrade: filters.minGrade,
-        maxGrade: filters.maxGrade,
+        // TODO: Convert string grades to numeric for filtering
+        // minGrade: _convertGradeToNumeric(filters.gradeMin),
+        // maxGrade: _convertGradeToNumeric(filters.gradeMax),
       );
 
       // Convert ClimbEntity to RouteEntity for existing UI

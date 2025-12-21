@@ -93,7 +93,7 @@ class _MyAppState extends State<MyApp> {
     final routerDelegate = BeamerDelegate(
       locationBuilder: BeamerLocationBuilder(
         beamLocations: [
-          MainLocation(const RouteInformation(uri: Uri(path: '/'))),
+          MainLocation(RouteInformation(uri: Uri(path: '/'))),
         ],
       ),
     );

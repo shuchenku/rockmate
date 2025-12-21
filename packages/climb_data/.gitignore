@@ -1,0 +1,17 @@
+# Build outputs
+build/
+*.g.dart.track.json
+
+# Hive test data
+test_hive/
+*.hive
+*.lock
+
+# IDE
+.idea/
+*.iml
+
+# Pub
+.dart_tool/
+.packages
+pubspec.lock

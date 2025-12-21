@@ -1,45 +1,26 @@
 import 'package:injectable/injectable.dart';
 import 'package:rockmate/core/domain/entities/route_entity.dart';
 import 'package:rockmate/features/climbing_data/data/datasources/route_local_data_source.dart';
-import 'package:openbeta_client/openbeta_client.dart';
+// TODO: Replace with ClimbRepository from climb_data package
 
 @injectable
 class RouteRepository {
   final RouteLocalDataSource _localDataSource;
-  final OpenBetaClient _networkClient;
+  // final ClimbRepository _climbRepository; // Will be added in Task 2
 
-  RouteRepository(this._localDataSource, this._networkClient);
+  RouteRepository(this._localDataSource);
 
   /// Searches for routes using cache-first strategy
-  /// 1. Check local cache
-  /// 2. If cache miss, fetch from network
-  /// 3. Cache network results
+  /// TODO: Replace with local climb data from Hive
   Future<List<RouteEntity>> searchRoutes(String query) async {
-    // Try cache first
+    // Temporarily return cached routes only
     final cachedRoutes = await _localDataSource.getCachedRoutes(query);
     if (cachedRoutes != null && cachedRoutes.isNotEmpty) {
       return cachedRoutes;
     }
 
-    // Cache miss: fetch from network
-    final networkResults = await _networkClient.searchRoutes(query);
-
-    // Convert models to entities
-    final routes = networkResults
-        .map((model) => RouteEntity(
-              id: model.id,
-              name: model.name,
-              grade: model.grade,
-              type: model.type,
-              rating: model.rating,
-              location: model.location,
-            ))
-        .toList();
-
-    // Cache the results
-    await _localDataSource.cacheRoutes(query, routes);
-
-    return routes;
+    // Network fetch removed - will be replaced with local Hive query
+    return [];
   }
 
   /// Clears all cached routes

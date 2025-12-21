@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'dart:io';
 import 'package:flutter/services.dart' show rootBundle;
 import 'climb_local_data_source.dart';
 import 'models/climb_entity.dart';
@@ -13,7 +14,21 @@ class DataImporter {
       {Function(int current, int total)? onProgress}) async {
     // Load JSON from assets
     final jsonString = await rootBundle.loadString(assetPath);
-    
+    await _importFromString(jsonString, onProgress: onProgress);
+  }
+
+  /// Import climbs from downloaded file
+  Future<void> importFromFile(String filePath,
+      {Function(int current, int total)? onProgress}) async {
+    // Read JSON from file
+    final file = File(filePath);
+    final jsonString = await file.readAsString();
+    await _importFromString(jsonString, onProgress: onProgress);
+  }
+
+  /// Internal method to import from JSON string
+  Future<void> _importFromString(String jsonString,
+      {Function(int current, int total)? onProgress}) async {
     // Parse JSON Lines format (each line is a separate JSON object)
     final lines = LineSplitter.split(jsonString);
     final climbs = <ClimbEntity>[];

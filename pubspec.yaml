@@ -48,8 +48,16 @@ dependencies:
   # Routing
   beamer: ^1.7.0
 
+  # HTTP & File System
+  http: ^1.2.0
+  path_provider: ^2.1.5
+
   # Utilities
   stream_transform: ^2.1.1
+  
+  # Internal packages
+  climb_data:
+    path: packages/climb_data
   
 dev_dependencies:
   flutter_test:

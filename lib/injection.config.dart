@@ -9,6 +9,7 @@
 // coverage:ignore-file
 
 // ignore_for_file: no_leading_underscores_for_library_prefixes
+import 'package:climb_data/climb_data.dart' as _i597;
 import 'package:get_it/get_it.dart' as _i174;
 import 'package:injectable/injectable.dart' as _i526;
 import 'package:rockmate/features/climbing_data/data/datasources/route_local_data_source.dart'
@@ -30,7 +31,7 @@ extension GetItInjectableX on _i174.GetIt {
       () => _i497.RouteRepository(gh<_i504.RouteLocalDataSource>()),
     );
     gh.factory<_i71.RouteSearchBloc>(
-      () => _i71.RouteSearchBloc(gh<_i497.RouteRepository>()),
+      () => _i71.RouteSearchBloc(gh<_i597.ClimbRepository>()),
     );
     return this;
   }

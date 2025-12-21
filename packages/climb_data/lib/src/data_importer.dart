@@ -54,47 +54,62 @@ class DataImporter {
 
   /// Parse a single climb from JSON
   ClimbEntity _parseClimb(Map<String, dynamic> json) {
-    // Parse type flags
-    final type = json['type'] as Map<String, dynamic>? ?? {};
+    // Parse type flags - actual field names from parquet export
+    final isSport = json['is_sport'] as bool? ?? false;
+    final isTrad = json['is_trad'] as bool? ?? false;
+    final isBoulder = json['is_boulder'] as bool? ?? false;
+    final isTr = json['is_tr'] as bool? ?? false;
+    final isAlpine = json['is_alpine'] as bool? ?? false;
+    final isIce = json['is_ice'] as bool? ?? false;
+    final isMixed = json['is_mixed'] as bool? ?? false;
+    final isAid = json['is_aid'] as bool? ?? false;
     
-    // Parse grades
-    final grades = json['grades'] as Map<String, dynamic>? ?? {};
-    final yds = grades['yds'] as String?;
-    final vscale = grades['vscale'] as String?;
-    final french = grades['french'] as String?;
+    // Parse grades - actual field names are flat, not nested
+    final yds = json['grade_yds'] as String?;
+    final vscale = json['grade_vscale'] as String?;
+    final french = json['grade_french'] as String?;
     
     // Calculate numeric grade (0-100 scale)
     int gradeNumeric = _calculateNumericGrade(yds, vscale);
     
-    // Parse path tokens
-    final pathTokens = (json['pathTokens'] as List<dynamic>?)
-        ?.map((e) => e.toString())
-        .toList() ?? [];
+    // Build path tokens from separate location fields
+    final pathTokens = <String>[];
+    final country = json['country'] as String?;
+    final stateProvince = json['state_province'] as String?;
+    final region = json['region'] as String?;
+    final area = json['area'] as String?;
+    final crag = json['crag'] as String?;
+    
+    if (country != null && country.isNotEmpty) pathTokens.add(country);
+    if (stateProvince != null && stateProvince.isNotEmpty) pathTokens.add(stateProvince);
+    if (region != null && region.isNotEmpty) pathTokens.add(region);
+    if (area != null && area.isNotEmpty) pathTokens.add(area);
+    if (crag != null && crag.isNotEmpty) pathTokens.add(crag);
     
     return ClimbEntity(
-      uuid: json['uuid'] as String,
-      name: json['name'] as String,
-      fa: json['fa'] as String?,
+      uuid: json['climb_id'] as String,
+      name: json['climb_name'] as String,
+      fa: json['first_ascent'] as String?,
       gradeYds: yds,
       gradeVscale: vscale,
       gradeFrench: french,
       gradeNumeric: gradeNumeric,
-      typeSport: type['sport'] as bool? ?? false,
-      typeTrad: type['trad'] as bool? ?? false,
-      typeBouldering: type['bouldering'] as bool? ?? false,
-      typeTr: type['tr'] as bool? ?? false,
-      typeAlpine: type['alpine'] as bool? ?? false,
-      typeIce: type['ice'] as bool? ?? false,
-      typeMixed: type['mixed'] as bool? ?? false,
-      typeAid: type['aid'] as bool? ?? false,
-      length: json['length'] as int? ?? -1,
-      boltsCount: json['boltsCount'] as int? ?? -1,
+      typeSport: isSport,
+      typeTrad: isTrad,
+      typeBouldering: isBoulder,
+      typeTr: isTr,
+      typeAlpine: isAlpine,
+      typeIce: isIce,
+      typeMixed: isMixed,
+      typeAid: isAid,
+      length: json['length_meters'] as int? ?? -1,
+      boltsCount: json['bolts_count'] as int? ?? -1,
       safety: json['safety'] as String?,
-      lat: (json['lat'] as num?)?.toDouble(),
-      lng: (json['lng'] as num?)?.toDouble(),
+      lat: (json['latitude'] as num?)?.toDouble(),
+      lng: (json['longitude'] as num?)?.toDouble(),
       description: json['description'] as String?,
       protection: json['protection'] as String?,
-      areaUuid: json['areaUuid'] as String? ?? '',
+      areaUuid: json['area_id'] as String? ?? '',
       pathTokens: pathTokens,
     );
   }

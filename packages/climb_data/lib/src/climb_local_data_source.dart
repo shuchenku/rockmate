@@ -89,16 +89,38 @@ class ClimbLocalDataSource {
     return results;
   }
 
-  /// Get unique states from all climbs
-  List<String> getUniqueStates() {
+  /// Get unique countries from all climbs
+  List<String> getUniqueCountries() {
+    if (_box == null || !_box!.isOpen) {
+      return [];
+    }
+    
+    final countries = <String>{};
+    for (final climb in _box!.values) {
+      // pathTokens: [Country, State/Province, Region, Area, Crag]
+      // We want index 0 (Country)
+      if (climb.pathTokens.isNotEmpty) {
+        countries.add(climb.pathTokens[0]);
+      }
+    }
+    return countries.toList()..sort();
+  }
+
+  /// Get unique states/provinces from all climbs, optionally filtered by country
+  List<String> getUniqueStates({String? country}) {
     if (_box == null || !_box!.isOpen) {
       return [];
     }
     
     final states = <String>{};
     for (final climb in _box!.values) {
-      if (climb.pathTokens.isNotEmpty) {
-        states.add(climb.pathTokens.first);
+      // pathTokens: [Country, State/Province, Region, Area, Crag]
+      // We want index 1 (State/Province)
+      if (climb.pathTokens.length >= 2) {
+        // If country filter is provided, only include states from that country
+        if (country == null || climb.pathTokens[0] == country) {
+          states.add(climb.pathTokens[1]);
+        }
       }
     }
     return states.toList()..sort();
@@ -112,10 +134,11 @@ class ClimbLocalDataSource {
     
     final regions = <String>{};
     for (final climb in _box!.values) {
-      if (climb.pathTokens.isNotEmpty && 
-          climb.pathTokens.first == state &&
-          climb.pathTokens.length >= 2) {
-        regions.add(climb.pathTokens[1]);
+      // pathTokens: [Country, State/Province, Region, Area, Crag]
+      // Match state at index 1, return region at index 2
+      if (climb.pathTokens.length >= 3 && 
+          climb.pathTokens[1] == state) {
+        regions.add(climb.pathTokens[2]);
       }
     }
     return regions.toList()..sort();

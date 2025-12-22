@@ -8,23 +8,27 @@ part 'route_search_state.freezed.dart';
 class RouteSearchState with _$RouteSearchState {
   const factory RouteSearchState.initial({
     @Default(RouteSearchFilters()) RouteSearchFilters filters,
-    @Default([]) List<String> availableAreas,
+    @Default([]) List<String> availableCountries,
+    @Default([]) List<String> availableStates,
   }) = RouteSearchStateInitial;
   
   const factory RouteSearchState.loading({
     required RouteSearchFilters filters,
-    @Default([]) List<String> availableAreas,
+    @Default([]) List<String> availableCountries,
+    @Default([]) List<String> availableStates,
   }) = RouteSearchStateLoading;
   
   const factory RouteSearchState.success({
     required RouteSearchFilters filters,
     required List<RouteEntity> routes,
-    @Default([]) List<String> availableAreas,
+    @Default([]) List<String> availableCountries,
+    @Default([]) List<String> availableStates,
   }) = RouteSearchStateSuccess;
   
   const factory RouteSearchState.error({
     required RouteSearchFilters filters,
     required String message,
-    @Default([]) List<String> availableAreas,
+    @Default([]) List<String> availableCountries,
+    @Default([]) List<String> availableStates,
   }) = RouteSearchStateError;
 }

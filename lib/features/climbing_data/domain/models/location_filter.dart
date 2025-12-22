@@ -2,25 +2,25 @@ import 'package:freezed_annotation/freezed_annotation.dart';
 
 part 'location_filter.freezed.dart';
 
-/// Hierarchical location filter: Continent → Country → Region → Location
+/// Hierarchical location filter matching pathTokens: Country → State/Province → Region → Area
 @freezed
 class LocationFilter with _$LocationFilter {
   const factory LocationFilter({
-    String? continent,
-    String? country,
-    String? region,
-    String? location,
+    String? country,        // pathTokens[0]
+    String? stateProvince,  // pathTokens[1]
+    String? region,         // pathTokens[2]
+    String? area,           // pathTokens[3]
   }) = _LocationFilter;
 
   const LocationFilter._();
 
   bool get isEmpty => 
-    continent == null && 
     country == null && 
+    stateProvince == null && 
     region == null && 
-    location == null;
+    area == null;
 
   /// Returns the most specific location level set
   String? get mostSpecific =>
-    location ?? region ?? country ?? continent;
+    area ?? region ?? stateProvince ?? country;
 }

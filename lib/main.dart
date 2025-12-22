@@ -8,15 +8,24 @@ import 'core/data/adapters/cached_routes_adapter.dart';
 import 'package:climb_data/climb_data.dart';
 import 'core/presentation/screens/data_download_screen.dart';
 
+
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   
-  // Register Hive Adapters
+  // Initialize Hive
+  await Hive.initFlutter();
+  
+  // Register ALL Hive Adapters (must be after initFlutter, before any box operations)
   Hive.registerAdapter(RouteEntityAdapter());
   Hive.registerAdapter(CachedRoutesAdapter());
   
-  // Initialize Hive
-  await Hive.initFlutter();
+  // Register ClimbEntityAdapter - catch if already registered
+  try {
+    Hive.registerAdapter(ClimbEntityAdapter());
+  } catch (e) {
+    // Already registered, ignore
+  }
+  
   
   // Configure Dependency Injection
   await configureDependencies();
@@ -93,7 +102,7 @@ class _MyAppState extends State<MyApp> {
     final routerDelegate = BeamerDelegate(
       locationBuilder: BeamerLocationBuilder(
         beamLocations: [
-          MainLocation(const RouteInformation(uri: Uri(path: '/'))),
+          MainLocation(RouteInformation(uri: Uri(path: '/'))),
         ],
       ),
     );

@@ -7,11 +7,11 @@ final getIt = GetIt.instance;
 
 @InjectableInit()
 Future<void> configureDependencies() async {
-  // Register ClimbRepository as singleton
-  // Must be done before getIt.init() since blocs depend on it
+  // Register ClimbRepository manually (from external package)
   final dataSource = ClimbLocalDataSource();
   await dataSource.init();
-  getIt.registerSingleton<ClimbRepository>(ClimbRepository(dataSource));
+  final repository = ClimbRepository(dataSource);
+  getIt.registerSingleton<ClimbRepository>(repository);
   
   // Initialize generated dependencies
   getIt.init();

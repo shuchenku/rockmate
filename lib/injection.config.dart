@@ -36,7 +36,7 @@ extension GetItInjectableX on _i174.GetIt {
       () => _i412.RouteDetailBloc(gh<_i597.ClimbRepository>()),
     );
     gh.factory<_i71.RouteSearchBloc>(
-      () => _i71.RouteSearchBloc(gh<_i497.RouteRepository>()),
+      () => _i71.RouteSearchBloc(gh<_i597.ClimbRepository>()),
     );
     return this;
   }

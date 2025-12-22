@@ -4,6 +4,8 @@ import 'package:climb_data/climb_data.dart';
 part 'route_detail_state.freezed.dart';
 
 /// State for Route Detail screen
+/// TODO: Add userLogStatus field when implementing Phase 4 (Logbook)
+///       to show if user has logged this route (to-do, sent, etc.)
 @freezed
 class RouteDetailState with _$RouteDetailState {
   /// Initial state before any route is loaded

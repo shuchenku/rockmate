@@ -12,14 +12,16 @@ class ClimbRepository {
   /// Search climbs with filters
   Future<List<ClimbEntity>> searchClimbs({
     String? query,
-    String? state,
+    String? country,
+    String? stateProvince,
     List<String>? types,
     int? minGrade,
     int? maxGrade,
   }) async {
     return await _dataSource.searchClimbs(
       query: query,
-      state: state,
+      country: country,
+      stateProvince: stateProvince,
       types: types,
       minGrade: minGrade,
       maxGrade: maxGrade,
@@ -31,9 +33,14 @@ class ClimbRepository {
     return await _dataSource.getClimbByUuid(uuid);
   }
 
-  /// Get unique states for filter dropdowns
-  List<String> getUniqueStates() {
-    return _dataSource.getUniqueStates();
+  /// Get unique countries for filter dropdowns
+  List<String> getUniqueCountries() {
+    return _dataSource.getUniqueCountries();
+  }
+
+  /// Get unique states for filter dropdowns, optionally filtered by country
+  List<String> getUniqueStates({String? country}) {
+    return _dataSource.getUniqueStates(country: country);
   }
 
   /// Get unique regions for a given state

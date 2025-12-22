@@ -8,6 +8,7 @@ import 'core/data/adapters/cached_routes_adapter.dart';
 import 'package:climb_data/climb_data.dart';
 import 'core/presentation/screens/data_download_screen.dart';
 
+
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   
@@ -24,6 +25,7 @@ void main() async {
   } catch (e) {
     // Already registered, ignore
   }
+  
   
   // Configure Dependency Injection
   await configureDependencies();

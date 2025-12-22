@@ -25,32 +25,40 @@ class RouteSearchBloc extends Bloc<RouteSearchEvent, RouteSearchState> {
   }
 
   void _loadAvailableAreas() {
-    try {
-      final states = _climbRepository.getUniqueStates();
-      final newState = state.when(
-        initial: (filters, _) => RouteSearchState.initial(
-          filters: filters,
-          availableAreas: states,
-        ),
-        loading: (filters, _) => RouteSearchState.loading(
-          filters: filters,
-          availableAreas: states,
-        ),
-        success: (filters, routes, _) => RouteSearchState.success(
-          filters: filters,
-          routes: routes,
-          availableAreas: states,
-        ),
-        error: (filters, message, _) => RouteSearchState.error(
-          filters: filters,
-          message: message,
-          availableAreas: states,
-        ),
-      );
-      emit(newState);
-    } catch (e) {
-      // Silently fail - areas will remain empty
-    }
+    // Defer emit to avoid "emit during construction" error
+    Future.microtask(() {
+      try {
+        final countries = _climbRepository.getUniqueCountries();
+        // Don't load states initially - they'll be loaded when a country is selected
+        final newState = state.when(
+          initial: (filters, _, __) => RouteSearchState.initial(
+            filters: filters,
+            availableCountries: countries,
+            availableStates: [],
+          ),
+          loading: (filters, _, __) => RouteSearchState.loading(
+            filters: filters,
+            availableCountries: countries,
+            availableStates: [],
+          ),
+          success: (filters, routes, _, __) => RouteSearchState.success(
+            filters: filters,
+            routes: routes,
+            availableCountries: countries,
+            availableStates: [],
+          ),
+          error: (filters, message, _, __ ) => RouteSearchState.error(
+            filters: filters,
+            message: message,
+            availableCountries: countries,
+            availableStates: [],
+          ),
+        );
+        emit(newState);
+      } catch (e) {
+        // Silently fail - areas will remain empty
+      }
+    });
   }
 
   Future<void> _onQueryChanged(
@@ -62,7 +70,18 @@ class RouteSearchBloc extends Bloc<RouteSearchEvent, RouteSearchState> {
     if (event.query.trim().isEmpty) {
       emit(RouteSearchState.initial(
         filters: updatedFilters,
-        availableAreas: state.availableAreas,
+        availableCountries: state.when(
+          initial: (_, countries, __) => countries,
+          loading: (_, countries, __) => countries,
+          success: (_, __, countries, ___) => countries,
+          error: (_, __, countries, ___) => countries,
+        ),
+        availableStates: state.when(
+          initial: (_, __, states) => states,
+          loading: (_, __, states) => states,
+          success: (_, __, ___, states) => states,
+          error: (_, __, ___, states) => states,
+        ),
       ));
       return;
     }
@@ -76,11 +95,37 @@ class RouteSearchBloc extends Bloc<RouteSearchEvent, RouteSearchState> {
   ) async {
     final updatedFilters = state.filters.copyWith(locationFilter: event.locationFilter);
     
+    // Load states for the newly selected country
+    final List<String> newStates;
+    if (event.locationFilter.country != null) {
+      newStates = _climbRepository.getUniqueStates(country: event.locationFilter.country);
+    } else {
+      newStates = [];
+    }
+
     final newState = state.when(
-      initial: (_, areas) => RouteSearchState.initial(filters: updatedFilters, availableAreas: areas),
-      loading: (_, areas) => RouteSearchState.loading(filters: updatedFilters, availableAreas: areas),
-      success: (_, routes, areas) => RouteSearchState.success(filters: updatedFilters, routes: routes, availableAreas: areas),
-      error: (_, message, areas) => RouteSearchState.error(filters: updatedFilters, message: message, availableAreas: areas),
+      initial: (_, countries, __) => RouteSearchState.initial(
+        filters: updatedFilters, 
+        availableCountries: countries,
+        availableStates: newStates,
+      ),
+      loading: (_, countries, __) => RouteSearchState.loading(
+        filters: updatedFilters,
+        availableCountries: countries,
+        availableStates: newStates,
+      ),
+      success: (_, routes, countries, __) => RouteSearchState.success(
+        filters: updatedFilters,
+        routes: routes,
+        availableCountries: countries,
+        availableStates: newStates,
+      ),
+      error: (_, message, countries, __) => RouteSearchState.error(
+        filters: updatedFilters,
+        message: message,
+        availableCountries: countries,
+        availableStates: newStates,
+      ),
     );
     emit(newState);
 
@@ -99,10 +144,10 @@ class RouteSearchBloc extends Bloc<RouteSearchEvent, RouteSearchState> {
     );
     
     final newState = state.when(
-      initial: (_, areas) => RouteSearchState.initial(filters: updatedFilters, availableAreas: areas),
-      loading: (_, areas) => RouteSearchState.loading(filters: updatedFilters, availableAreas: areas),
-      success: (_, routes, areas) => RouteSearchState.success(filters: updatedFilters, routes: routes, availableAreas: areas),
-      error: (_, message, areas) => RouteSearchState.error(filters: updatedFilters, message: message, availableAreas: areas),
+      initial: (_, countries, states) => RouteSearchState.initial(filters: updatedFilters, availableCountries: countries, availableStates: states),
+      loading: (_, countries, states) => RouteSearchState.loading(filters: updatedFilters, availableCountries: countries, availableStates: states),
+      success: (_, routes, countries, states) => RouteSearchState.success(filters: updatedFilters, routes: routes, availableCountries: countries, availableStates: states),
+      error: (_, message, countries, states) => RouteSearchState.error(filters: updatedFilters, message: message, availableCountries: countries, availableStates: states),
     );
     emit(newState);
 
@@ -118,10 +163,10 @@ class RouteSearchBloc extends Bloc<RouteSearchEvent, RouteSearchState> {
     final updatedFilters = state.filters.copyWith(types: event.types);
     
     final newState = state.when(
-      initial: (_, areas) => RouteSearchState.initial(filters: updatedFilters, availableAreas: areas),
-      loading: (_, areas) => RouteSearchState.loading(filters: updatedFilters, availableAreas: areas),
-      success: (_, routes, areas) => RouteSearchState.success(filters: updatedFilters, routes: routes, availableAreas: areas),
-      error: (_, message, areas) => RouteSearchState.error(filters: updatedFilters, message: message, availableAreas: areas),
+      initial: (_, countries, states) => RouteSearchState.initial(filters: updatedFilters, availableCountries: countries, availableStates: states),
+      loading: (_, countries, states) => RouteSearchState.loading(filters: updatedFilters, availableCountries: countries, availableStates: states),
+      success: (_, routes, countries, states) => RouteSearchState.success(filters: updatedFilters, routes: routes, availableCountries: countries, availableStates: states),
+      error: (_, message, countries, states) => RouteSearchState.error(filters: updatedFilters, message: message, availableCountries: countries, availableStates: states),
     );
     emit(newState);
 
@@ -142,7 +187,20 @@ class RouteSearchBloc extends Bloc<RouteSearchEvent, RouteSearchState> {
     RouteSearchEventFiltersCleared event,
     Emitter<RouteSearchState> emit,
   ) async {
-    emit(RouteSearchState.initial(availableAreas: state.availableAreas));
+    emit(RouteSearchState.initial(
+      availableCountries: state.when(
+        initial: (_, countries, __) => countries,
+        loading: (_, countries, __) => countries,
+        success: (_, __, countries, ___) => countries,
+        error: (_, __, countries, ___) => countries,
+      ),
+      availableStates: state.when(
+        initial: (_, __, states) => states,
+        loading: (_, __, states) => states,
+        success: (_, __, ___, states) => states,
+        error: (_, __, ___, states) => states,
+      ),
+    ));
   }
 
   /// Performs search using local climb repository
@@ -152,12 +210,24 @@ class RouteSearchBloc extends Bloc<RouteSearchEvent, RouteSearchState> {
   ) async {
     emit(RouteSearchState.loading(
       filters: filters,
-      availableAreas: state.availableAreas,
+      availableCountries: state.when(
+        initial: (_, countries, __) => countries,
+        loading: (_, countries, __) => countries,
+        success: (_, __, countries, ___) => countries,
+        error: (_, __, countries, ___) => countries,
+      ),
+      availableStates: state.when(
+        initial: (_, __, states) => states,
+        loading: (_, __, states) => states,
+        success: (_, __, ___, states) => states,
+        error: (_, __, ___, states) => states,
+      ),
     ));
 
     try {
-      // Extract state from locationFilter (use most specific location set)
-      final stateFilter = filters.locationFilter.mostSpecific;
+      // Extract country and state/province from locationFilter
+      final country = filters.locationFilter.country;
+      final stateProvince = filters.locationFilter.stateProvince;
       
       // Convert RouteType Set to type string list
       final typesList = filters.types.map((t) => t.displayName).toList();
@@ -165,7 +235,8 @@ class RouteSearchBloc extends Bloc<RouteSearchEvent, RouteSearchState> {
       // For now, ignore grade filtering (would need conversion from string grades to numeric)
       final climbResults = await _climbRepository.searchClimbs(
         query: filters.query,
-        state: stateFilter?.isNotEmpty == true ? stateFilter : null,
+        country: country?.isNotEmpty == true ? country : null,
+        stateProvince: stateProvince?.isNotEmpty == true ? stateProvince : null,
         types: typesList.isNotEmpty ? typesList : null,
         // TODO: Convert string grades to numeric for filtering
         // minGrade: _convertGradeToNumeric(filters.gradeMin),
@@ -185,13 +256,35 @@ class RouteSearchBloc extends Bloc<RouteSearchEvent, RouteSearchState> {
       emit(RouteSearchState.success(
         filters: filters,
         routes: routes,
-        availableAreas: state.availableAreas,
+        availableCountries: state.when(
+          initial: (_, countries, __) => countries,
+          loading: (_, countries, __) => countries,
+          success: (_, __, countries, ___) => countries,
+          error: (_, __, countries, ___) => countries,
+        ),
+        availableStates: state.when(
+          initial: (_, __, states) => states,
+          loading: (_, __, states) => states,
+          success: (_, __, ___, states) => states,
+          error: (_, __, ___, states) => states,
+        ),
       ));
     } catch (e) {
       emit(RouteSearchState.error(
         filters: filters,
         message: e.toString(),
-        availableAreas: state.availableAreas,
+        availableCountries: state.when(
+          initial: (_, countries, __) => countries,
+          loading: (_, countries, __) => countries,
+          success: (_, __, countries, ___) => countries,
+          error: (_, __, countries, ___) => countries,
+        ),
+        availableStates: state.when(
+          initial: (_, __, states) => states,
+          loading: (_, __, states) => states,
+          success: (_, __, ___, states) => states,
+          error: (_, __, ___, states) => states,
+        ),
       ));
     }
   }

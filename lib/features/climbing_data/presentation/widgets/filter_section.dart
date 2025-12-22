@@ -15,8 +15,9 @@ class FilterSection extends StatefulWidget {
 
 class _FilterSectionState extends State<FilterSection> {
   bool _showFilters = false;
-  String _selectedArea = 'all';
-  String _selectedType = 'all';
+  String _selectedArea = 'all'; // Country selection
+  String _selectedState = 'all'; // State/Province selection
+  String _selectedType = 'all'; // Climb type selection
 
   @override
   Widget build(BuildContext context) {
@@ -78,9 +79,9 @@ class _FilterSectionState extends State<FilterSection> {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  // Area Filter
+                  // Country Filter
                   Text(
-                    'Area',
+                    'Country',
                     style: TextStyle(
                       fontSize: 14,
                       color: Colors.grey.shade700,
@@ -90,9 +91,15 @@ class _FilterSectionState extends State<FilterSection> {
                   const SizedBox(height: 8),
                   BlocBuilder<RouteSearchBloc, RouteSearchState>(
                     builder: (context, state) {
-                      // Ensure selected area is valid, or reset to 'all'
-                      final areas = state.availableAreas;
-                      if (_selectedArea != 'all' && !areas.contains(_selectedArea)) {
+                      final countries = state.when(
+                        initial: (_, countries, __) => countries,
+                        loading: (_, countries, __) => countries,
+                        success: (_, __, countries, ___) => countries,
+                        error: (_, __, countries, ___) => countries,
+                      );
+                      
+                      // Ensure selected country is valid
+                      if (_selectedArea != 'all' && !countries.contains(_selectedArea)) {
                         _selectedArea = 'all';
                       }
                       
@@ -107,20 +114,21 @@ class _FilterSectionState extends State<FilterSection> {
                           isExpanded: true,
                           underline: const SizedBox(),
                           items: [
-                            const DropdownMenuItem(value: 'all', child: Text('All Areas')),
-                            ...areas.map((area) => DropdownMenuItem(
-                              value: area,
-                              child: Text(area),
+                            const DropdownMenuItem(value: 'all', child: Text('All Countries')),
+                            ...countries.map((country) => DropdownMenuItem(
+                              value: country,
+                              child: Text(country),
                             )),
                           ],
                           onChanged: (value) {
                             setState(() {
                               _selectedArea = value ?? 'all';
+                              _selectedState = 'all'; // Reset state when country changes
                             });
                             
                             final filter = value == 'all' 
                                 ? const LocationFilter()
-                                : LocationFilter(location: value);
+                                : LocationFilter(country: value);
                                 
                             context.read<RouteSearchBloc>().add(
                                   RouteSearchEventLocationFilterChanged(filter),
@@ -132,7 +140,72 @@ class _FilterSectionState extends State<FilterSection> {
                   ),
                   const SizedBox(height: 16),
                   
-                  // Type Filter
+                  // State/Province Filter (conditional)
+                  BlocBuilder<RouteSearchBloc, RouteSearchState>(
+                    builder: (context, state) {
+                      final states = state.when(
+                        initial: (_, __, states) => states,
+                        loading: (_, __, states) => states,
+                        success: (_, __, ___, states) => states,
+                        error: (_, __, ___, states) => states,
+                      );
+                      
+                      // Only show if a country is selected and states are available
+                      if (_selectedArea == 'all' || states.isEmpty) {
+                        return const SizedBox.shrink();
+                      }
+                      
+                      return Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Text(
+                            'State/Province',
+                            style: TextStyle(
+                              fontSize: 14,
+                              color: Colors.grey.shade700,
+                              fontWeight: FontWeight.w500,
+                            ),
+                          ),
+                          const SizedBox(height: 8),
+                          Container(
+                            padding: const EdgeInsets.symmetric(horizontal: 12),
+                            decoration: BoxDecoration(
+                              border: Border.all(color: Colors.grey.shade300),
+                              borderRadius: BorderRadius.circular(8),
+                            ),
+                            child: DropdownButton<String>(
+                              value: _selectedState,
+                              isExpanded: true,
+                              underline: const SizedBox(),
+                              items: [
+                                const DropdownMenuItem(value: 'all', child: Text('All States/Provinces')),
+                                ...states.map((stateName) => DropdownMenuItem(
+                                  value: stateName,
+                                  child: Text(stateName),
+                                )),
+                              ],
+                              onChanged: (value) {
+                                setState(() {
+                                  _selectedState = value ?? 'all';
+                                });
+                                
+                                final filter = value == 'all'
+                                    ? LocationFilter(country: _selectedArea)
+                                    : LocationFilter(country: _selectedArea, stateProvince: value);
+                                    
+                                context.read<RouteSearchBloc>().add(
+                                      RouteSearchEventLocationFilterChanged(filter),
+                                    );
+                              },
+                            ),
+                          ),
+                          const SizedBox(height: 16),
+                        ],
+                      );
+                    },
+                  ),
+                  
+                  // Climb Type Filter
                   Text(
                     'Type',
                     style: TextStyle(

@@ -18,67 +18,92 @@ final _privateConstructorUsedError = UnsupportedError(
 /// @nodoc
 mixin _$RouteSearchState {
   RouteSearchFilters get filters => throw _privateConstructorUsedError;
-  List<String> get availableAreas => throw _privateConstructorUsedError;
+  List<String> get availableCountries => throw _privateConstructorUsedError;
+  List<String> get availableStates => throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function(
       RouteSearchFilters filters,
-      List<String> availableAreas,
+      List<String> availableCountries,
+      List<String> availableStates,
     )
     initial,
     required TResult Function(
       RouteSearchFilters filters,
-      List<String> availableAreas,
+      List<String> availableCountries,
+      List<String> availableStates,
     )
     loading,
     required TResult Function(
       RouteSearchFilters filters,
       List<RouteEntity> routes,
-      List<String> availableAreas,
+      List<String> availableCountries,
+      List<String> availableStates,
     )
     success,
     required TResult Function(
       RouteSearchFilters filters,
       String message,
-      List<String> availableAreas,
+      List<String> availableCountries,
+      List<String> availableStates,
     )
     error,
   }) => throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function(RouteSearchFilters filters, List<String> availableAreas)?
+    TResult? Function(
+      RouteSearchFilters filters,
+      List<String> availableCountries,
+      List<String> availableStates,
+    )?
     initial,
-    TResult? Function(RouteSearchFilters filters, List<String> availableAreas)?
+    TResult? Function(
+      RouteSearchFilters filters,
+      List<String> availableCountries,
+      List<String> availableStates,
+    )?
     loading,
     TResult? Function(
       RouteSearchFilters filters,
       List<RouteEntity> routes,
-      List<String> availableAreas,
+      List<String> availableCountries,
+      List<String> availableStates,
     )?
     success,
     TResult? Function(
       RouteSearchFilters filters,
       String message,
-      List<String> availableAreas,
+      List<String> availableCountries,
+      List<String> availableStates,
     )?
     error,
   }) => throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function(RouteSearchFilters filters, List<String> availableAreas)?
+    TResult Function(
+      RouteSearchFilters filters,
+      List<String> availableCountries,
+      List<String> availableStates,
+    )?
     initial,
-    TResult Function(RouteSearchFilters filters, List<String> availableAreas)?
+    TResult Function(
+      RouteSearchFilters filters,
+      List<String> availableCountries,
+      List<String> availableStates,
+    )?
     loading,
     TResult Function(
       RouteSearchFilters filters,
       List<RouteEntity> routes,
-      List<String> availableAreas,
+      List<String> availableCountries,
+      List<String> availableStates,
     )?
     success,
     TResult Function(
       RouteSearchFilters filters,
       String message,
-      List<String> availableAreas,
+      List<String> availableCountries,
+      List<String> availableStates,
     )?
     error,
     required TResult orElse(),
@@ -120,7 +145,11 @@ abstract class $RouteSearchStateCopyWith<$Res> {
     $Res Function(RouteSearchState) then,
   ) = _$RouteSearchStateCopyWithImpl<$Res, RouteSearchState>;
   @useResult
-  $Res call({RouteSearchFilters filters, List<String> availableAreas});
+  $Res call({
+    RouteSearchFilters filters,
+    List<String> availableCountries,
+    List<String> availableStates,
+  });
 
   $RouteSearchFiltersCopyWith<$Res> get filters;
 }
@@ -139,16 +168,24 @@ class _$RouteSearchStateCopyWithImpl<$Res, $Val extends RouteSearchState>
   /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
-  $Res call({Object? filters = null, Object? availableAreas = null}) {
+  $Res call({
+    Object? filters = null,
+    Object? availableCountries = null,
+    Object? availableStates = null,
+  }) {
     return _then(
       _value.copyWith(
             filters: null == filters
                 ? _value.filters
                 : filters // ignore: cast_nullable_to_non_nullable
                       as RouteSearchFilters,
-            availableAreas: null == availableAreas
-                ? _value.availableAreas
-                : availableAreas // ignore: cast_nullable_to_non_nullable
+            availableCountries: null == availableCountries
+                ? _value.availableCountries
+                : availableCountries // ignore: cast_nullable_to_non_nullable
+                      as List<String>,
+            availableStates: null == availableStates
+                ? _value.availableStates
+                : availableStates // ignore: cast_nullable_to_non_nullable
                       as List<String>,
           )
           as $Val,
@@ -175,7 +212,11 @@ abstract class _$$RouteSearchStateInitialImplCopyWith<$Res>
   ) = __$$RouteSearchStateInitialImplCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({RouteSearchFilters filters, List<String> availableAreas});
+  $Res call({
+    RouteSearchFilters filters,
+    List<String> availableCountries,
+    List<String> availableStates,
+  });
 
   @override
   $RouteSearchFiltersCopyWith<$Res> get filters;
@@ -194,16 +235,24 @@ class __$$RouteSearchStateInitialImplCopyWithImpl<$Res>
   /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
-  $Res call({Object? filters = null, Object? availableAreas = null}) {
+  $Res call({
+    Object? filters = null,
+    Object? availableCountries = null,
+    Object? availableStates = null,
+  }) {
     return _then(
       _$RouteSearchStateInitialImpl(
         filters: null == filters
             ? _value.filters
             : filters // ignore: cast_nullable_to_non_nullable
                   as RouteSearchFilters,
-        availableAreas: null == availableAreas
-            ? _value._availableAreas
-            : availableAreas // ignore: cast_nullable_to_non_nullable
+        availableCountries: null == availableCountries
+            ? _value._availableCountries
+            : availableCountries // ignore: cast_nullable_to_non_nullable
+                  as List<String>,
+        availableStates: null == availableStates
+            ? _value._availableStates
+            : availableStates // ignore: cast_nullable_to_non_nullable
                   as List<String>,
       ),
     );
@@ -215,24 +264,36 @@ class __$$RouteSearchStateInitialImplCopyWithImpl<$Res>
 class _$RouteSearchStateInitialImpl implements RouteSearchStateInitial {
   const _$RouteSearchStateInitialImpl({
     this.filters = const RouteSearchFilters(),
-    final List<String> availableAreas = const [],
-  }) : _availableAreas = availableAreas;
+    final List<String> availableCountries = const [],
+    final List<String> availableStates = const [],
+  }) : _availableCountries = availableCountries,
+       _availableStates = availableStates;
 
   @override
   @JsonKey()
   final RouteSearchFilters filters;
-  final List<String> _availableAreas;
+  final List<String> _availableCountries;
   @override
   @JsonKey()
-  List<String> get availableAreas {
-    if (_availableAreas is EqualUnmodifiableListView) return _availableAreas;
+  List<String> get availableCountries {
+    if (_availableCountries is EqualUnmodifiableListView)
+      return _availableCountries;
     // ignore: implicit_dynamic_type
-    return EqualUnmodifiableListView(_availableAreas);
+    return EqualUnmodifiableListView(_availableCountries);
+  }
+
+  final List<String> _availableStates;
+  @override
+  @JsonKey()
+  List<String> get availableStates {
+    if (_availableStates is EqualUnmodifiableListView) return _availableStates;
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(_availableStates);
   }
 
   @override
   String toString() {
-    return 'RouteSearchState.initial(filters: $filters, availableAreas: $availableAreas)';
+    return 'RouteSearchState.initial(filters: $filters, availableCountries: $availableCountries, availableStates: $availableStates)';
   }
 
   @override
@@ -242,8 +303,12 @@ class _$RouteSearchStateInitialImpl implements RouteSearchStateInitial {
             other is _$RouteSearchStateInitialImpl &&
             (identical(other.filters, filters) || other.filters == filters) &&
             const DeepCollectionEquality().equals(
-              other._availableAreas,
-              _availableAreas,
+              other._availableCountries,
+              _availableCountries,
+            ) &&
+            const DeepCollectionEquality().equals(
+              other._availableStates,
+              _availableStates,
             ));
   }
 
@@ -251,7 +316,8 @@ class _$RouteSearchStateInitialImpl implements RouteSearchStateInitial {
   int get hashCode => Object.hash(
     runtimeType,
     filters,
-    const DeepCollectionEquality().hash(_availableAreas),
+    const DeepCollectionEquality().hash(_availableCountries),
+    const DeepCollectionEquality().hash(_availableStates),
   );
 
   /// Create a copy of RouteSearchState
@@ -270,76 +336,100 @@ class _$RouteSearchStateInitialImpl implements RouteSearchStateInitial {
   TResult when<TResult extends Object?>({
     required TResult Function(
       RouteSearchFilters filters,
-      List<String> availableAreas,
+      List<String> availableCountries,
+      List<String> availableStates,
     )
     initial,
     required TResult Function(
       RouteSearchFilters filters,
-      List<String> availableAreas,
+      List<String> availableCountries,
+      List<String> availableStates,
     )
     loading,
     required TResult Function(
       RouteSearchFilters filters,
       List<RouteEntity> routes,
-      List<String> availableAreas,
+      List<String> availableCountries,
+      List<String> availableStates,
     )
     success,
     required TResult Function(
       RouteSearchFilters filters,
       String message,
-      List<String> availableAreas,
+      List<String> availableCountries,
+      List<String> availableStates,
     )
     error,
   }) {
-    return initial(filters, availableAreas);
+    return initial(filters, availableCountries, availableStates);
   }
 
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function(RouteSearchFilters filters, List<String> availableAreas)?
+    TResult? Function(
+      RouteSearchFilters filters,
+      List<String> availableCountries,
+      List<String> availableStates,
+    )?
     initial,
-    TResult? Function(RouteSearchFilters filters, List<String> availableAreas)?
+    TResult? Function(
+      RouteSearchFilters filters,
+      List<String> availableCountries,
+      List<String> availableStates,
+    )?
     loading,
     TResult? Function(
       RouteSearchFilters filters,
       List<RouteEntity> routes,
-      List<String> availableAreas,
+      List<String> availableCountries,
+      List<String> availableStates,
     )?
     success,
     TResult? Function(
       RouteSearchFilters filters,
       String message,
-      List<String> availableAreas,
+      List<String> availableCountries,
+      List<String> availableStates,
     )?
     error,
   }) {
-    return initial?.call(filters, availableAreas);
+    return initial?.call(filters, availableCountries, availableStates);
   }
 
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function(RouteSearchFilters filters, List<String> availableAreas)?
+    TResult Function(
+      RouteSearchFilters filters,
+      List<String> availableCountries,
+      List<String> availableStates,
+    )?
     initial,
-    TResult Function(RouteSearchFilters filters, List<String> availableAreas)?
+    TResult Function(
+      RouteSearchFilters filters,
+      List<String> availableCountries,
+      List<String> availableStates,
+    )?
     loading,
     TResult Function(
       RouteSearchFilters filters,
       List<RouteEntity> routes,
-      List<String> availableAreas,
+      List<String> availableCountries,
+      List<String> availableStates,
     )?
     success,
     TResult Function(
       RouteSearchFilters filters,
       String message,
-      List<String> availableAreas,
+      List<String> availableCountries,
+      List<String> availableStates,
     )?
     error,
     required TResult orElse(),
   }) {
     if (initial != null) {
-      return initial(filters, availableAreas);
+      return initial(filters, availableCountries, availableStates);
     }
     return orElse();
   }
@@ -385,13 +475,16 @@ class _$RouteSearchStateInitialImpl implements RouteSearchStateInitial {
 abstract class RouteSearchStateInitial implements RouteSearchState {
   const factory RouteSearchStateInitial({
     final RouteSearchFilters filters,
-    final List<String> availableAreas,
+    final List<String> availableCountries,
+    final List<String> availableStates,
   }) = _$RouteSearchStateInitialImpl;
 
   @override
   RouteSearchFilters get filters;
   @override
-  List<String> get availableAreas;
+  List<String> get availableCountries;
+  @override
+  List<String> get availableStates;
 
   /// Create a copy of RouteSearchState
   /// with the given fields replaced by the non-null parameter values.
@@ -410,7 +503,11 @@ abstract class _$$RouteSearchStateLoadingImplCopyWith<$Res>
   ) = __$$RouteSearchStateLoadingImplCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({RouteSearchFilters filters, List<String> availableAreas});
+  $Res call({
+    RouteSearchFilters filters,
+    List<String> availableCountries,
+    List<String> availableStates,
+  });
 
   @override
   $RouteSearchFiltersCopyWith<$Res> get filters;
@@ -429,16 +526,24 @@ class __$$RouteSearchStateLoadingImplCopyWithImpl<$Res>
   /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
-  $Res call({Object? filters = null, Object? availableAreas = null}) {
+  $Res call({
+    Object? filters = null,
+    Object? availableCountries = null,
+    Object? availableStates = null,
+  }) {
     return _then(
       _$RouteSearchStateLoadingImpl(
         filters: null == filters
             ? _value.filters
             : filters // ignore: cast_nullable_to_non_nullable
                   as RouteSearchFilters,
-        availableAreas: null == availableAreas
-            ? _value._availableAreas
-            : availableAreas // ignore: cast_nullable_to_non_nullable
+        availableCountries: null == availableCountries
+            ? _value._availableCountries
+            : availableCountries // ignore: cast_nullable_to_non_nullable
+                  as List<String>,
+        availableStates: null == availableStates
+            ? _value._availableStates
+            : availableStates // ignore: cast_nullable_to_non_nullable
                   as List<String>,
       ),
     );
@@ -450,23 +555,35 @@ class __$$RouteSearchStateLoadingImplCopyWithImpl<$Res>
 class _$RouteSearchStateLoadingImpl implements RouteSearchStateLoading {
   const _$RouteSearchStateLoadingImpl({
     required this.filters,
-    final List<String> availableAreas = const [],
-  }) : _availableAreas = availableAreas;
+    final List<String> availableCountries = const [],
+    final List<String> availableStates = const [],
+  }) : _availableCountries = availableCountries,
+       _availableStates = availableStates;
 
   @override
   final RouteSearchFilters filters;
-  final List<String> _availableAreas;
+  final List<String> _availableCountries;
   @override
   @JsonKey()
-  List<String> get availableAreas {
-    if (_availableAreas is EqualUnmodifiableListView) return _availableAreas;
+  List<String> get availableCountries {
+    if (_availableCountries is EqualUnmodifiableListView)
+      return _availableCountries;
     // ignore: implicit_dynamic_type
-    return EqualUnmodifiableListView(_availableAreas);
+    return EqualUnmodifiableListView(_availableCountries);
+  }
+
+  final List<String> _availableStates;
+  @override
+  @JsonKey()
+  List<String> get availableStates {
+    if (_availableStates is EqualUnmodifiableListView) return _availableStates;
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(_availableStates);
   }
 
   @override
   String toString() {
-    return 'RouteSearchState.loading(filters: $filters, availableAreas: $availableAreas)';
+    return 'RouteSearchState.loading(filters: $filters, availableCountries: $availableCountries, availableStates: $availableStates)';
   }
 
   @override
@@ -476,8 +593,12 @@ class _$RouteSearchStateLoadingImpl implements RouteSearchStateLoading {
             other is _$RouteSearchStateLoadingImpl &&
             (identical(other.filters, filters) || other.filters == filters) &&
             const DeepCollectionEquality().equals(
-              other._availableAreas,
-              _availableAreas,
+              other._availableCountries,
+              _availableCountries,
+            ) &&
+            const DeepCollectionEquality().equals(
+              other._availableStates,
+              _availableStates,
             ));
   }
 
@@ -485,7 +606,8 @@ class _$RouteSearchStateLoadingImpl implements RouteSearchStateLoading {
   int get hashCode => Object.hash(
     runtimeType,
     filters,
-    const DeepCollectionEquality().hash(_availableAreas),
+    const DeepCollectionEquality().hash(_availableCountries),
+    const DeepCollectionEquality().hash(_availableStates),
   );
 
   /// Create a copy of RouteSearchState
@@ -504,76 +626,100 @@ class _$RouteSearchStateLoadingImpl implements RouteSearchStateLoading {
   TResult when<TResult extends Object?>({
     required TResult Function(
       RouteSearchFilters filters,
-      List<String> availableAreas,
+      List<String> availableCountries,
+      List<String> availableStates,
     )
     initial,
     required TResult Function(
       RouteSearchFilters filters,
-      List<String> availableAreas,
+      List<String> availableCountries,
+      List<String> availableStates,
     )
     loading,
     required TResult Function(
       RouteSearchFilters filters,
       List<RouteEntity> routes,
-      List<String> availableAreas,
+      List<String> availableCountries,
+      List<String> availableStates,
     )
     success,
     required TResult Function(
       RouteSearchFilters filters,
       String message,
-      List<String> availableAreas,
+      List<String> availableCountries,
+      List<String> availableStates,
     )
     error,
   }) {
-    return loading(filters, availableAreas);
+    return loading(filters, availableCountries, availableStates);
   }
 
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function(RouteSearchFilters filters, List<String> availableAreas)?
+    TResult? Function(
+      RouteSearchFilters filters,
+      List<String> availableCountries,
+      List<String> availableStates,
+    )?
     initial,
-    TResult? Function(RouteSearchFilters filters, List<String> availableAreas)?
+    TResult? Function(
+      RouteSearchFilters filters,
+      List<String> availableCountries,
+      List<String> availableStates,
+    )?
     loading,
     TResult? Function(
       RouteSearchFilters filters,
       List<RouteEntity> routes,
-      List<String> availableAreas,
+      List<String> availableCountries,
+      List<String> availableStates,
     )?
     success,
     TResult? Function(
       RouteSearchFilters filters,
       String message,
-      List<String> availableAreas,
+      List<String> availableCountries,
+      List<String> availableStates,
     )?
     error,
   }) {
-    return loading?.call(filters, availableAreas);
+    return loading?.call(filters, availableCountries, availableStates);
   }
 
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function(RouteSearchFilters filters, List<String> availableAreas)?
+    TResult Function(
+      RouteSearchFilters filters,
+      List<String> availableCountries,
+      List<String> availableStates,
+    )?
     initial,
-    TResult Function(RouteSearchFilters filters, List<String> availableAreas)?
+    TResult Function(
+      RouteSearchFilters filters,
+      List<String> availableCountries,
+      List<String> availableStates,
+    )?
     loading,
     TResult Function(
       RouteSearchFilters filters,
       List<RouteEntity> routes,
-      List<String> availableAreas,
+      List<String> availableCountries,
+      List<String> availableStates,
     )?
     success,
     TResult Function(
       RouteSearchFilters filters,
       String message,
-      List<String> availableAreas,
+      List<String> availableCountries,
+      List<String> availableStates,
     )?
     error,
     required TResult orElse(),
   }) {
     if (loading != null) {
-      return loading(filters, availableAreas);
+      return loading(filters, availableCountries, availableStates);
     }
     return orElse();
   }
@@ -619,13 +765,16 @@ class _$RouteSearchStateLoadingImpl implements RouteSearchStateLoading {
 abstract class RouteSearchStateLoading implements RouteSearchState {
   const factory RouteSearchStateLoading({
     required final RouteSearchFilters filters,
-    final List<String> availableAreas,
+    final List<String> availableCountries,
+    final List<String> availableStates,
   }) = _$RouteSearchStateLoadingImpl;
 
   @override
   RouteSearchFilters get filters;
   @override
-  List<String> get availableAreas;
+  List<String> get availableCountries;
+  @override
+  List<String> get availableStates;
 
   /// Create a copy of RouteSearchState
   /// with the given fields replaced by the non-null parameter values.
@@ -647,7 +796,8 @@ abstract class _$$RouteSearchStateSuccessImplCopyWith<$Res>
   $Res call({
     RouteSearchFilters filters,
     List<RouteEntity> routes,
-    List<String> availableAreas,
+    List<String> availableCountries,
+    List<String> availableStates,
   });
 
   @override
@@ -670,7 +820,8 @@ class __$$RouteSearchStateSuccessImplCopyWithImpl<$Res>
   $Res call({
     Object? filters = null,
     Object? routes = null,
-    Object? availableAreas = null,
+    Object? availableCountries = null,
+    Object? availableStates = null,
   }) {
     return _then(
       _$RouteSearchStateSuccessImpl(
@@ -682,9 +833,13 @@ class __$$RouteSearchStateSuccessImplCopyWithImpl<$Res>
             ? _value._routes
             : routes // ignore: cast_nullable_to_non_nullable
                   as List<RouteEntity>,
-        availableAreas: null == availableAreas
-            ? _value._availableAreas
-            : availableAreas // ignore: cast_nullable_to_non_nullable
+        availableCountries: null == availableCountries
+            ? _value._availableCountries
+            : availableCountries // ignore: cast_nullable_to_non_nullable
+                  as List<String>,
+        availableStates: null == availableStates
+            ? _value._availableStates
+            : availableStates // ignore: cast_nullable_to_non_nullable
                   as List<String>,
       ),
     );
@@ -697,9 +852,11 @@ class _$RouteSearchStateSuccessImpl implements RouteSearchStateSuccess {
   const _$RouteSearchStateSuccessImpl({
     required this.filters,
     required final List<RouteEntity> routes,
-    final List<String> availableAreas = const [],
+    final List<String> availableCountries = const [],
+    final List<String> availableStates = const [],
   }) : _routes = routes,
-       _availableAreas = availableAreas;
+       _availableCountries = availableCountries,
+       _availableStates = availableStates;
 
   @override
   final RouteSearchFilters filters;
@@ -711,18 +868,28 @@ class _$RouteSearchStateSuccessImpl implements RouteSearchStateSuccess {
     return EqualUnmodifiableListView(_routes);
   }
 
-  final List<String> _availableAreas;
+  final List<String> _availableCountries;
   @override
   @JsonKey()
-  List<String> get availableAreas {
-    if (_availableAreas is EqualUnmodifiableListView) return _availableAreas;
+  List<String> get availableCountries {
+    if (_availableCountries is EqualUnmodifiableListView)
+      return _availableCountries;
     // ignore: implicit_dynamic_type
-    return EqualUnmodifiableListView(_availableAreas);
+    return EqualUnmodifiableListView(_availableCountries);
+  }
+
+  final List<String> _availableStates;
+  @override
+  @JsonKey()
+  List<String> get availableStates {
+    if (_availableStates is EqualUnmodifiableListView) return _availableStates;
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(_availableStates);
   }
 
   @override
   String toString() {
-    return 'RouteSearchState.success(filters: $filters, routes: $routes, availableAreas: $availableAreas)';
+    return 'RouteSearchState.success(filters: $filters, routes: $routes, availableCountries: $availableCountries, availableStates: $availableStates)';
   }
 
   @override
@@ -733,8 +900,12 @@ class _$RouteSearchStateSuccessImpl implements RouteSearchStateSuccess {
             (identical(other.filters, filters) || other.filters == filters) &&
             const DeepCollectionEquality().equals(other._routes, _routes) &&
             const DeepCollectionEquality().equals(
-              other._availableAreas,
-              _availableAreas,
+              other._availableCountries,
+              _availableCountries,
+            ) &&
+            const DeepCollectionEquality().equals(
+              other._availableStates,
+              _availableStates,
             ));
   }
 
@@ -743,7 +914,8 @@ class _$RouteSearchStateSuccessImpl implements RouteSearchStateSuccess {
     runtimeType,
     filters,
     const DeepCollectionEquality().hash(_routes),
-    const DeepCollectionEquality().hash(_availableAreas),
+    const DeepCollectionEquality().hash(_availableCountries),
+    const DeepCollectionEquality().hash(_availableStates),
   );
 
   /// Create a copy of RouteSearchState
@@ -762,76 +934,100 @@ class _$RouteSearchStateSuccessImpl implements RouteSearchStateSuccess {
   TResult when<TResult extends Object?>({
     required TResult Function(
       RouteSearchFilters filters,
-      List<String> availableAreas,
+      List<String> availableCountries,
+      List<String> availableStates,
     )
     initial,
     required TResult Function(
       RouteSearchFilters filters,
-      List<String> availableAreas,
+      List<String> availableCountries,
+      List<String> availableStates,
     )
     loading,
     required TResult Function(
       RouteSearchFilters filters,
       List<RouteEntity> routes,
-      List<String> availableAreas,
+      List<String> availableCountries,
+      List<String> availableStates,
     )
     success,
     required TResult Function(
       RouteSearchFilters filters,
       String message,
-      List<String> availableAreas,
+      List<String> availableCountries,
+      List<String> availableStates,
     )
     error,
   }) {
-    return success(filters, routes, availableAreas);
+    return success(filters, routes, availableCountries, availableStates);
   }
 
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function(RouteSearchFilters filters, List<String> availableAreas)?
+    TResult? Function(
+      RouteSearchFilters filters,
+      List<String> availableCountries,
+      List<String> availableStates,
+    )?
     initial,
-    TResult? Function(RouteSearchFilters filters, List<String> availableAreas)?
+    TResult? Function(
+      RouteSearchFilters filters,
+      List<String> availableCountries,
+      List<String> availableStates,
+    )?
     loading,
     TResult? Function(
       RouteSearchFilters filters,
       List<RouteEntity> routes,
-      List<String> availableAreas,
+      List<String> availableCountries,
+      List<String> availableStates,
     )?
     success,
     TResult? Function(
       RouteSearchFilters filters,
       String message,
-      List<String> availableAreas,
+      List<String> availableCountries,
+      List<String> availableStates,
     )?
     error,
   }) {
-    return success?.call(filters, routes, availableAreas);
+    return success?.call(filters, routes, availableCountries, availableStates);
   }
 
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function(RouteSearchFilters filters, List<String> availableAreas)?
+    TResult Function(
+      RouteSearchFilters filters,
+      List<String> availableCountries,
+      List<String> availableStates,
+    )?
     initial,
-    TResult Function(RouteSearchFilters filters, List<String> availableAreas)?
+    TResult Function(
+      RouteSearchFilters filters,
+      List<String> availableCountries,
+      List<String> availableStates,
+    )?
     loading,
     TResult Function(
       RouteSearchFilters filters,
       List<RouteEntity> routes,
-      List<String> availableAreas,
+      List<String> availableCountries,
+      List<String> availableStates,
     )?
     success,
     TResult Function(
       RouteSearchFilters filters,
       String message,
-      List<String> availableAreas,
+      List<String> availableCountries,
+      List<String> availableStates,
     )?
     error,
     required TResult orElse(),
   }) {
     if (success != null) {
-      return success(filters, routes, availableAreas);
+      return success(filters, routes, availableCountries, availableStates);
     }
     return orElse();
   }
@@ -878,14 +1074,17 @@ abstract class RouteSearchStateSuccess implements RouteSearchState {
   const factory RouteSearchStateSuccess({
     required final RouteSearchFilters filters,
     required final List<RouteEntity> routes,
-    final List<String> availableAreas,
+    final List<String> availableCountries,
+    final List<String> availableStates,
   }) = _$RouteSearchStateSuccessImpl;
 
   @override
   RouteSearchFilters get filters;
   List<RouteEntity> get routes;
   @override
-  List<String> get availableAreas;
+  List<String> get availableCountries;
+  @override
+  List<String> get availableStates;
 
   /// Create a copy of RouteSearchState
   /// with the given fields replaced by the non-null parameter values.
@@ -907,7 +1106,8 @@ abstract class _$$RouteSearchStateErrorImplCopyWith<$Res>
   $Res call({
     RouteSearchFilters filters,
     String message,
-    List<String> availableAreas,
+    List<String> availableCountries,
+    List<String> availableStates,
   });
 
   @override
@@ -930,7 +1130,8 @@ class __$$RouteSearchStateErrorImplCopyWithImpl<$Res>
   $Res call({
     Object? filters = null,
     Object? message = null,
-    Object? availableAreas = null,
+    Object? availableCountries = null,
+    Object? availableStates = null,
   }) {
     return _then(
       _$RouteSearchStateErrorImpl(
@@ -942,9 +1143,13 @@ class __$$RouteSearchStateErrorImplCopyWithImpl<$Res>
             ? _value.message
             : message // ignore: cast_nullable_to_non_nullable
                   as String,
-        availableAreas: null == availableAreas
-            ? _value._availableAreas
-            : availableAreas // ignore: cast_nullable_to_non_nullable
+        availableCountries: null == availableCountries
+            ? _value._availableCountries
+            : availableCountries // ignore: cast_nullable_to_non_nullable
+                  as List<String>,
+        availableStates: null == availableStates
+            ? _value._availableStates
+            : availableStates // ignore: cast_nullable_to_non_nullable
                   as List<String>,
       ),
     );
@@ -957,25 +1162,37 @@ class _$RouteSearchStateErrorImpl implements RouteSearchStateError {
   const _$RouteSearchStateErrorImpl({
     required this.filters,
     required this.message,
-    final List<String> availableAreas = const [],
-  }) : _availableAreas = availableAreas;
+    final List<String> availableCountries = const [],
+    final List<String> availableStates = const [],
+  }) : _availableCountries = availableCountries,
+       _availableStates = availableStates;
 
   @override
   final RouteSearchFilters filters;
   @override
   final String message;
-  final List<String> _availableAreas;
+  final List<String> _availableCountries;
   @override
   @JsonKey()
-  List<String> get availableAreas {
-    if (_availableAreas is EqualUnmodifiableListView) return _availableAreas;
+  List<String> get availableCountries {
+    if (_availableCountries is EqualUnmodifiableListView)
+      return _availableCountries;
     // ignore: implicit_dynamic_type
-    return EqualUnmodifiableListView(_availableAreas);
+    return EqualUnmodifiableListView(_availableCountries);
+  }
+
+  final List<String> _availableStates;
+  @override
+  @JsonKey()
+  List<String> get availableStates {
+    if (_availableStates is EqualUnmodifiableListView) return _availableStates;
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(_availableStates);
   }
 
   @override
   String toString() {
-    return 'RouteSearchState.error(filters: $filters, message: $message, availableAreas: $availableAreas)';
+    return 'RouteSearchState.error(filters: $filters, message: $message, availableCountries: $availableCountries, availableStates: $availableStates)';
   }
 
   @override
@@ -986,8 +1203,12 @@ class _$RouteSearchStateErrorImpl implements RouteSearchStateError {
             (identical(other.filters, filters) || other.filters == filters) &&
             (identical(other.message, message) || other.message == message) &&
             const DeepCollectionEquality().equals(
-              other._availableAreas,
-              _availableAreas,
+              other._availableCountries,
+              _availableCountries,
+            ) &&
+            const DeepCollectionEquality().equals(
+              other._availableStates,
+              _availableStates,
             ));
   }
 
@@ -996,7 +1217,8 @@ class _$RouteSearchStateErrorImpl implements RouteSearchStateError {
     runtimeType,
     filters,
     message,
-    const DeepCollectionEquality().hash(_availableAreas),
+    const DeepCollectionEquality().hash(_availableCountries),
+    const DeepCollectionEquality().hash(_availableStates),
   );
 
   /// Create a copy of RouteSearchState
@@ -1016,76 +1238,100 @@ class _$RouteSearchStateErrorImpl implements RouteSearchStateError {
   TResult when<TResult extends Object?>({
     required TResult Function(
       RouteSearchFilters filters,
-      List<String> availableAreas,
+      List<String> availableCountries,
+      List<String> availableStates,
     )
     initial,
     required TResult Function(
       RouteSearchFilters filters,
-      List<String> availableAreas,
+      List<String> availableCountries,
+      List<String> availableStates,
     )
     loading,
     required TResult Function(
       RouteSearchFilters filters,
       List<RouteEntity> routes,
-      List<String> availableAreas,
+      List<String> availableCountries,
+      List<String> availableStates,
     )
     success,
     required TResult Function(
       RouteSearchFilters filters,
       String message,
-      List<String> availableAreas,
+      List<String> availableCountries,
+      List<String> availableStates,
     )
     error,
   }) {
-    return error(filters, message, availableAreas);
+    return error(filters, message, availableCountries, availableStates);
   }
 
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function(RouteSearchFilters filters, List<String> availableAreas)?
+    TResult? Function(
+      RouteSearchFilters filters,
+      List<String> availableCountries,
+      List<String> availableStates,
+    )?
     initial,
-    TResult? Function(RouteSearchFilters filters, List<String> availableAreas)?
+    TResult? Function(
+      RouteSearchFilters filters,
+      List<String> availableCountries,
+      List<String> availableStates,
+    )?
     loading,
     TResult? Function(
       RouteSearchFilters filters,
       List<RouteEntity> routes,
-      List<String> availableAreas,
+      List<String> availableCountries,
+      List<String> availableStates,
     )?
     success,
     TResult? Function(
       RouteSearchFilters filters,
       String message,
-      List<String> availableAreas,
+      List<String> availableCountries,
+      List<String> availableStates,
     )?
     error,
   }) {
-    return error?.call(filters, message, availableAreas);
+    return error?.call(filters, message, availableCountries, availableStates);
   }
 
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function(RouteSearchFilters filters, List<String> availableAreas)?
+    TResult Function(
+      RouteSearchFilters filters,
+      List<String> availableCountries,
+      List<String> availableStates,
+    )?
     initial,
-    TResult Function(RouteSearchFilters filters, List<String> availableAreas)?
+    TResult Function(
+      RouteSearchFilters filters,
+      List<String> availableCountries,
+      List<String> availableStates,
+    )?
     loading,
     TResult Function(
       RouteSearchFilters filters,
       List<RouteEntity> routes,
-      List<String> availableAreas,
+      List<String> availableCountries,
+      List<String> availableStates,
     )?
     success,
     TResult Function(
       RouteSearchFilters filters,
       String message,
-      List<String> availableAreas,
+      List<String> availableCountries,
+      List<String> availableStates,
     )?
     error,
     required TResult orElse(),
   }) {
     if (error != null) {
-      return error(filters, message, availableAreas);
+      return error(filters, message, availableCountries, availableStates);
     }
     return orElse();
   }
@@ -1132,14 +1378,17 @@ abstract class RouteSearchStateError implements RouteSearchState {
   const factory RouteSearchStateError({
     required final RouteSearchFilters filters,
     required final String message,
-    final List<String> availableAreas,
+    final List<String> availableCountries,
+    final List<String> availableStates,
   }) = _$RouteSearchStateErrorImpl;
 
   @override
   RouteSearchFilters get filters;
   String get message;
   @override
-  List<String> get availableAreas;
+  List<String> get availableCountries;
+  @override
+  List<String> get availableStates;
 
   /// Create a copy of RouteSearchState
   /// with the given fields replaced by the non-null parameter values.

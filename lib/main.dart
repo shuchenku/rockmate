@@ -18,9 +18,11 @@ void main() async {
   Hive.registerAdapter(RouteEntityAdapter());
   Hive.registerAdapter(CachedRoutesAdapter());
   
-  // ClimbEntityAdapter uses typeId 1 - check if already registered
-  if (!Hive.isAdapterRegistered(1)) {
+  // Register ClimbEntityAdapter - catch if already registered
+  try {
     Hive.registerAdapter(ClimbEntityAdapter());
+  } catch (e) {
+    // Already registered, ignore
   }
   
   // Configure Dependency Injection

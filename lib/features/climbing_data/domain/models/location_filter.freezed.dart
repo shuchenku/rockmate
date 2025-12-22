@@ -17,10 +17,11 @@ final _privateConstructorUsedError = UnsupportedError(
 
 /// @nodoc
 mixin _$LocationFilter {
-  String? get continent => throw _privateConstructorUsedError;
-  String? get country => throw _privateConstructorUsedError;
-  String? get region => throw _privateConstructorUsedError;
-  String? get location => throw _privateConstructorUsedError;
+  String? get country => throw _privateConstructorUsedError; // pathTokens[0]
+  String? get stateProvince =>
+      throw _privateConstructorUsedError; // pathTokens[1]
+  String? get region => throw _privateConstructorUsedError; // pathTokens[2]
+  String? get area => throw _privateConstructorUsedError;
 
   /// Create a copy of LocationFilter
   /// with the given fields replaced by the non-null parameter values.
@@ -37,10 +38,10 @@ abstract class $LocationFilterCopyWith<$Res> {
   ) = _$LocationFilterCopyWithImpl<$Res, LocationFilter>;
   @useResult
   $Res call({
-    String? continent,
     String? country,
+    String? stateProvince,
     String? region,
-    String? location,
+    String? area,
   });
 }
 
@@ -59,28 +60,28 @@ class _$LocationFilterCopyWithImpl<$Res, $Val extends LocationFilter>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? continent = freezed,
     Object? country = freezed,
+    Object? stateProvince = freezed,
     Object? region = freezed,
-    Object? location = freezed,
+    Object? area = freezed,
   }) {
     return _then(
       _value.copyWith(
-            continent: freezed == continent
-                ? _value.continent
-                : continent // ignore: cast_nullable_to_non_nullable
-                      as String?,
             country: freezed == country
                 ? _value.country
                 : country // ignore: cast_nullable_to_non_nullable
+                      as String?,
+            stateProvince: freezed == stateProvince
+                ? _value.stateProvince
+                : stateProvince // ignore: cast_nullable_to_non_nullable
                       as String?,
             region: freezed == region
                 ? _value.region
                 : region // ignore: cast_nullable_to_non_nullable
                       as String?,
-            location: freezed == location
-                ? _value.location
-                : location // ignore: cast_nullable_to_non_nullable
+            area: freezed == area
+                ? _value.area
+                : area // ignore: cast_nullable_to_non_nullable
                       as String?,
           )
           as $Val,
@@ -98,10 +99,10 @@ abstract class _$$LocationFilterImplCopyWith<$Res>
   @override
   @useResult
   $Res call({
-    String? continent,
     String? country,
+    String? stateProvince,
     String? region,
-    String? location,
+    String? area,
   });
 }
 
@@ -119,28 +120,28 @@ class __$$LocationFilterImplCopyWithImpl<$Res>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? continent = freezed,
     Object? country = freezed,
+    Object? stateProvince = freezed,
     Object? region = freezed,
-    Object? location = freezed,
+    Object? area = freezed,
   }) {
     return _then(
       _$LocationFilterImpl(
-        continent: freezed == continent
-            ? _value.continent
-            : continent // ignore: cast_nullable_to_non_nullable
-                  as String?,
         country: freezed == country
             ? _value.country
             : country // ignore: cast_nullable_to_non_nullable
+                  as String?,
+        stateProvince: freezed == stateProvince
+            ? _value.stateProvince
+            : stateProvince // ignore: cast_nullable_to_non_nullable
                   as String?,
         region: freezed == region
             ? _value.region
             : region // ignore: cast_nullable_to_non_nullable
                   as String?,
-        location: freezed == location
-            ? _value.location
-            : location // ignore: cast_nullable_to_non_nullable
+        area: freezed == area
+            ? _value.area
+            : area // ignore: cast_nullable_to_non_nullable
                   as String?,
       ),
     );
@@ -151,24 +152,27 @@ class __$$LocationFilterImplCopyWithImpl<$Res>
 
 class _$LocationFilterImpl extends _LocationFilter {
   const _$LocationFilterImpl({
-    this.continent,
     this.country,
+    this.stateProvince,
     this.region,
-    this.location,
+    this.area,
   }) : super._();
 
   @override
-  final String? continent;
-  @override
   final String? country;
+  // pathTokens[0]
+  @override
+  final String? stateProvince;
+  // pathTokens[1]
   @override
   final String? region;
+  // pathTokens[2]
   @override
-  final String? location;
+  final String? area;
 
   @override
   String toString() {
-    return 'LocationFilter(continent: $continent, country: $country, region: $region, location: $location)';
+    return 'LocationFilter(country: $country, stateProvince: $stateProvince, region: $region, area: $area)';
   }
 
   @override
@@ -176,17 +180,16 @@ class _$LocationFilterImpl extends _LocationFilter {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$LocationFilterImpl &&
-            (identical(other.continent, continent) ||
-                other.continent == continent) &&
             (identical(other.country, country) || other.country == country) &&
+            (identical(other.stateProvince, stateProvince) ||
+                other.stateProvince == stateProvince) &&
             (identical(other.region, region) || other.region == region) &&
-            (identical(other.location, location) ||
-                other.location == location));
+            (identical(other.area, area) || other.area == area));
   }
 
   @override
   int get hashCode =>
-      Object.hash(runtimeType, continent, country, region, location);
+      Object.hash(runtimeType, country, stateProvince, region, area);
 
   /// Create a copy of LocationFilter
   /// with the given fields replaced by the non-null parameter values.
@@ -202,21 +205,21 @@ class _$LocationFilterImpl extends _LocationFilter {
 
 abstract class _LocationFilter extends LocationFilter {
   const factory _LocationFilter({
-    final String? continent,
     final String? country,
+    final String? stateProvince,
     final String? region,
-    final String? location,
+    final String? area,
   }) = _$LocationFilterImpl;
   const _LocationFilter._() : super._();
 
   @override
-  String? get continent;
+  String? get country; // pathTokens[0]
   @override
-  String? get country;
+  String? get stateProvince; // pathTokens[1]
   @override
-  String? get region;
+  String? get region; // pathTokens[2]
   @override
-  String? get location;
+  String? get area;
 
   /// Create a copy of LocationFilter
   /// with the given fields replaced by the non-null parameter values.

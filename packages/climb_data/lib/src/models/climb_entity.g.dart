@@ -8,7 +8,7 @@ part of 'climb_entity.dart';
 
 class ClimbEntityAdapter extends TypeAdapter<ClimbEntity> {
   @override
-  final int typeId = 1;
+  final int typeId = 2;
 
   @override
   ClimbEntity read(BinaryReader reader) {

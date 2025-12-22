@@ -15,8 +15,9 @@ class FilterSection extends StatefulWidget {
 
 class _FilterSectionState extends State<FilterSection> {
   bool _showFilters = false;
-  String _selectedArea = 'all';
-  String _selectedType = 'all';
+  String _selectedArea = 'all'; // Country selection
+  String _selectedState = 'all'; // State/Province selection
+  String _selectedType = 'all'; // Climb type selection
 
   @override
   Widget build(BuildContext context) {
@@ -122,7 +123,7 @@ class _FilterSectionState extends State<FilterSection> {
                           onChanged: (value) {
                             setState(() {
                               _selectedArea = value ?? 'all';
-                              _selectedType = 'all'; // Reset state when country changes
+                              _selectedState = 'all'; // Reset state when country changes
                             });
                             
                             final filter = value == 'all' 
@@ -173,7 +174,7 @@ class _FilterSectionState extends State<FilterSection> {
                               borderRadius: BorderRadius.circular(8),
                             ),
                             child: DropdownButton<String>(
-                              value: _selectedType,
+                              value: _selectedState,
                               isExpanded: true,
                               underline: const SizedBox(),
                               items: [
@@ -185,7 +186,7 @@ class _FilterSectionState extends State<FilterSection> {
                               ],
                               onChanged: (value) {
                                 setState(() {
-                                  _selectedType = value ?? 'all';
+                                  _selectedState = value ?? 'all';
                                 });
                                 
                                 final filter = value == 'all'

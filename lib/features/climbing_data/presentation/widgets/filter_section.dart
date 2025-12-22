@@ -156,7 +156,7 @@ class _FilterSectionState extends State<FilterSection> {
                         DropdownMenuItem(value: 'all', child: Text('All Types')),
                         DropdownMenuItem(value: 'sport', child: Text('Sport')),
                         DropdownMenuItem(value: 'trad', child: Text('Trad')),
-                        DropdownMenuItem(value: 'boulder', child: Text('Boulder')),
+                        DropdownMenuItem(value: 'bouldering', child: Text('Boulder')),
                         DropdownMenuItem(value: 'toprope', child: Text('Top Rope')),
                       ],
                       onChanged: (value) {

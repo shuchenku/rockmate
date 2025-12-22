@@ -28,9 +28,14 @@ class ClimbRepository {
     return await _dataSource.getClimbByUuid(uuid);
   }
 
-  /// Get unique states for filter dropdowns
-  List<String> getUniqueStates() {
-    return _dataSource.getUniqueStates();
+  /// Get unique countries for filter dropdowns
+  List<String> getUniqueCountries() {
+    return _dataSource.getUniqueCountries();
+  }
+
+  /// Get unique states for filter dropdowns, optionally filtered by country
+  List<String> getUniqueStates({String? country}) {
+    return _dataSource.getUniqueStates(country: country);
   }
 
   /// Get unique regions for a given state

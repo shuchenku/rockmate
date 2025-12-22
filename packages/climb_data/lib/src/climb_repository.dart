@@ -6,6 +6,9 @@ class ClimbRepository {
 
   ClimbRepository(this._dataSource);
 
+  /// Expose data source for import operations
+  ClimbLocalDataSource get dataSource => _dataSource;
+
   /// Search climbs with filters
   Future<List<ClimbEntity>> searchClimbs({
     String? query,

@@ -2,7 +2,7 @@ import 'package:hive/hive.dart';
 
 part 'climb_entity.g.dart';
 
-@HiveType(typeId: 1)
+@HiveType(typeId: 2)
 class ClimbEntity extends HiveObject {
   @HiveField(0)
   final String uuid;

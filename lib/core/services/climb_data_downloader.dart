@@ -5,7 +5,7 @@ import 'package:climb_data/climb_data.dart';
 
 class ClimbDataDownloader {
   static const String _githubReleaseUrl = 
-      'https://github.com/shuchenku/rockmate/releases/latest/download/all_climbs.json';
+      'https://github.com/shuchenku/rockmate/releases/download/v0.1.0-data/all_climbs.json';
   
   final ClimbRepository _repository;
 
@@ -34,11 +34,8 @@ class ClimbDataDownloader {
 
       onProgress(0.4, 'Importing ${response.bodyBytes.length ~/ 1024 ~/ 1024}MB of data...');
 
-      // Import using DataImporter
-      final dataSource = ClimbLocalDataSource();
-      await dataSource.init();
-      
-      final importer = DataImporter(dataSource);
+      // Use the repository's data source (already initialized with adapter registered)
+      final importer = DataImporter(_repository.dataSource);
       
       int lastReportedProgress = 0;
       await importer.importFromFile(

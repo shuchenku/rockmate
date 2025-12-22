@@ -41,10 +41,10 @@ class ClimbLocalDataSource {
       }).toList();
     }
 
-    // Filter by state (first path token)
+    // Filter by state (second path token at index 1)
     if (state != null && state.isNotEmpty && state != 'All States') {
       results = results.where((climb) {
-        return climb.pathTokens.isNotEmpty && climb.pathTokens.first == state;
+        return climb.pathTokens.length >= 2 && climb.pathTokens[1] == state;
       }).toList();
     }
 

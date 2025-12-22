@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:beamer/beamer.dart';
 import 'package:rockmate/core/domain/entities/route_entity.dart';
 
 class RouteCardWidget extends StatelessWidget {
@@ -13,13 +14,8 @@ class RouteCardWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return InkWell(
       onTap: () {
-        // TODO: Navigate to route detail when routing is implemented
-        ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(
-            content: Text('Route detail for "${route.name}" coming soon!'),
-            duration: const Duration(seconds: 2),
-          ),
-        );
+        // Navigate to route detail screen
+        context.beamToNamed('/routes/${route.id}');
       },
       child: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 10),

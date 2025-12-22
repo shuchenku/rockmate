@@ -1,6 +1,7 @@
 import 'package:beamer/beamer.dart';
 import 'package:flutter/material.dart';
 import 'package:rockmate/features/climbing_data/presentation/screens/route_search_screen.dart';
+import 'package:rockmate/features/climbing_data/presentation/screens/route_detail_screen.dart';
 
 class RoutesLocation extends BeamLocation<BeamState> {
   RoutesLocation(super.routeInformation);
@@ -24,7 +25,7 @@ class RoutesLocation extends BeamLocation<BeamState> {
         BeamPage(
           key: ValueKey('route-$routeId'),
           title: 'Route Detail',
-          child: Scaffold(body: Center(child: Text('Route Detail: $routeId - To be implemented'))),
+          child: RouteDetailScreen(routeId: routeId),
         ),
       );
     }

@@ -7,11 +7,7 @@ class ClimbLocalDataSource {
 
   /// Initialize Hive and open climbs box
   Future<void> init() async {
-    // Register adapter if not already registered
-    if (!Hive.isAdapterRegistered(1)) {
-      Hive.registerAdapter(ClimbEntityAdapter());
-    }
-    
+    // Adapter is registered in main.dart, just open the box
     if (_box == null || !_box!.isOpen) {
       _box = await Hive.openBox<ClimbEntity>(_boxName);
     }
@@ -26,7 +22,8 @@ class ClimbLocalDataSource {
   /// Search climbs with filters
   Future<List<ClimbEntity>> searchClimbs({
     String? query,
-    String? state,
+    String? country,        // pathTokens[0]
+    String? stateProvince,  // pathTokens[1]
     List<String>? types,
     int? minGrade,
     int? maxGrade,
@@ -45,10 +42,17 @@ class ClimbLocalDataSource {
       }).toList();
     }
 
-    // Filter by state (second path token at index 1)
-    if (state != null && state.isNotEmpty && state != 'All States') {
+    // Filter by country (first path token at index 0)
+    if (country != null && country.isNotEmpty) {
       results = results.where((climb) {
-        return climb.pathTokens.length >= 2 && climb.pathTokens[1] == state;
+        return climb.pathTokens.isNotEmpty && climb.pathTokens[0] == country;
+      }).toList();
+    }
+
+    // Filter by state/province (second path token at index 1)
+    if (stateProvince != null && stateProvince.isNotEmpty) {
+      results = results.where((climb) {
+        return climb.pathTokens.length >= 2 && climb.pathTokens[1] == stateProvince;
       }).toList();
     }
 

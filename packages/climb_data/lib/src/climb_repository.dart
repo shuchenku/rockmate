@@ -6,17 +6,22 @@ class ClimbRepository {
 
   ClimbRepository(this._dataSource);
 
+  /// Expose data source for import operations
+  ClimbLocalDataSource get dataSource => _dataSource;
+
   /// Search climbs with filters
   Future<List<ClimbEntity>> searchClimbs({
     String? query,
-    String? state,
+    String? country,
+    String? stateProvince,
     List<String>? types,
     int? minGrade,
     int? maxGrade,
   }) async {
     return await _dataSource.searchClimbs(
       query: query,
-      state: state,
+      country: country,
+      stateProvince: stateProvince,
       types: types,
       minGrade: minGrade,
       maxGrade: maxGrade,

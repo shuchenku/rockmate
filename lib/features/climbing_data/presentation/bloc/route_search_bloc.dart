@@ -225,8 +225,9 @@ class RouteSearchBloc extends Bloc<RouteSearchEvent, RouteSearchState> {
     ));
 
     try {
-      // Extract state from locationFilter (use most specific location set)
-      final stateFilter = filters.locationFilter.mostSpecific;
+      // Extract country and state/province from locationFilter
+      final country = filters.locationFilter.country;
+      final stateProvince = filters.locationFilter.stateProvince;
       
       // Convert RouteType Set to type string list
       final typesList = filters.types.map((t) => t.displayName).toList();
@@ -234,7 +235,8 @@ class RouteSearchBloc extends Bloc<RouteSearchEvent, RouteSearchState> {
       // For now, ignore grade filtering (would need conversion from string grades to numeric)
       final climbResults = await _climbRepository.searchClimbs(
         query: filters.query,
-        state: stateFilter?.isNotEmpty == true ? stateFilter : null,
+        country: country?.isNotEmpty == true ? country : null,
+        stateProvince: stateProvince?.isNotEmpty == true ? stateProvince : null,
         types: typesList.isNotEmpty ? typesList : null,
         // TODO: Convert string grades to numeric for filtering
         // minGrade: _convertGradeToNumeric(filters.gradeMin),

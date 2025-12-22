@@ -191,7 +191,7 @@ class _FilterSectionState extends State<FilterSection> {
                                 
                                 final filter = value == 'all'
                                     ? LocationFilter(country: _selectedArea)
-                                    : LocationFilter(country: _selectedArea, region: value);
+                                    : LocationFilter(country: _selectedArea, stateProvince: value);
                                     
                                 context.read<RouteSearchBloc>().add(
                                       RouteSearchEventLocationFilterChanged(filter),

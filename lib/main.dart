@@ -15,8 +15,17 @@ void main() async {
   Hive.registerAdapter(RouteEntityAdapter());
   Hive.registerAdapter(CachedRoutesAdapter());
   
+  
   // Initialize Hive
   await Hive.initFlutter();
+  
+  // Register ClimbEntityAdapter - catch if already registered
+  try {
+    Hive.registerAdapter(ClimbEntityAdapter());
+  } catch (e) {
+    // Already registered, ignore
+  }
+  
   
   // Configure Dependency Injection
   await configureDependencies();

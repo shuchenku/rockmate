@@ -16,6 +16,10 @@ import 'package:rockmate/features/climbing_data/presentation/bloc/route_detail_b
     as _i412;
 import 'package:rockmate/features/climbing_data/presentation/bloc/route_search_bloc.dart'
     as _i71;
+import 'package:rockmate/features/logbook/data/repositories/logbook_repository.dart'
+    as _i821;
+import 'package:rockmate/features/logbook/presentation/bloc/logbook_bloc.dart'
+    as _i812;
 
 extension GetItInjectableX on _i174.GetIt {
   // initializes the registration of main-scope dependencies inside of GetIt
@@ -29,6 +33,9 @@ extension GetItInjectableX on _i174.GetIt {
     );
     gh.factory<_i412.RouteDetailBloc>(
       () => _i412.RouteDetailBloc(gh<_i597.ClimbRepository>()),
+    );
+    gh.factory<_i812.LogbookBloc>(
+      () => _i812.LogbookBloc(gh<_i821.LogbookRepository>()),
     );
     return this;
   }

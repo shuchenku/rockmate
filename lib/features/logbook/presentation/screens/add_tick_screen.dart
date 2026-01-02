@@ -25,9 +25,16 @@ class AddTickScreen extends StatelessWidget {
   
   @override
   Widget build(BuildContext context) {
-    return BlocProvider(
-      create: (context) => getIt<RouteDetailBloc>()
-        ..add(RouteDetailEvent.loadRoute(routeId)),
+    return MultiBlocProvider(
+      providers: [
+        BlocProvider(
+          create: (context) => getIt<RouteDetailBloc>()
+            ..add(RouteDetailEvent.loadRoute(routeId)),
+        ),
+        BlocProvider(
+          create: (context) => getIt<LogbookBloc>(),
+        ),
+      ],
       child: Scaffold(
         backgroundColor: Colors.grey.shade50,
         appBar: AppBar(
@@ -226,7 +233,7 @@ class _AddTickFormState extends State<_AddTickForm> {
                     ),
                   ),
                   child: const Text(
-                    'Save Tick',
+                    'Save Route',
                     style: TextStyle(
                       fontSize: 16,
                       fontWeight: FontWeight.w600,

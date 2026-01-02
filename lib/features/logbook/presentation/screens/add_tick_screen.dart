@@ -8,22 +8,63 @@ import 'package:rockmate/core/domain/entities/tick_entity.dart';
 import 'package:rockmate/core/domain/entities/tick_status.dart';
 import 'package:rockmate/features/logbook/presentation/bloc/logbook_bloc.dart';
 import 'package:rockmate/features/logbook/domain/events/logbook_event.dart';
+import 'package:rockmate/features/climbing_data/presentation/bloc/route_detail_bloc.dart';
+import 'package:rockmate/features/climbing_data/domain/events/route_detail_event.dart';
+import 'package:rockmate/features/climbing_data/domain/state/route_detail_state.dart';
+import 'package:rockmate/injection.dart';
 
 const _uuid = Uuid();
 
-class AddTickScreen extends StatefulWidget {
-  final ClimbEntity climb;
+class AddTickScreen extends StatelessWidget {
+  final String routeId;
   
   const AddTickScreen({
     super.key,
-    required this.climb,
+    required this.routeId,
   });
   
   @override
-  State<AddTickScreen> createState() => _AddTickScreenState();
+  Widget build(BuildContext context) {
+    return BlocProvider(
+      create: (context) => getIt<RouteDetailBloc>()
+        ..add(RouteDetailEvent.loadRoute(routeId)),
+      child: Scaffold(
+        backgroundColor: Colors.grey.shade50,
+        appBar: AppBar(
+          title: const Text('Log Route'),
+          backgroundColor: Colors.white,
+          foregroundColor: Colors.black87,
+          elevation: 0,
+        ),
+        body: BlocBuilder<RouteDetailBloc, RouteDetailState>(
+          builder: (context, state) {
+            return state.when(
+              initial: () => const SizedBox.shrink(),
+              loading: (id) => const Center(
+                child: CircularProgressIndicator(),
+              ),
+              success: (climb) => _AddTickForm(climb: climb),
+              error: (id, message) => Center(
+                child: Text('Error loading route: $message'),
+              ),
+            );
+          },
+        ),
+      ),
+    );
+  }
 }
 
-class _AddTickScreenState extends State<AddTickScreen> {
+class _AddTickForm extends StatefulWidget {
+  final ClimbEntity climb;
+  
+  const _AddTickForm({required this.climb});
+
+  @override
+  State<_AddTickForm> createState() => _AddTickFormState();
+}
+
+class _AddTickFormState extends State<_AddTickForm> {
   late DateTime _selectedDate;
   late TickStatus _selectedStatus;
   late TextEditingController _commentController;
@@ -79,20 +120,11 @@ class _AddTickScreenState extends State<AddTickScreen> {
   
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      backgroundColor: Colors.grey.shade50,
-      appBar: AppBar(
-        title: Text('Log ${widget.climb.name}'),
-        backgroundColor: Colors.white,
-        foregroundColor: Colors.black87,
-        elevation: 0,
-      ),
-      body: SingleChildScrollView(
-        child: Padding(
-          padding: const EdgeInsets.all(16.0),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
+    return Padding(
+      padding: const EdgeInsets.all(16.0),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
               // Date picker
               Card(
                 child: ListTile(
@@ -204,8 +236,6 @@ class _AddTickScreenState extends State<AddTickScreen> {
               ),
             ],
           ),
-        ),
-      ),
-    );
+        );
   }
 }

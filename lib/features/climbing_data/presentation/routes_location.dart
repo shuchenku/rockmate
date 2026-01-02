@@ -1,6 +1,5 @@
 import 'package:beamer/beamer.dart';
 import 'package:flutter/material.dart';
-import 'package:climb_data/climb_data.dart';
 import 'package:rockmate/features/climbing_data/presentation/screens/route_search_screen.dart';
 import 'package:rockmate/features/climbing_data/presentation/screens/route_detail_screen.dart';
 import 'package:rockmate/features/logbook/presentation/screens/add_tick_screen.dart';
@@ -36,16 +35,13 @@ class RoutesLocation extends BeamLocation<BeamState> {
 
       // Add tick screen
       if (state.uri.path.contains('/log')) {
-        final climb = state.data as ClimbEntity?;
-        if (climb != null) {
-          pages.add(
-            BeamPage(
-              key: ValueKey('log-$routeId'),
-              title: 'Log Route',
-              child: AddTickScreen(climb: climb),
-            ),
-          );
-        }
+        pages.add(
+          BeamPage(
+            key: ValueKey('log-$routeId'),
+            title: 'Log Route',
+            child: AddTickScreen(routeId: routeId),
+          ),
+        );
       }
     }
 

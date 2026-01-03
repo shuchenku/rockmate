@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:beamer/beamer.dart';
 import 'package:climb_data/climb_data.dart';
 import 'package:rockmate/features/climbing_data/presentation/bloc/route_detail_bloc.dart';
 import 'package:rockmate/features/climbing_data/domain/events/route_detail_event.dart';
@@ -43,6 +44,25 @@ class RouteDetailScreen extends StatelessWidget {
                       );
                 },
               ),
+            );
+          },
+        ),
+        floatingActionButton: BlocBuilder<RouteDetailBloc, RouteDetailState>(
+          builder: (context, state) {
+            return state.maybeWhen(
+              success: (climb) => FloatingActionButton.extended(
+                onPressed: () {
+                  context.beamToNamed(
+                    '/routes/$routeId/log',
+                    data: climb,
+                  );
+                },
+                icon: const Icon(Icons.add),
+                label: const Text('Log Route'),
+                backgroundColor: Colors.blue,
+                foregroundColor: Colors.white,
+              ),
+              orElse: () => const SizedBox.shrink(),
             );
           },
         ),

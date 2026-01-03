@@ -1,5 +1,6 @@
 import 'package:beamer/beamer.dart';
 import 'package:flutter/material.dart';
+import 'package:rockmate/features/logbook/presentation/screens/logbook_screen.dart';
 
 class LogbookLocation extends BeamLocation<BeamState> {
   LogbookLocation(super.routeInformation);
@@ -13,7 +14,7 @@ class LogbookLocation extends BeamLocation<BeamState> {
       const BeamPage(
         key: ValueKey('logbook'),
         title: 'Logbook',
-        child: Scaffold(body: Center(child: Text('Logbook - To be implemented'))),
+        child: LogbookScreen(),
       ),
     ];
   }

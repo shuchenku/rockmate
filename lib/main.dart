@@ -3,8 +3,6 @@ import 'package:hive_flutter/hive_flutter.dart';
 import 'package:beamer/beamer.dart';
 import 'injection.dart';
 import 'features/navigation/presentation/main_location.dart';
-import 'core/data/adapters/route_entity_adapter.dart';
-import 'core/data/adapters/cached_routes_adapter.dart';
 import 'package:climb_data/climb_data.dart';
 import 'core/presentation/screens/data_download_screen.dart';
 
@@ -14,10 +12,6 @@ void main() async {
   
   // Initialize Hive
   await Hive.initFlutter();
-  
-  // Register ALL Hive Adapters (must be after initFlutter, before any box operations)
-  Hive.registerAdapter(RouteEntityAdapter());
-  Hive.registerAdapter(CachedRoutesAdapter());
   
   // Register ClimbEntityAdapter - catch if already registered
   try {

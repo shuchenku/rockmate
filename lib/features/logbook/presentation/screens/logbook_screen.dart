@@ -15,31 +15,49 @@ class LogbookScreen extends StatelessWidget {
     return BlocProvider(
       create: (context) => getIt<LogbookBloc>()
         ..add(const LogbookEvent.loadLogbook()),
-      child: Scaffold(
-        backgroundColor: Colors.grey.shade50,
-        appBar: AppBar(
-          title: const Text('My Logbook'),
-          backgroundColor: Colors.white,
-          foregroundColor: Colors.black87,
-          elevation: 0,
-        ),
-        body: BlocBuilder<LogbookBloc, LogbookState>(
-          builder: (context, state) {
-            return state.when(
-              initial: () => const SizedBox.shrink(),
-              loading: () => const Center(
+      child: BlocBuilder<LogbookBloc, LogbookState>(
+        builder: (context, state) {
+          return state.when(
+            initial: () => Scaffold(
+              backgroundColor: Colors.grey.shade50,
+              appBar: AppBar(
+                title: const Text('My Logbook'),
+                backgroundColor: Colors.white,
+                foregroundColor: Colors.black87,
+                elevation: 0,
+              ),
+              body: const SizedBox.shrink(),
+            ),
+            loading: () => Scaffold(
+              backgroundColor: Colors.grey.shade50,
+              appBar: AppBar(
+                title: const Text('My Logbook'),
+                backgroundColor: Colors.white,
+                foregroundColor: Colors.black87,
+                elevation: 0,
+              ),
+              body: const Center(
                 child: CircularProgressIndicator(),
               ),
-              success: (projects, sends) => _LogbookContent(
-                projects: projects,
-                sends: sends,
+            ),
+            success: (projects, sends) => _LogbookContent(
+              projects: projects,
+              sends: sends,
+            ),
+            failure: (errorMessage) => Scaffold(
+              backgroundColor: Colors.grey.shade50,
+              appBar: AppBar(
+                title: const Text('My Logbook'),
+                backgroundColor: Colors.white,
+                foregroundColor: Colors.black87,
+                elevation: 0,
               ),
-              failure: (errorMessage) => Center(
+              body: Center(
                 child: Text('Error: $errorMessage'),
               ),
-            );
-          },
-        ),
+            ),
+          );
+        },
       ),
     );
   }
@@ -57,106 +75,150 @@ class _LogbookContent extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     if (projects.isEmpty && sends.isEmpty) {
-      return Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            Icon(
-              Icons.book_outlined,
-              size: 64,
-              color: Colors.grey.shade400,
-            ),
-            const SizedBox(height: 16),
-            Text(
-              'No logged routes yet',
-              style: TextStyle(
-                fontSize: 18,
-                fontWeight: FontWeight.w600,
-                color: Colors.grey.shade700,
+      return Scaffold(
+        backgroundColor: Colors.grey.shade50,
+        appBar: AppBar(
+          title: const Text('My Logbook'),
+          backgroundColor: Colors.white,
+          foregroundColor: Colors.black87,
+          elevation: 0,
+        ),
+        body: Center(
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Icon(
+                Icons.book_outlined,
+                size: 64,
+                color: Colors.grey.shade400,
               ),
-            ),
-            const SizedBox(height: 8),
-            Text(
-              'Log a route from the route detail screen',
-              style: TextStyle(
-                fontSize: 14,
-                color: Colors.grey.shade600,
+              const SizedBox(height: 16),
+              Text(
+                'No logged routes yet',
+                style: TextStyle(
+                  fontSize: 18,
+                  fontWeight: FontWeight.w600,
+                  color: Colors.grey.shade700,
+                ),
               ),
-            ),
-          ],
+              const SizedBox(height: 8),
+              Text(
+                'Log a route from the route detail screen',
+                style: TextStyle(
+                  fontSize: 14,
+                  color: Colors.grey.shade600,
+                ),
+              ),
+            ],
+          ),
         ),
       );
     }
 
-    return ListView(
-      padding: const EdgeInsets.all(16),
-      children: [
-        if (projects.isNotEmpty) ...[
-          _SectionHeader(
-            title: 'Projects',
-            count: projects.length,
-            icon: Icons.star_border,
+    return DefaultTabController(
+      length: 2,
+      child: Scaffold(
+        backgroundColor: Colors.grey.shade50,
+        appBar: AppBar(
+          title: const Text('My Logbook'),
+          backgroundColor: Colors.white,
+          foregroundColor: Colors.black87,
+          elevation: 0,
+          bottom: TabBar(
+            labelColor: Colors.black87,
+            unselectedLabelColor: Colors.grey.shade600,
+            indicatorColor: Colors.blue,
+            tabs: [
+              Tab(
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    const Icon(Icons.star_border, size: 18),
+                    const SizedBox(width: 8),
+                    Text('Projects (${projects.length})'),
+                  ],
+                ),
+              ),
+              Tab(
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    const Icon(Icons.check_circle_outline, size: 18),
+                    const SizedBox(width: 8),
+                    Text('Sends (${sends.length})'),
+                  ],
+                ),
+              ),
+            ],
           ),
-          const SizedBox(height: 12),
-          ...projects.map((tick) => _TickCard(tick: tick)),
-          const SizedBox(height: 24),
-        ],
-        if (sends.isNotEmpty) ...[
-          _SectionHeader(
-            title: 'Sends',
-            count: sends.length,
-            icon: Icons.check_circle_outline,
-          ),
-          const SizedBox(height: 12),
-          ...sends.map((tick) => _TickCard(tick: tick)),
-        ],
-      ],
+        ),
+        body: TabBarView(
+          children: [
+            _TickList(ticks: projects),
+            _TickList(ticks: sends),
+          ],
+        ),
+      ),
     );
   }
 }
 
-class _SectionHeader extends StatelessWidget {
-  final String title;
-  final int count;
-  final IconData icon;
+class _TickList extends StatelessWidget {
+  final List<TickEntity> ticks;
 
-  const _SectionHeader({
-    required this.title,
-    required this.count,
-    required this.icon,
-  });
+  const _TickList({required this.ticks});
 
   @override
   Widget build(BuildContext context) {
-    return Row(
-      children: [
-        Icon(icon, size: 20, color: Colors.grey.shade700),
-        const SizedBox(width: 8),
-        Text(
-          title,
+    if (ticks.isEmpty) {
+      return Center(
+        child: Text(
+          'No routes yet',
           style: TextStyle(
-            fontSize: 18,
-            fontWeight: FontWeight.bold,
-            color: Colors.grey.shade800,
+            fontSize: 16,
+            color: Colors.grey.shade600,
           ),
         ),
-        const SizedBox(width: 8),
-        Container(
-          padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 2),
-          decoration: BoxDecoration(
-            color: Colors.grey.shade300,
-            borderRadius: BorderRadius.circular(12),
-          ),
-          child: Text(
-            '$count',
-            style: TextStyle(
-              fontSize: 12,
-              fontWeight: FontWeight.w600,
-              color: Colors.grey.shade700,
+      );
+    }
+
+    return ListView.builder(
+      padding: const EdgeInsets.all(16),
+      itemCount: ticks.length,
+      itemBuilder: (context, index) {
+        final tick = ticks[index];
+        return Dismissible(
+          key: Key(tick.id),
+          direction: DismissDirection.endToStart,
+          background: Container(
+            margin: const EdgeInsets.only(bottom: 12),
+            decoration: BoxDecoration(
+              color: Colors.red,
+              borderRadius: BorderRadius.circular(8),
+            ),
+            alignment: Alignment.centerRight,
+            padding: const EdgeInsets.only(right: 20),
+            child: const Icon(
+              Icons.delete,
+              color: Colors.white,
+              size: 28,
             ),
           ),
-        ),
-      ],
+          onDismissed: (_) {
+            context.read<LogbookBloc>().add(
+              LogbookEvent.deleteTick(tickId: tick.id),
+            );
+            
+            ScaffoldMessenger.of(context).showSnackBar(
+              SnackBar(
+                content: Text('Deleted ${tick.routeName}'),
+                duration: const Duration(seconds: 2),
+              ),
+            );
+          },
+          child: _TickCard(tick: tick),
+        );
+      },
     );
   }
 }

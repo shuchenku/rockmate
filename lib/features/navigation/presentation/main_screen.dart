@@ -12,14 +12,13 @@ class MainScreen extends StatefulWidget {
 
 class _MainScreenState extends State<MainScreen> {
   late final _routerDelegate = BeamerDelegate(
-    locationBuilder: (RouteInformation routeInformation, BeamParameters? beamParameters) {
-      return BeamerLocationBuilder(
-        beamLocations: [
-          RoutesLocation(RouteInformation(uri: Uri.parse('/routes'))),
-          LogbookLocation(RouteInformation(uri: Uri.parse('/logbook'))),
-        ],
-      ).call(routeInformation, beamParameters);
-    },
+    locationBuilder: (routeInformation, beamParameters) =>
+        BeamerLocationBuilder(
+          beamLocations: [
+            RoutesLocation(RouteInformation(uri: Uri.parse('/routes'))),
+            LogbookLocation(RouteInformation(uri: Uri.parse('/logbook'))),
+          ],
+        ).call(routeInformation, beamParameters),
   );
 
   int _currentIndex = 0;
@@ -58,9 +57,7 @@ class _MainScreenState extends State<MainScreen> {
         foregroundColor: Colors.white,
         elevation: 0,
       ),
-      body: Beamer(
-        routerDelegate: _routerDelegate,
-      ),
+      body: Beamer(routerDelegate: _routerDelegate),
       bottomNavigationBar: BottomNavigationBar(
         currentIndex: _currentIndex,
         type: BottomNavigationBarType.fixed,

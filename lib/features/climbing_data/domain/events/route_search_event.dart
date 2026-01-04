@@ -20,4 +20,6 @@ class RouteSearchEvent with _$RouteSearchEvent {
   const factory RouteSearchEvent.searchSubmitted() = RouteSearchEventSearchSubmitted;
   
   const factory RouteSearchEvent.filtersCleared() = RouteSearchEventFiltersCleared;
+  
+  const factory RouteSearchEvent.loadLocationData() = RouteSearchEventLoadLocationData;
 }

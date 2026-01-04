@@ -6,24 +6,22 @@ import 'features/navigation/presentation/main_location.dart';
 import 'package:climb_data/climb_data.dart';
 import 'core/presentation/screens/data_download_screen.dart';
 
-
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  
+
   // Initialize Hive
   await Hive.initFlutter();
-  
+
   // Register ClimbEntityAdapter - catch if already registered
   try {
     Hive.registerAdapter(ClimbEntityAdapter());
   } catch (e) {
     // Already registered, ignore
   }
-  
-  
+
   // Configure Dependency Injection
   await configureDependencies();
-  
+
   runApp(const MyApp());
 }
 
@@ -73,11 +71,7 @@ class _MyAppState extends State<MyApp> {
     if (_isLoading) {
       return const MaterialApp(
         debugShowCheckedModeBanner: false,
-        home: Scaffold(
-          body: Center(
-            child: CircularProgressIndicator(),
-          ),
-        ),
+        home: Scaffold(body: Center(child: CircularProgressIndicator())),
       );
     }
 
@@ -94,13 +88,12 @@ class _MyAppState extends State<MyApp> {
     }
 
     final routerDelegate = BeamerDelegate(
-      locationBuilder: (RouteInformation routeInformation, BeamParameters? beamParameters) {
-        return BeamerLocationBuilder(
-          beamLocations: [
-            MainLocation(RouteInformation(uri: Uri(path: '/'))),
-          ],
-        ).call(routeInformation, beamParameters);
-      },
+      locationBuilder: (routeInformation, beamParameters) =>
+          BeamerLocationBuilder(
+            beamLocations: [
+              MainLocation(RouteInformation(uri: Uri(path: '/'))),
+            ],
+          ).call(routeInformation, beamParameters),
     );
 
     return MaterialApp.router(

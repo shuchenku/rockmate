@@ -94,11 +94,13 @@ class _MyAppState extends State<MyApp> {
     }
 
     final routerDelegate = BeamerDelegate(
-      locationBuilder: BeamerLocationBuilder(
-        beamLocations: [
-          MainLocation(RouteInformation(uri: Uri(path: '/'))),
-        ],
-      ),
+      locationBuilder: (RouteInformation routeInformation, BeamParameters? beamParameters) {
+        return BeamerLocationBuilder(
+          beamLocations: [
+            MainLocation(RouteInformation(uri: Uri(path: '/'))),
+          ],
+        ).call(routeInformation, beamParameters);
+      },
     );
 
     return MaterialApp.router(

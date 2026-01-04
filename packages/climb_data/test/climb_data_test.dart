@@ -157,8 +157,6 @@ void main() {
 
   group('DataImporter', () {
     test('calculates numeric grade from YDS correctly', () {
-      final importer = DataImporter(ClimbLocalDataSource());
-      
       // Access via parsing test data
       final testGrades = {
         '5.5': 10,   // (5-5)*10 = 0 + 10 = 10

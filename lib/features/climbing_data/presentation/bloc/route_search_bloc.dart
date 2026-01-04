@@ -54,6 +54,7 @@ class RouteSearchBloc extends Bloc<RouteSearchEvent, RouteSearchState> {
             availableStates: [],
           ),
         );
+        // ignore: invalid_use_of_visible_for_testing_member
         emit(newState);
       } catch (e) {
         // Silently fail - areas will remain empty

@@ -116,10 +116,10 @@ class RouteListWidget extends StatelessWidget {
                       ),
                     ),
                   );
-                }).toList(),
+                }),
               ],
             );
-          }).toList(),
+          }),
         ],
       ),
     );

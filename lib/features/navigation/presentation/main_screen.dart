@@ -12,12 +12,14 @@ class MainScreen extends StatefulWidget {
 
 class _MainScreenState extends State<MainScreen> {
   late final _routerDelegate = BeamerDelegate(
-    locationBuilder: BeamerLocationBuilder(
-      beamLocations: [
-        RoutesLocation(const RouteInformation(location: '/routes')),
-        LogbookLocation(const RouteInformation(location: '/logbook')),
-      ],
-    ),
+    locationBuilder: (RouteInformation routeInformation, BeamParameters? beamParameters) {
+      return BeamerLocationBuilder(
+        beamLocations: [
+          RoutesLocation(RouteInformation(uri: Uri.parse('/routes'))),
+          LogbookLocation(RouteInformation(uri: Uri.parse('/logbook'))),
+        ],
+      ).call(routeInformation, beamParameters);
+    },
   );
 
   int _currentIndex = 0;
@@ -25,7 +27,7 @@ class _MainScreenState extends State<MainScreen> {
   @override
   void didChangeDependencies() {
     super.didChangeDependencies();
-    final uriString = Beamer.of(context).configuration.location!;
+    final uriString = Beamer.of(context).configuration.uri.toString();
     if (uriString.contains('logbook')) {
       _currentIndex = 1;
     } else {

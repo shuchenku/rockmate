@@ -1,5 +1,4 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
-import 'package:rockmate/features/climbing_data/domain/models/route_search_filters.dart';
 import 'package:rockmate/features/climbing_data/domain/models/route_type.dart';
 import 'package:rockmate/features/climbing_data/domain/models/location_filter.dart';
 

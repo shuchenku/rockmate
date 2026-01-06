@@ -12,9 +12,10 @@ void main() async {
   // Initialize Hive
   await Hive.initFlutter();
 
-  // Register ClimbEntityAdapter - catch if already registered
+  // Register Hive adapters - catch if already registered
   try {
     Hive.registerAdapter(ClimbEntityAdapter());
+    Hive.registerAdapter(SyncMetadataAdapter());
   } catch (e) {
     // Already registered, ignore
   }

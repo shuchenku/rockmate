@@ -4,8 +4,11 @@ import 'package:path_provider/path_provider.dart';
 import 'package:climb_data/climb_data.dart';
 
 class ClimbDataDownloader {
+  /// Version of the climb data being downloaded
+  static const String dataVersion = 'v0.1.0-data';
+  
   static const String _githubReleaseUrl = 
-      'https://github.com/shuchenku/rockmate/releases/download/v0.1.0-data/all_climbs.json';
+      'https://github.com/shuchenku/rockmate/releases/download/$dataVersion/all_climbs.json';
   
   final ClimbRepository _repository;
 
@@ -56,6 +59,16 @@ class ClimbDataDownloader {
 
       // Cleanup
       await tempFile.delete();
+      
+      // Save version metadata
+      await _repository.dataSource.saveSyncMetadata(
+        SyncMetadata(
+          dataVersion: dataVersion,
+          lastSyncTimestamp: DateTime.now().millisecondsSinceEpoch,
+          downloadUrl: _githubReleaseUrl,
+          downloadSizeBytes: response.bodyBytes.length,
+        ),
+      );
       
       onProgress(1.0, 'Import complete!');
     } catch (e) {

@@ -1,9 +1,14 @@
 import 'package:hive/hive.dart';
 import 'models/climb_entity.dart';
+import 'models/sync_metadata.dart';
 
 class ClimbLocalDataSource {
   static const String _boxName = 'climbs';
+  static const String _metadataBoxName = 'syncMetadata';
+  static const String _metadataKey = 'metadata';
+  
   Box<ClimbEntity>? _box;
+  Box<SyncMetadata>? _metadataBox;
 
   /// Initialize Hive and open climbs box
   Future<void> init() async {
@@ -184,6 +189,22 @@ class ClimbLocalDataSource {
   /// Check if data exists
   bool get hasData {
     return climbCount > 0;
+  }
+
+  /// Save sync metadata
+  Future<void> saveSyncMetadata(SyncMetadata metadata) async {
+    if (_metadataBox == null || !_metadataBox!.isOpen) {
+      _metadataBox = await Hive.openBox<SyncMetadata>(_metadataBoxName);
+    }
+    await _metadataBox!.put(_metadataKey, metadata);
+  }
+
+  /// Get sync metadata
+  Future<SyncMetadata?> getSyncMetadata() async {
+    if (_metadataBox == null || !_metadataBox!.isOpen) {
+      _metadataBox = await Hive.openBox<SyncMetadata>(_metadataBoxName);
+    }
+    return _metadataBox!.get(_metadataKey);
   }
 
   /// Close the box

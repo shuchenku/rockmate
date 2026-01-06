@@ -1,6 +1,5 @@
 import 'dart:async';
 import 'package:rockmate/core/domain/entities/tick_entity.dart';
-import 'package:rockmate/core/domain/entities/tick_status.dart';
 
 /// Abstract repository interface for logbook operations
 /// Designed to be easily swapped with Firestore implementation later

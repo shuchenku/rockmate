@@ -6,9 +6,9 @@ class DataDownloadScreen extends StatefulWidget {
   final VoidCallback onComplete;
 
   const DataDownloadScreen({
-    Key? key,
+    super.key,
     required this.onComplete,
-  }) : super(key: key);
+  });
 
   @override
   State<DataDownloadScreen> createState() => _DataDownloadScreenState();

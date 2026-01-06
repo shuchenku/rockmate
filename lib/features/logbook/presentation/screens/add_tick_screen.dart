@@ -149,7 +149,7 @@ class _AddTickFormState extends State<_AddTickForm> {
                 child: Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
                   child: DropdownButtonFormField<TickStatus>(
-                    value: _selectedStatus,
+                    initialValue: _selectedStatus,
                     decoration: const InputDecoration(
                       labelText: 'Status',
                       border: InputBorder.none,

@@ -27,6 +27,7 @@ mixin _$RouteSearchEvent {
     required TResult Function(Set<RouteType> types) routeTypesChanged,
     required TResult Function() searchSubmitted,
     required TResult Function() filtersCleared,
+    required TResult Function() loadLocationData,
   }) => throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
@@ -36,6 +37,7 @@ mixin _$RouteSearchEvent {
     TResult? Function(Set<RouteType> types)? routeTypesChanged,
     TResult? Function()? searchSubmitted,
     TResult? Function()? filtersCleared,
+    TResult? Function()? loadLocationData,
   }) => throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
@@ -45,6 +47,7 @@ mixin _$RouteSearchEvent {
     TResult Function(Set<RouteType> types)? routeTypesChanged,
     TResult Function()? searchSubmitted,
     TResult Function()? filtersCleared,
+    TResult Function()? loadLocationData,
     required TResult orElse(),
   }) => throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -60,6 +63,8 @@ mixin _$RouteSearchEvent {
     searchSubmitted,
     required TResult Function(RouteSearchEventFiltersCleared value)
     filtersCleared,
+    required TResult Function(RouteSearchEventLoadLocationData value)
+    loadLocationData,
   }) => throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
@@ -72,6 +77,7 @@ mixin _$RouteSearchEvent {
     routeTypesChanged,
     TResult? Function(RouteSearchEventSearchSubmitted value)? searchSubmitted,
     TResult? Function(RouteSearchEventFiltersCleared value)? filtersCleared,
+    TResult? Function(RouteSearchEventLoadLocationData value)? loadLocationData,
   }) => throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
@@ -84,6 +90,7 @@ mixin _$RouteSearchEvent {
     routeTypesChanged,
     TResult Function(RouteSearchEventSearchSubmitted value)? searchSubmitted,
     TResult Function(RouteSearchEventFiltersCleared value)? filtersCleared,
+    TResult Function(RouteSearchEventLoadLocationData value)? loadLocationData,
     required TResult orElse(),
   }) => throw _privateConstructorUsedError;
 }
@@ -195,6 +202,7 @@ class _$RouteSearchEventQueryChangedImpl
     required TResult Function(Set<RouteType> types) routeTypesChanged,
     required TResult Function() searchSubmitted,
     required TResult Function() filtersCleared,
+    required TResult Function() loadLocationData,
   }) {
     return queryChanged(query);
   }
@@ -208,6 +216,7 @@ class _$RouteSearchEventQueryChangedImpl
     TResult? Function(Set<RouteType> types)? routeTypesChanged,
     TResult? Function()? searchSubmitted,
     TResult? Function()? filtersCleared,
+    TResult? Function()? loadLocationData,
   }) {
     return queryChanged?.call(query);
   }
@@ -221,6 +230,7 @@ class _$RouteSearchEventQueryChangedImpl
     TResult Function(Set<RouteType> types)? routeTypesChanged,
     TResult Function()? searchSubmitted,
     TResult Function()? filtersCleared,
+    TResult Function()? loadLocationData,
     required TResult orElse(),
   }) {
     if (queryChanged != null) {
@@ -243,6 +253,8 @@ class _$RouteSearchEventQueryChangedImpl
     searchSubmitted,
     required TResult Function(RouteSearchEventFiltersCleared value)
     filtersCleared,
+    required TResult Function(RouteSearchEventLoadLocationData value)
+    loadLocationData,
   }) {
     return queryChanged(this);
   }
@@ -259,6 +271,7 @@ class _$RouteSearchEventQueryChangedImpl
     routeTypesChanged,
     TResult? Function(RouteSearchEventSearchSubmitted value)? searchSubmitted,
     TResult? Function(RouteSearchEventFiltersCleared value)? filtersCleared,
+    TResult? Function(RouteSearchEventLoadLocationData value)? loadLocationData,
   }) {
     return queryChanged?.call(this);
   }
@@ -275,6 +288,7 @@ class _$RouteSearchEventQueryChangedImpl
     routeTypesChanged,
     TResult Function(RouteSearchEventSearchSubmitted value)? searchSubmitted,
     TResult Function(RouteSearchEventFiltersCleared value)? filtersCleared,
+    TResult Function(RouteSearchEventLoadLocationData value)? loadLocationData,
     required TResult orElse(),
   }) {
     if (queryChanged != null) {
@@ -400,6 +414,7 @@ class _$RouteSearchEventLocationFilterChangedImpl
     required TResult Function(Set<RouteType> types) routeTypesChanged,
     required TResult Function() searchSubmitted,
     required TResult Function() filtersCleared,
+    required TResult Function() loadLocationData,
   }) {
     return locationFilterChanged(locationFilter);
   }
@@ -413,6 +428,7 @@ class _$RouteSearchEventLocationFilterChangedImpl
     TResult? Function(Set<RouteType> types)? routeTypesChanged,
     TResult? Function()? searchSubmitted,
     TResult? Function()? filtersCleared,
+    TResult? Function()? loadLocationData,
   }) {
     return locationFilterChanged?.call(locationFilter);
   }
@@ -426,6 +442,7 @@ class _$RouteSearchEventLocationFilterChangedImpl
     TResult Function(Set<RouteType> types)? routeTypesChanged,
     TResult Function()? searchSubmitted,
     TResult Function()? filtersCleared,
+    TResult Function()? loadLocationData,
     required TResult orElse(),
   }) {
     if (locationFilterChanged != null) {
@@ -448,6 +465,8 @@ class _$RouteSearchEventLocationFilterChangedImpl
     searchSubmitted,
     required TResult Function(RouteSearchEventFiltersCleared value)
     filtersCleared,
+    required TResult Function(RouteSearchEventLoadLocationData value)
+    loadLocationData,
   }) {
     return locationFilterChanged(this);
   }
@@ -464,6 +483,7 @@ class _$RouteSearchEventLocationFilterChangedImpl
     routeTypesChanged,
     TResult? Function(RouteSearchEventSearchSubmitted value)? searchSubmitted,
     TResult? Function(RouteSearchEventFiltersCleared value)? filtersCleared,
+    TResult? Function(RouteSearchEventLoadLocationData value)? loadLocationData,
   }) {
     return locationFilterChanged?.call(this);
   }
@@ -480,6 +500,7 @@ class _$RouteSearchEventLocationFilterChangedImpl
     routeTypesChanged,
     TResult Function(RouteSearchEventSearchSubmitted value)? searchSubmitted,
     TResult Function(RouteSearchEventFiltersCleared value)? filtersCleared,
+    TResult Function(RouteSearchEventLoadLocationData value)? loadLocationData,
     required TResult orElse(),
   }) {
     if (locationFilterChanged != null) {
@@ -603,6 +624,7 @@ class _$RouteSearchEventGradeRangeChangedImpl
     required TResult Function(Set<RouteType> types) routeTypesChanged,
     required TResult Function() searchSubmitted,
     required TResult Function() filtersCleared,
+    required TResult Function() loadLocationData,
   }) {
     return gradeRangeChanged(gradeMin, gradeMax);
   }
@@ -616,6 +638,7 @@ class _$RouteSearchEventGradeRangeChangedImpl
     TResult? Function(Set<RouteType> types)? routeTypesChanged,
     TResult? Function()? searchSubmitted,
     TResult? Function()? filtersCleared,
+    TResult? Function()? loadLocationData,
   }) {
     return gradeRangeChanged?.call(gradeMin, gradeMax);
   }
@@ -629,6 +652,7 @@ class _$RouteSearchEventGradeRangeChangedImpl
     TResult Function(Set<RouteType> types)? routeTypesChanged,
     TResult Function()? searchSubmitted,
     TResult Function()? filtersCleared,
+    TResult Function()? loadLocationData,
     required TResult orElse(),
   }) {
     if (gradeRangeChanged != null) {
@@ -651,6 +675,8 @@ class _$RouteSearchEventGradeRangeChangedImpl
     searchSubmitted,
     required TResult Function(RouteSearchEventFiltersCleared value)
     filtersCleared,
+    required TResult Function(RouteSearchEventLoadLocationData value)
+    loadLocationData,
   }) {
     return gradeRangeChanged(this);
   }
@@ -667,6 +693,7 @@ class _$RouteSearchEventGradeRangeChangedImpl
     routeTypesChanged,
     TResult? Function(RouteSearchEventSearchSubmitted value)? searchSubmitted,
     TResult? Function(RouteSearchEventFiltersCleared value)? filtersCleared,
+    TResult? Function(RouteSearchEventLoadLocationData value)? loadLocationData,
   }) {
     return gradeRangeChanged?.call(this);
   }
@@ -683,6 +710,7 @@ class _$RouteSearchEventGradeRangeChangedImpl
     routeTypesChanged,
     TResult Function(RouteSearchEventSearchSubmitted value)? searchSubmitted,
     TResult Function(RouteSearchEventFiltersCleared value)? filtersCleared,
+    TResult Function(RouteSearchEventLoadLocationData value)? loadLocationData,
     required TResult orElse(),
   }) {
     if (gradeRangeChanged != null) {
@@ -805,6 +833,7 @@ class _$RouteSearchEventRouteTypesChangedImpl
     required TResult Function(Set<RouteType> types) routeTypesChanged,
     required TResult Function() searchSubmitted,
     required TResult Function() filtersCleared,
+    required TResult Function() loadLocationData,
   }) {
     return routeTypesChanged(types);
   }
@@ -818,6 +847,7 @@ class _$RouteSearchEventRouteTypesChangedImpl
     TResult? Function(Set<RouteType> types)? routeTypesChanged,
     TResult? Function()? searchSubmitted,
     TResult? Function()? filtersCleared,
+    TResult? Function()? loadLocationData,
   }) {
     return routeTypesChanged?.call(types);
   }
@@ -831,6 +861,7 @@ class _$RouteSearchEventRouteTypesChangedImpl
     TResult Function(Set<RouteType> types)? routeTypesChanged,
     TResult Function()? searchSubmitted,
     TResult Function()? filtersCleared,
+    TResult Function()? loadLocationData,
     required TResult orElse(),
   }) {
     if (routeTypesChanged != null) {
@@ -853,6 +884,8 @@ class _$RouteSearchEventRouteTypesChangedImpl
     searchSubmitted,
     required TResult Function(RouteSearchEventFiltersCleared value)
     filtersCleared,
+    required TResult Function(RouteSearchEventLoadLocationData value)
+    loadLocationData,
   }) {
     return routeTypesChanged(this);
   }
@@ -869,6 +902,7 @@ class _$RouteSearchEventRouteTypesChangedImpl
     routeTypesChanged,
     TResult? Function(RouteSearchEventSearchSubmitted value)? searchSubmitted,
     TResult? Function(RouteSearchEventFiltersCleared value)? filtersCleared,
+    TResult? Function(RouteSearchEventLoadLocationData value)? loadLocationData,
   }) {
     return routeTypesChanged?.call(this);
   }
@@ -885,6 +919,7 @@ class _$RouteSearchEventRouteTypesChangedImpl
     routeTypesChanged,
     TResult Function(RouteSearchEventSearchSubmitted value)? searchSubmitted,
     TResult Function(RouteSearchEventFiltersCleared value)? filtersCleared,
+    TResult Function(RouteSearchEventLoadLocationData value)? loadLocationData,
     required TResult orElse(),
   }) {
     if (routeTypesChanged != null) {
@@ -966,6 +1001,7 @@ class _$RouteSearchEventSearchSubmittedImpl
     required TResult Function(Set<RouteType> types) routeTypesChanged,
     required TResult Function() searchSubmitted,
     required TResult Function() filtersCleared,
+    required TResult Function() loadLocationData,
   }) {
     return searchSubmitted();
   }
@@ -979,6 +1015,7 @@ class _$RouteSearchEventSearchSubmittedImpl
     TResult? Function(Set<RouteType> types)? routeTypesChanged,
     TResult? Function()? searchSubmitted,
     TResult? Function()? filtersCleared,
+    TResult? Function()? loadLocationData,
   }) {
     return searchSubmitted?.call();
   }
@@ -992,6 +1029,7 @@ class _$RouteSearchEventSearchSubmittedImpl
     TResult Function(Set<RouteType> types)? routeTypesChanged,
     TResult Function()? searchSubmitted,
     TResult Function()? filtersCleared,
+    TResult Function()? loadLocationData,
     required TResult orElse(),
   }) {
     if (searchSubmitted != null) {
@@ -1014,6 +1052,8 @@ class _$RouteSearchEventSearchSubmittedImpl
     searchSubmitted,
     required TResult Function(RouteSearchEventFiltersCleared value)
     filtersCleared,
+    required TResult Function(RouteSearchEventLoadLocationData value)
+    loadLocationData,
   }) {
     return searchSubmitted(this);
   }
@@ -1030,6 +1070,7 @@ class _$RouteSearchEventSearchSubmittedImpl
     routeTypesChanged,
     TResult? Function(RouteSearchEventSearchSubmitted value)? searchSubmitted,
     TResult? Function(RouteSearchEventFiltersCleared value)? filtersCleared,
+    TResult? Function(RouteSearchEventLoadLocationData value)? loadLocationData,
   }) {
     return searchSubmitted?.call(this);
   }
@@ -1046,6 +1087,7 @@ class _$RouteSearchEventSearchSubmittedImpl
     routeTypesChanged,
     TResult Function(RouteSearchEventSearchSubmitted value)? searchSubmitted,
     TResult Function(RouteSearchEventFiltersCleared value)? filtersCleared,
+    TResult Function(RouteSearchEventLoadLocationData value)? loadLocationData,
     required TResult orElse(),
   }) {
     if (searchSubmitted != null) {
@@ -1117,6 +1159,7 @@ class _$RouteSearchEventFiltersClearedImpl
     required TResult Function(Set<RouteType> types) routeTypesChanged,
     required TResult Function() searchSubmitted,
     required TResult Function() filtersCleared,
+    required TResult Function() loadLocationData,
   }) {
     return filtersCleared();
   }
@@ -1130,6 +1173,7 @@ class _$RouteSearchEventFiltersClearedImpl
     TResult? Function(Set<RouteType> types)? routeTypesChanged,
     TResult? Function()? searchSubmitted,
     TResult? Function()? filtersCleared,
+    TResult? Function()? loadLocationData,
   }) {
     return filtersCleared?.call();
   }
@@ -1143,6 +1187,7 @@ class _$RouteSearchEventFiltersClearedImpl
     TResult Function(Set<RouteType> types)? routeTypesChanged,
     TResult Function()? searchSubmitted,
     TResult Function()? filtersCleared,
+    TResult Function()? loadLocationData,
     required TResult orElse(),
   }) {
     if (filtersCleared != null) {
@@ -1165,6 +1210,8 @@ class _$RouteSearchEventFiltersClearedImpl
     searchSubmitted,
     required TResult Function(RouteSearchEventFiltersCleared value)
     filtersCleared,
+    required TResult Function(RouteSearchEventLoadLocationData value)
+    loadLocationData,
   }) {
     return filtersCleared(this);
   }
@@ -1181,6 +1228,7 @@ class _$RouteSearchEventFiltersClearedImpl
     routeTypesChanged,
     TResult? Function(RouteSearchEventSearchSubmitted value)? searchSubmitted,
     TResult? Function(RouteSearchEventFiltersCleared value)? filtersCleared,
+    TResult? Function(RouteSearchEventLoadLocationData value)? loadLocationData,
   }) {
     return filtersCleared?.call(this);
   }
@@ -1197,6 +1245,7 @@ class _$RouteSearchEventFiltersClearedImpl
     routeTypesChanged,
     TResult Function(RouteSearchEventSearchSubmitted value)? searchSubmitted,
     TResult Function(RouteSearchEventFiltersCleared value)? filtersCleared,
+    TResult Function(RouteSearchEventLoadLocationData value)? loadLocationData,
     required TResult orElse(),
   }) {
     if (filtersCleared != null) {
@@ -1209,4 +1258,162 @@ class _$RouteSearchEventFiltersClearedImpl
 abstract class RouteSearchEventFiltersCleared implements RouteSearchEvent {
   const factory RouteSearchEventFiltersCleared() =
       _$RouteSearchEventFiltersClearedImpl;
+}
+
+/// @nodoc
+abstract class _$$RouteSearchEventLoadLocationDataImplCopyWith<$Res> {
+  factory _$$RouteSearchEventLoadLocationDataImplCopyWith(
+    _$RouteSearchEventLoadLocationDataImpl value,
+    $Res Function(_$RouteSearchEventLoadLocationDataImpl) then,
+  ) = __$$RouteSearchEventLoadLocationDataImplCopyWithImpl<$Res>;
+}
+
+/// @nodoc
+class __$$RouteSearchEventLoadLocationDataImplCopyWithImpl<$Res>
+    extends
+        _$RouteSearchEventCopyWithImpl<
+          $Res,
+          _$RouteSearchEventLoadLocationDataImpl
+        >
+    implements _$$RouteSearchEventLoadLocationDataImplCopyWith<$Res> {
+  __$$RouteSearchEventLoadLocationDataImplCopyWithImpl(
+    _$RouteSearchEventLoadLocationDataImpl _value,
+    $Res Function(_$RouteSearchEventLoadLocationDataImpl) _then,
+  ) : super(_value, _then);
+
+  /// Create a copy of RouteSearchEvent
+  /// with the given fields replaced by the non-null parameter values.
+}
+
+/// @nodoc
+
+class _$RouteSearchEventLoadLocationDataImpl
+    implements RouteSearchEventLoadLocationData {
+  const _$RouteSearchEventLoadLocationDataImpl();
+
+  @override
+  String toString() {
+    return 'RouteSearchEvent.loadLocationData()';
+  }
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$RouteSearchEventLoadLocationDataImpl);
+  }
+
+  @override
+  int get hashCode => runtimeType.hashCode;
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function(String query) queryChanged,
+    required TResult Function(LocationFilter locationFilter)
+    locationFilterChanged,
+    required TResult Function(String? gradeMin, String? gradeMax)
+    gradeRangeChanged,
+    required TResult Function(Set<RouteType> types) routeTypesChanged,
+    required TResult Function() searchSubmitted,
+    required TResult Function() filtersCleared,
+    required TResult Function() loadLocationData,
+  }) {
+    return loadLocationData();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function(String query)? queryChanged,
+    TResult? Function(LocationFilter locationFilter)? locationFilterChanged,
+    TResult? Function(String? gradeMin, String? gradeMax)? gradeRangeChanged,
+    TResult? Function(Set<RouteType> types)? routeTypesChanged,
+    TResult? Function()? searchSubmitted,
+    TResult? Function()? filtersCleared,
+    TResult? Function()? loadLocationData,
+  }) {
+    return loadLocationData?.call();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function(String query)? queryChanged,
+    TResult Function(LocationFilter locationFilter)? locationFilterChanged,
+    TResult Function(String? gradeMin, String? gradeMax)? gradeRangeChanged,
+    TResult Function(Set<RouteType> types)? routeTypesChanged,
+    TResult Function()? searchSubmitted,
+    TResult Function()? filtersCleared,
+    TResult Function()? loadLocationData,
+    required TResult orElse(),
+  }) {
+    if (loadLocationData != null) {
+      return loadLocationData();
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(RouteSearchEventQueryChanged value) queryChanged,
+    required TResult Function(RouteSearchEventLocationFilterChanged value)
+    locationFilterChanged,
+    required TResult Function(RouteSearchEventGradeRangeChanged value)
+    gradeRangeChanged,
+    required TResult Function(RouteSearchEventRouteTypesChanged value)
+    routeTypesChanged,
+    required TResult Function(RouteSearchEventSearchSubmitted value)
+    searchSubmitted,
+    required TResult Function(RouteSearchEventFiltersCleared value)
+    filtersCleared,
+    required TResult Function(RouteSearchEventLoadLocationData value)
+    loadLocationData,
+  }) {
+    return loadLocationData(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(RouteSearchEventQueryChanged value)? queryChanged,
+    TResult? Function(RouteSearchEventLocationFilterChanged value)?
+    locationFilterChanged,
+    TResult? Function(RouteSearchEventGradeRangeChanged value)?
+    gradeRangeChanged,
+    TResult? Function(RouteSearchEventRouteTypesChanged value)?
+    routeTypesChanged,
+    TResult? Function(RouteSearchEventSearchSubmitted value)? searchSubmitted,
+    TResult? Function(RouteSearchEventFiltersCleared value)? filtersCleared,
+    TResult? Function(RouteSearchEventLoadLocationData value)? loadLocationData,
+  }) {
+    return loadLocationData?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(RouteSearchEventQueryChanged value)? queryChanged,
+    TResult Function(RouteSearchEventLocationFilterChanged value)?
+    locationFilterChanged,
+    TResult Function(RouteSearchEventGradeRangeChanged value)?
+    gradeRangeChanged,
+    TResult Function(RouteSearchEventRouteTypesChanged value)?
+    routeTypesChanged,
+    TResult Function(RouteSearchEventSearchSubmitted value)? searchSubmitted,
+    TResult Function(RouteSearchEventFiltersCleared value)? filtersCleared,
+    TResult Function(RouteSearchEventLoadLocationData value)? loadLocationData,
+    required TResult orElse(),
+  }) {
+    if (loadLocationData != null) {
+      return loadLocationData(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class RouteSearchEventLoadLocationData implements RouteSearchEvent {
+  const factory RouteSearchEventLoadLocationData() =
+      _$RouteSearchEventLoadLocationDataImpl;
 }

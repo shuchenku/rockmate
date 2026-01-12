@@ -2,6 +2,7 @@ import 'package:beamer/beamer.dart';
 import 'package:flutter/material.dart';
 import 'package:rockmate/features/climbing_data/presentation/routes_location.dart';
 import 'package:rockmate/features/logbook/presentation/logbook_location.dart';
+import 'package:rockmate/features/auth/presentation/screens/profile_screen.dart';
 
 class MainScreen extends StatefulWidget {
   const MainScreen({super.key});
@@ -12,6 +13,8 @@ class MainScreen extends StatefulWidget {
 
 class _MainScreenState extends State<MainScreen> {
   late final _routerDelegate = BeamerDelegate(
+    initialPath: '/routes',
+    setBrowserTabTitle: false,
     locationBuilder: (routeInformation, beamParameters) =>
         BeamerLocationBuilder(
           beamLocations: [
@@ -24,14 +27,27 @@ class _MainScreenState extends State<MainScreen> {
   int _currentIndex = 0;
 
   @override
-  void didChangeDependencies() {
-    super.didChangeDependencies();
-    final uriString = Beamer.of(context).configuration.uri.toString();
-    if (uriString.contains('logbook')) {
-      _currentIndex = 1;
-    } else {
-      _currentIndex = 0;
-    }
+  void initState() {
+    super.initState();
+    _routerDelegate.addListener(_updateCurrentIndex);
+    _routerDelegate.beamToNamed('/routes');
+  }
+
+  @override
+  void dispose() {
+    _routerDelegate.removeListener(_updateCurrentIndex);
+    super.dispose();
+  }
+
+  void _updateCurrentIndex() {
+    final uriString = _routerDelegate.configuration.uri.toString();
+    setState(() {
+      if (uriString.contains('logbook')) {
+        _currentIndex = 1;
+      } else {
+        _currentIndex = 0;
+      }
+    });
   }
 
   @override
@@ -57,7 +73,12 @@ class _MainScreenState extends State<MainScreen> {
         foregroundColor: Colors.white,
         elevation: 0,
       ),
-      body: Beamer(routerDelegate: _routerDelegate),
+      body: Router(
+        routerDelegate: _routerDelegate,
+        backButtonDispatcher: BeamerBackButtonDispatcher(
+          delegate: _routerDelegate,
+        ),
+      ),
       bottomNavigationBar: BottomNavigationBar(
         currentIndex: _currentIndex,
         type: BottomNavigationBarType.fixed,
@@ -75,6 +96,12 @@ class _MainScreenState extends State<MainScreen> {
             _routerDelegate.beamToNamed('/routes');
           } else if (index == 1) {
             _routerDelegate.beamToNamed('/logbook');
+          } else if (index == 3) {
+            Navigator.of(context).push(
+              MaterialPageRoute(
+                builder: (context) => const UserProfileScreen(),
+              ),
+            );
           }
           // Placeholders for 2 and 3
         },

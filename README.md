@@ -22,9 +22,36 @@ A mobile-first climbing companion app built with Flutter.
 - Node.js (for Cloud Functions)
 
 ### Setup
-1. Install dependencies: `flutter pub get`
-2. Configure Firebase: `flutterfire configure`
-3. Run the app: `flutter run`
+
+#### 1. Install Dependencies
+```bash
+flutter pub get
+cd functions && npm install
+```
+
+#### 2. Firebase Configuration
+**Required:** You must configure Firebase before running the app.
+
+1. **Download Firebase config files** from [Firebase Console](https://console.firebase.google.com):
+   - iOS: Download `GoogleService-Info.plist` → place in `ios/Runner/`
+   - Android: Download `google-services.json` → place in `android/app/`
+
+2. **Generate `firebase_options.dart`**:
+   ```bash
+   flutterfire configure
+   ```
+
+3. **Enable Authentication** in Firebase Console:
+   - Email/Password
+   - Google Sign-In
+   - Apple Sign-In (iOS only)
+
+#### 3. Run the App
+```bash
+flutter run
+```
+
+> **Note:** Firebase config files (`GoogleService-Info.plist`, `google-services.json`, `firebase_options.dart`) are gitignored for security. Each developer must configure their own Firebase project.
 
 ## Project Structure
 ```

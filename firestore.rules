@@ -35,8 +35,8 @@ service cloud.firestore {
     
     // Trips collection
     match /trips/{tripId} {
-      // Read only if user is public (denormalized field)
-      allow read: if resource.data.userIsPublic == true;
+      // Read only if trip is public (denormalized field)
+      allow read: if resource.data.isPublic == true;
       
       // Create/update: must be authenticated and userId matches auth uid
       allow create: if isAuthenticated() && 
@@ -48,6 +48,15 @@ service cloud.firestore {
       // Owner can delete their own trips
       allow delete: if isAuthenticated() && 
                       resource.data.userId == request.auth.uid;
+    }
+    
+    // Profiles collection
+    match /profiles/{userId} {
+      // Any authenticated user can read profiles
+      allow read: if isAuthenticated();
+      
+      // Users can only write their own profile  
+      allow write: if isOwner(userId);
     }
     
     // Connections collection

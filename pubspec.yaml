@@ -69,6 +69,10 @@ dependencies:
   # Social Auth
   google_sign_in: ^6.2.0
   sign_in_with_apple: ^6.1.0
+  
+  # Storage \u0026 Media
+  firebase_storage: ^12.0.0
+  image_picker: ^1.0.7
 
   # Local packages
   climb_data:

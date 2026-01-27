@@ -1,6 +1,8 @@
 import 'package:get_it/get_it.dart';
 import 'package:injectable/injectable.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_storage/firebase_storage.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:climb_data/climb_data.dart';
 import 'package:rockmate/features/logbook/data/repositories/logbook_repository.dart';
@@ -11,8 +13,10 @@ final getIt = GetIt.instance;
 
 @InjectableInit()
 Future<void> configureDependencies() async {
-  // Register Firebase Auth
+  // Register Firebase services
   getIt.registerSingleton<FirebaseAuth>(FirebaseAuth.instance);
+  getIt.registerSingleton<FirebaseFirestore>(FirebaseFirestore.instance);
+  getIt.registerSingleton<FirebaseStorage>(FirebaseStorage.instance);
   getIt.registerSingleton<GoogleSignIn>(GoogleSignIn());
   
   // Register ClimbRepository manually (from external package)
